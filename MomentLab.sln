@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MomentLab.API", "back\MomentLab.API\MomentLab.API.csproj", "{22A316BB-BB03-4D2F-B6FD-8F4F21B82038}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MomentLab.Core", "back\MomentLab.Core\MomentLab.Core.csproj", "{4083496A-A9F1-46E9-9834-D7CD21B47676}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MomentLab.Infrastructure", "back\MomentLab.Infrastructure\MomentLab.Infrastructure.csproj", "{6D6F9AD8-B27E-4F9B-B71A-4F3131255EBD}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MomentLab.Tests", "back\MomentLab.Tests\MomentLab.Tests.csproj", "{EF9E5B6A-4971-4004-A634-41223222AA7D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{22A316BB-BB03-4D2F-B6FD-8F4F21B82038}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{22A316BB-BB03-4D2F-B6FD-8F4F21B82038}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{22A316BB-BB03-4D2F-B6FD-8F4F21B82038}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{22A316BB-BB03-4D2F-B6FD-8F4F21B82038}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4083496A-A9F1-46E9-9834-D7CD21B47676}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4083496A-A9F1-46E9-9834-D7CD21B47676}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4083496A-A9F1-46E9-9834-D7CD21B47676}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4083496A-A9F1-46E9-9834-D7CD21B47676}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6D6F9AD8-B27E-4F9B-B71A-4F3131255EBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6D6F9AD8-B27E-4F9B-B71A-4F3131255EBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6D6F9AD8-B27E-4F9B-B71A-4F3131255EBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6D6F9AD8-B27E-4F9B-B71A-4F3131255EBD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF9E5B6A-4971-4004-A634-41223222AA7D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF9E5B6A-4971-4004-A634-41223222AA7D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF9E5B6A-4971-4004-A634-41223222AA7D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF9E5B6A-4971-4004-A634-41223222AA7D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

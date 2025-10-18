@@ -1,0 +1,36 @@
+{
+  "Serilog": {
+    "MinimumLevel": {
+      "Default": "Information",
+      "Override": {
+        "Microsoft": "Warning",
+        "Microsoft.Hosting.Lifetime": "Information",
+        "Microsoft.EntityFrameworkCore": "Warning"
+      }
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "DefaultConnection": "Host=localhost;Port=5432;Database=momentlab;Username=postgres;Password=your_secure_password_here"
+  },
+  "IntegrationSettings": {
+    "EnableTelegram": true,
+    "EnableEmail": false,
+    "EnableBitrix": false
+  },
+  "BitrixSettings": {
+    "WebhookUrl": "https://your-domain.bitrix24.ru/rest/1/your-webhook-code",
+    "UserId": "1"
+  },
+  "EmailSettings": {
+    "SmtpServer": "smtp.gmail.com",
+    "Port": "587",
+    "Username": "your-email@gmail.com",
+    "Password": "your-app-password",
+    "FromEmail": "your-email@gmail.com"
+  },
+  "TelegramSettings": {
+    "BotToken": "your-bot-token-here",
+    "AdminChatIds": "123456789,987654321"
+  }
+}

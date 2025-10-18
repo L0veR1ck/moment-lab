@@ -1,0 +1,60 @@
+# Git
+.git/
+.gitignore
+.gitattributes
+
+# Documentation
+README.md
+SETUP.md
+*.md
+
+# IDE
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Build results
+**/bin/
+**/obj/
+**/out/
+
+# NuGet
+*.nupkg
+**/packages/*
+
+# Test
+**/TestResults/
+
+# Logs
+logs/
+*.log
+
+# Environment
+.env
+.env.*
+!.env.example
+
+# Docker
+docker-compose*.yml
+Dockerfile
+.dockerignore
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
+# Application specific
+appsettings.Production.json
+appsettings.*.json
+!appsettings.json
+!appsettings.Development.json
+

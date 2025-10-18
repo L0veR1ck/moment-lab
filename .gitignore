@@ -1,0 +1,62 @@
+# .NET Build results
+back/**/[Dd]ebug/
+back/**/[Rr]elease/
+back/**/[Bb]in/
+back/**/[Oo]bj/
+back/**/*.log
+back/**/*.pdb
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosf
+*.sln.docstates
+
+# Rider
+.idea/
+
+# Visual Studio Code
+.vscode/
+
+# NuGet
+*.nupkg
+*.snupkg
+**/packages/
+.nuget/
+
+# Test results
+TestResults/
+*.trx
+coverage*.xml
+coverage*.json
+*.coverage
+
+# Logs
+back/logs/
+*.log
+logs/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Application settings
+back/MomentLab.API/appsettings.json
+
+# Docker
+docker-compose.override.yml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Database
+*.db
+*.sqlite
+
+# Temporary files
+*.tmp
+*.temp
+*~

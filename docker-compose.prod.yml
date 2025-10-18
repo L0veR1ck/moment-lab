@@ -1,0 +1,93 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: momentlab-postgres
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-momentlab}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    networks:
+      - momentlab-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  api:
+    build:
+      context: ./back
+      dockerfile: MomentLab.API/Dockerfile
+    container_name: momentlab-api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=${POSTGRES_DB:-momentlab};Username=${POSTGRES_USER:-postgres};Password=${POSTGRES_PASSWORD}
+      - BitrixSettings__WebhookUrl=${BITRIX_WEBHOOK_URL}
+      - BitrixSettings__UserId=${BITRIX_USER_ID}
+      - EmailSettings__SmtpServer=${SMTP_SERVER}
+      - EmailSettings__Port=${SMTP_PORT}
+      - EmailSettings__Username=${SMTP_USERNAME}
+      - EmailSettings__Password=${SMTP_PASSWORD}
+      - EmailSettings__FromEmail=${SMTP_FROM_EMAIL}
+      - TelegramSettings__BotToken=${TELEGRAM_BOT_TOKEN}
+      - TelegramSettings__AdminChatIds=${TELEGRAM_ADMIN_CHAT_IDS}
+    depends_on:
+      postgres:
+        condition: service_healthy
+    networks:
+      - momentlab-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.momentlab-api.rule=Host(`${DOMAIN}`)"
+      - "traefik.http.routers.momentlab-api.entrypoints=websecure"
+      - "traefik.http.routers.momentlab-api.tls=true"
+      - "traefik.http.routers.momentlab-api.tls.certresolver=letsencrypt"
+      - "traefik.http.services.momentlab-api.loadbalancer.server.port=8080"
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  traefik:
+    image: traefik:v3.0
+    container_name: momentlab-traefik
+    command:
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.letsencrypt.acme.email=${ACME_EMAIL}"
+      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
+      - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
+      # Redirect HTTP to HTTPS
+      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - traefik-certificates:/letsencrypt
+    networks:
+      - momentlab-network
+    restart: unless-stopped
+
+volumes:
+  postgres-data:
+    driver: local
+  traefik-certificates:
+    driver: local
+
+networks:
+  momentlab-network:
+    driver: bridge
+
