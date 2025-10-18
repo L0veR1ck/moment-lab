@@ -19,8 +19,8 @@ services:
 
   api:
     build:
-      context: ./back
-      dockerfile: MomentLab.API/Dockerfile
+      context: .
+      dockerfile: back/MomentLab.API/Dockerfile
     container_name: momentlab-api
     environment:
       - ASPNETCORE_ENVIRONMENT=Production

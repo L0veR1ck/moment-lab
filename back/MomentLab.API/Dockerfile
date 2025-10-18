@@ -4,15 +4,15 @@ WORKDIR /src
 
 # Copy solution and project files
 COPY MomentLab.sln .
-COPY MomentLab.API/MomentLab.API.csproj MomentLab.API/
-COPY MomentLab.Core/MomentLab.Core.csproj MomentLab.Core/
-COPY MomentLab.Infrastructure/MomentLab.Infrastructure.csproj MomentLab.Infrastructure/
+COPY back/MomentLab.API/MomentLab.API.csproj MomentLab.API/
+COPY back/MomentLab.Core/MomentLab.Core.csproj MomentLab.Core/
+COPY back/MomentLab.Infrastructure/MomentLab.Infrastructure.csproj MomentLab.Infrastructure/
 
 # Restore dependencies
 RUN dotnet restore MomentLab.API/MomentLab.API.csproj
 
 # Copy all source code
-COPY . .
+COPY back/ .
 
 # Build and publish
 WORKDIR /src/MomentLab.API
