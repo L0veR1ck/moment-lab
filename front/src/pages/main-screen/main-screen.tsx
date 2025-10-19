@@ -1,12 +1,10 @@
-import Header from "../../components/header/header";
+import Header from '../../components/header/header';
 
-function MainScreen(){
+function MainScreen() {
 
-    return (
-        <Header/>
-    )
-
-
+  return (
+    <Header/>
+  );
 }
 
 export default MainScreen;

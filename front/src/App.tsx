@@ -1,10 +1,10 @@
-import MainScreen from "./pages/main-screen/main-screen"
+import MainScreen from './pages/main-screen/main-screen';
 
 function App() {
 
   return (
     <MainScreen/>
-  )
+  );
 }
 
-export default App
+export default App;
