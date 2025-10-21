@@ -21,7 +21,6 @@ export default defineConfig([
     },
     rules: {
       // Стилистические правила
-      'linebreak-style': ['error', 'unix'],
       'indent': ['error', 2],
       'quotes': ['error', 'single'],
       'semi': ['error', 'always'],
