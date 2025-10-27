@@ -20,7 +20,6 @@ export default defineConfig([
       globals: globals.browser,
     },
     rules: {
-      // Стилистические правила
       'indent': ['error', 2],
       'quotes': ['error', 'single'],
       'semi': ['error', 'always'],
