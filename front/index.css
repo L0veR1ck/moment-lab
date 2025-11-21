@@ -1,1 +1,15 @@
 @import "tailwindcss";
+
+:root {
+    --main-font-: 'Inter', sans-serif;
+    --color-dark-blue: #11224E;
+    --color-blue: #2E5283;
+    --color-beige: #FFFAF0;
+}
+
+body {
+    background-color: var(--color-beige);
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
