@@ -40,7 +40,7 @@ function Header() {
               e.stopPropagation();
               setOpen((s) => ({ ...s, about: !s.about }));
             }}
-            items={["О Момент.Лаб", 'Мероприятия']}
+            items={["О Момент.Лаб", 'Портфолио']}
           />
         </ul>
       </nav>
