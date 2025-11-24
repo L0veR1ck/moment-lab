@@ -3,7 +3,11 @@ import Header from '../../components/header/header';
 function MainScreen() {
 
   return (
-    <Header/>
+    <>
+      <Header />
+      <main></main>
+      <footer></footer>
+    </>
   );
 }
 

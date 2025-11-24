@@ -1,9 +1,14 @@
 import MainScreen from '../pages/main-screen/main-screen';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 function App() {
 
   return (
-    <MainScreen/>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<MainScreen />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
