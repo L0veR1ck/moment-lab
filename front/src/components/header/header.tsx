@@ -18,30 +18,35 @@ function Header() {
   }, []);
 
   return (
-    <header className="flex justify-between items-center w-[100%] px-[64px] py-[24px]">
+    <header className="flex justify-between items-center w-[100%] py-[24px] max-w-[1280px]">
       <img className="h-[32px]" src={logo} alt="Moment Lab Logo" />
 
       <nav ref={wrapperRef} className="flex items-center">
-        <ul className="flex gap-x-[150px] items-center">
-          <DropMenu
-            label="Программы и услуги"
-            isOpen={open.programs}
-            onToggle={(e) => {
-              e.stopPropagation();
-              setOpen((s) => ({ ...s, programs: !s.programs }));
-            }}
-            items={['Частные мероприятия', 'Корпоративные мероприятия', 'Интерактивы', 'Аренда помещений']}
-          />
+        <ul className="flex gap-x-[150px] items-center text-nowrap">
+          <li>
+            <DropMenu
+              label="Программы и услуги"
+              isOpen={open.programs}
+              onToggle={(e) => {
+                e.stopPropagation();
+                setOpen((s) => ({ ...s, programs: !s.programs }));
+              }}
+              items={['Частные мероприятия', 'Корпоративные мероприятия', 'Интерактивы', 'Аренда помещений']}
+            />
+          </li>
 
-          <DropMenu
-            label="О нас"
-            isOpen={open.about}
-            onToggle={(e) => {
-              e.stopPropagation();
-              setOpen((s) => ({ ...s, about: !s.about }));
-            }}
-            items={["О Момент.Лаб", 'Портфолио']}
-          />
+          <li>
+            <DropMenu
+              label="О нас"
+              isOpen={open.about}
+              onToggle={(e) => {
+                e.stopPropagation();
+                setOpen((s) => ({ ...s, about: !s.about }));
+              }}
+              items={["О Момент.Лаб", 'Портфолио']}
+            />
+          </li>
+
         </ul>
       </nav>
 

@@ -1,12 +1,18 @@
+import Footer from '../../components/footer/footer';
+import FormSection from '../../components/form-section/form-section';
 import Header from '../../components/header/header';
+
+
 
 function MainScreen() {
 
   return (
     <>
       <Header />
-      <main></main>
-      <footer></footer>
+      <main>
+        <FormSection/>
+      </main>
+      <Footer />
     </>
   );
 }
