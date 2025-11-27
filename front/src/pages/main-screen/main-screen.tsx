@@ -1,5 +1,5 @@
 import Footer from '../../components/footer/footer';
-import FormSection from '../../components/form-section/form-section';
+import FormSection from '../../components/section-form/section-form';
 import Header from '../../components/header/header';
 
 

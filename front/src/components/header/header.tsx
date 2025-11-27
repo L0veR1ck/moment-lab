@@ -2,15 +2,23 @@ import { useEffect, useRef, useState } from 'react';
 import logo from '../../assets/logo/logo-momen-lab.svg';
 import Button from '../button/button';
 import DropMenu from '../drop-menu/drop-menu';
+import ModalForm from '../modal-form/modal-form';
 
 function Header() {
-  const [open, setOpen] = useState({ programs: false, about: false });
+  const [isDropOpen, setDropOpen] = useState({ programs: false, about: false });
+  const [isModalOpen, setModalOpen] = useState(false);
   const wrapperRef = useRef<HTMLLIElement | null>(null);
+
+
+  const handleModalClick = () => {
+    setModalOpen(prev => !prev)
+    console.log('нажался')
+  }
 
   useEffect(() => {
     function handleDocumentClick(e: MouseEvent) {
       if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
-        setOpen({ programs: false, about: false });
+        setDropOpen({ programs: false, about: false });
       }
     }
     document.addEventListener('click', handleDocumentClick);
@@ -26,10 +34,10 @@ function Header() {
           <li>
             <DropMenu
               label="Программы и услуги"
-              isOpen={open.programs}
+              isOpen={isDropOpen.programs}
               onToggle={(e) => {
                 e.stopPropagation();
-                setOpen((s) => ({ ...s, programs: !s.programs }));
+                setDropOpen((s) => ({ ...s, programs: !s.programs }));
               }}
               items={['Частные мероприятия', 'Корпоративные мероприятия', 'Интерактивы', 'Аренда помещений']}
             />
@@ -38,10 +46,10 @@ function Header() {
           <li>
             <DropMenu
               label="О нас"
-              isOpen={open.about}
+              isOpen={isDropOpen.about}
               onToggle={(e) => {
                 e.stopPropagation();
-                setOpen((s) => ({ ...s, about: !s.about }));
+                setDropOpen((s) => ({ ...s, about: !s.about }));
               }}
               items={["О Момент.Лаб", 'Портфолио']}
             />
@@ -50,7 +58,8 @@ function Header() {
         </ul>
       </nav>
 
-      <Button text="Связатьcя" />
+      <Button text="Связатьcя" onClick={handleModalClick}/>
+      {isModalOpen && <ModalForm onClose={handleModalClick}/>} 
     </header>
   );
 }
