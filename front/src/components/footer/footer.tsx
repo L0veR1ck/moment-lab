@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom'
 
 function Footer() {
     return (
-        <footer className='flex justify-between items-start border-t border-t-[var(--color-blue)]/25 max-w-[1280px]'>
+        <footer className='flex w-full justify-between items-start border-t border-t-[var(--color-blue)]/25 max-w-[1280px]'>
             <div className='flex flex-col gap-[64px] py-[80px]'>
                 <div className='flex flex-col gap-2 items-start'>
                     <img className="h-[32px]" src={logo} alt="Moment Lab Logo" />

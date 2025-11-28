@@ -3,6 +3,7 @@ import logo from '../../assets/logo/logo-momen-lab.svg';
 import Button from '../button/button';
 import DropMenu from '../drop-menu/drop-menu';
 import ModalForm from '../modal-form/modal-form';
+import { Link } from 'react-router-dom';
 
 function Header() {
   const [isDropOpen, setDropOpen] = useState({ programs: false, about: false });
@@ -26,8 +27,10 @@ function Header() {
   }, []);
 
   return (
-    <header className="flex justify-between items-center w-[100%] py-[24px] max-w-[1280px]">
-      <img className="h-[32px]" src={logo} alt="Moment Lab Logo" />
+    <header className="flex justify-between items-center w-full py-[24px] max-w-[1280px]">
+      <Link to="/" className="cursor-pointer hover:text-[var(--color-dark-blue)] block">
+        <img className="h-[32px]" src={logo} alt="Moment Lab Logo" />
+      </Link>
 
       <nav ref={wrapperRef} className="flex items-center">
         <ul className="flex gap-x-[150px] items-center text-nowrap">
@@ -58,8 +61,8 @@ function Header() {
         </ul>
       </nav>
 
-      <Button text="Связатьcя" onClick={handleModalClick}/>
-      {isModalOpen && <ModalForm onClose={handleModalClick}/>} 
+      <Button text="Связатьcя" onClick={handleModalClick} />
+      {isModalOpen && <ModalForm onClose={handleModalClick} />}
     </header>
   );
 }
