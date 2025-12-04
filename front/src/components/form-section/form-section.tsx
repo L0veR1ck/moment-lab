@@ -1,9 +1,8 @@
 import Form from '../form/form';
 
 function FormSection() {
-
     return (
-        <section className="flex w-full py-[120px] max-w-[1280px]">
+        <section id='form-section' className="flex w-full py-[120px] max-w-[1280px]">
             <div className="flex w-full justify-between bg-[var(--color-blue)] p-[32px] rounded-2xl">
                 <div className="flex flex-col gap-[40px] max-w-[520px]">
                     <h2 className="font-semibold text-[64px]/13 text-[var(--color-beige)]">
@@ -11,7 +10,7 @@ function FormSection() {
                     </h2>
                     <p className="text-lg text-[var(--color-beige)]/55">
                         Опишите задачу или пришлите бриф.
-                        <br/> 
+                        <br />
                         Мы свяжемся с вами в течении двух часов.
                     </p>
                 </div>

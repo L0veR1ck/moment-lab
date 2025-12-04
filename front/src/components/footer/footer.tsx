@@ -4,8 +4,6 @@ import telegram from '../../assets/social-link/telegram.svg'
 import whatsapp from '../../assets/social-link/whatsapp.svg'
 import { Link } from 'react-router-dom'
 
-
-
 function Footer() {
     return (
         <footer className='flex w-full justify-between items-start border-t border-t-[var(--color-blue)]/25 max-w-[1280px]'>
@@ -16,7 +14,6 @@ function Footer() {
                         Креативное агентство по организации мероприятий
                     </p>
                 </div>
-
 
                 <div className='flex flex-col gap-[4px] items-star'>
                     <a className='text-2xl text-[var(--color-blue)]/80' href="tel:+79121234567">
@@ -30,19 +27,17 @@ function Footer() {
                     </a>
                 </div>
 
-
                 <div className='flex flex-row gap-[12px]'>
-                    <a target="_blank" href="https://vk.com/momentlab"> 
+                    <a target="_blank" href="https://vk.com/momentlab">
                         <img className="h-[34px]" src={vk} alt="vk" />
                     </a>
-                    <a target="_blank" href="https://t.me/momentlab"> 
+                    <a target="_blank" href="https://t.me/momentlab">
                         <img className="h-[34px]" src={telegram} alt="telegram" />
                     </a>
-                    <a target="_blank" href="https://api.whatsapp.com/send/?phone=79630402828&text&type=phone_number&app_absent=0"> 
+                    <a target="_blank" href="https://api.whatsapp.com/send/?phone=79630402828&text&type=phone_number&app_absent=0">
                         <img className="h-[34px]" src={whatsapp} alt="whatsapp" />
                     </a>
                 </div>
-
             </div>
             <div className='py-[80px]'>
                 <p className='font-semibold text-lg text-[var(--color-blue)] pb-[16px]'>Наши продукты</p>
@@ -54,18 +49,15 @@ function Footer() {
                         <Link to="/" className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>Частные мероприятия</Link>
                     </li>
                     <li>
-                        <Link to="/" className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>Интерактивы</Link>
+                        <Link to="/" className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>События для школ</Link>
                     </li>
                     <li>
-                        <Link to="/" className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>Аренда помещения</Link>
+                        <Link to="/" className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>Пространство для событий</Link>
                     </li>
                 </ul>
             </div>
-
-
-        </footer >
+        </footer>
     )
-
 };
 
 export default Footer;

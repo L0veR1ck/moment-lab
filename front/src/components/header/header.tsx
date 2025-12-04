@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import logo from '../../assets/logo/logo-momen-lab.svg';
 import Button from '../button/button';
 import DropMenu from '../drop-menu/drop-menu';
 import ModalForm from '../modal-form/modal-form';
-import { Link } from 'react-router-dom';
 
 function Header() {
   const [isDropOpen, setDropOpen] = useState({ programs: false, about: false });
@@ -42,7 +42,7 @@ function Header() {
                 e.stopPropagation();
                 setDropOpen((s) => ({ ...s, programs: !s.programs }));
               }}
-              items={['Частные мероприятия', 'Корпоративные мероприятия', 'Интерактивы', 'Аренда помещений']}
+              items={['Частные мероприятия', 'Корпоративные мероприятия', 'События для школ', 'Пространство для событий']}
             />
           </li>
 
