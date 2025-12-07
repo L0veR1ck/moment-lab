@@ -1,4 +1,5 @@
-import Button from "../button/button";
+import Button from "../../../../components/ui/button/button";
+
 
 function StartSection() {
     const scrollToForm = () => {

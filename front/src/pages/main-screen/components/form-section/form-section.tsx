@@ -1,4 +1,5 @@
-import Form from '../form/form';
+import Form from "../../../../components/ui/form/form";
+
 
 function FormSection() {
     return (

@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import logo from '../../assets/logo/logo-momen-lab.svg';
-import Button from '../button/button';
-import DropMenu from '../drop-menu/drop-menu';
-import ModalForm from '../modal-form/modal-form';
+import logo from '../../../assets/logo/logo-moment-lab.svg';
+import Button from '../../ui/button/button';
+import ModalForm from '../../ui/modal-form/modal-form';
+import DropMenu from '../../common/drop-menu/drop-menu';
 
 function Header() {
   const [isDropOpen, setDropOpen] = useState({ programs: false, about: false });
