@@ -27,7 +27,7 @@ function InfoSection() {
                                 {stat.value}
                             </p>
                             <p className="font-semibold text-lg text-[var(--color-blue)] whitespace-nowrap">
-                                {stat.description.split(' ').slice(0, -1)}
+                                {stat.description.split(' ').slice(0, -1).join(' ')}
                                 <br />
                                 {stat.description.split(' ').slice(-1)[0]}
                             </p>

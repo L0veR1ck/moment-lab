@@ -1,5 +1,6 @@
 import Button from "../button/button";
 
+
 type FormProps = {
     isModal: boolean;
     onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;

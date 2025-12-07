@@ -1,4 +1,4 @@
-import ProgramCard from "../program-card/program-card";
+import ProgramCard from "./components/program-card/program-card";
 
 function ProgramSection() {
     return (
