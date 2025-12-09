@@ -43,13 +43,13 @@ function Footer() {
                 <p className='font-semibold text-lg text-[var(--color-blue)] pb-[16px]'>Наши продукты</p>
                 <ul className='flex flex-col gap-[8px] text-lg text-[var(--color-blue)] '>
                     <li>
-                        <Link to="/" className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>Корпоративные мероприятия</Link>
+                        <Link to="/corporate-events" className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>Корпоративные мероприятия</Link>
                     </li>
                     <li>
                         <Link to="/" className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>Частные мероприятия</Link>
                     </li>
                     <li>
-                        <Link to="/" className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>События для школ</Link>
+                        <Link to="/school-events" className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>События для школ</Link>
                     </li>
                     <li>
                         <Link to="/" className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>Пространство для событий</Link>

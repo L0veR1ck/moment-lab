@@ -42,7 +42,25 @@ function Header() {
                 e.stopPropagation();
                 setDropOpen((s) => ({ ...s, programs: !s.programs }));
               }}
-              items={['Частные мероприятия', 'Корпоративные мероприятия', 'События для школ', 'Пространство для событий']}
+              items={[
+                {
+                  name: 'Корпоративные мероприятия',
+                  path: '/corporate-events'
+                },
+                {
+                  name: 'Частные мероприятия',
+                  path: '/'
+                }, 
+                { 
+                  name: 'События для школ',
+                  path: '/school-events'
+
+                }, 
+                { 
+                  name: 'Пространство для событий',
+                  path: '/'
+                }
+              ]}
             />
           </li>
 
@@ -54,7 +72,16 @@ function Header() {
                 e.stopPropagation();
                 setDropOpen((s) => ({ ...s, about: !s.about }));
               }}
-              items={["О Момент.Лаб", 'Портфолио']}
+              items={[
+                {
+                  name: "О Момент.Лаб",
+                  path: '/'
+                }, 
+                {
+                  name: 'Портфолио',
+                  path: '/'
+                }
+              ]}
             />
           </li>
 
