@@ -8,10 +8,14 @@ import { bottleIcon, cakeIcon, clockIcon, hangerIcon, megaphoneIcon, microphoneI
 import InfoItem from "../../components/ui/info-item/info-item";
 import Marquee from "react-fast-marquee";
 import { cross, check } from "../../assets/3d-objects/index.ts";
+import { useParallax } from "../../shared/use-parallax.ts";
 
 function RentScreen() {
     const [isModalOpen, setModalOpen] = useState(false);
     const photos = Array.from({ length: 12 }, (_, i) => i + 1);
+
+    const checkOffset = useParallax(0.20, 70);
+    const crossOffset = useParallax(0.15, 160);
 
     const conditionData = [
         { value: "500 м²", description: "общая площадь пространства" },
@@ -49,13 +53,18 @@ function RentScreen() {
                     {isModalOpen && <ModalForm onClose={handleModalClick} />}
                 </section>
                 <section className="flex flex-col flex-wrap gap-[32px] py-[64px] max-w-[1280px] w-full">
-                     <div className="relative">
+                    <div className="relative">
                         <h2 className="text-5xl font-semibold text-[var(--color-dark-blue)] text-left pr-10">
-                        У нас есть
+                            У нас есть
                         </h2>
                         <img 
                             src={check} 
-                            className="absolute top-2/5 left-[200px] transform -translate-y-1/2 -mt-12" 
+                            className="absolute top-[-50px] left-[200px] -mt-12" 
+                            style={{ 
+                                transform: `translateY(calc(-50% + ${checkOffset}px))`,
+                                transition: 'transform 0.2s ease-out',
+                                willChange: 'transform'
+                            }}
                             alt="" 
                         />
                     </div>
@@ -73,9 +82,14 @@ function RentScreen() {
                 <section className="flex flex-col flex-wrap gap-[32px] py-[32px] max-w-[1280px] w-full">
                     <div className="relative">
                         <img 
-                                src={cross} 
-                                className="absolute top-2/5 right-[10px] transform -translate-y-1/2 -mt-12" 
-                                alt="" 
+                            src={cross} 
+                            className="absolute top-2/5 right-[10px] -mt-12" 
+                            style={{ 
+                                transform: `translateY(calc(-50% + ${crossOffset}px))`,
+                                transition: 'transform 0.2s ease-out',
+                                willChange: 'transform'
+                            }}
+                            alt="" 
                         />
                         <h2 className="text-5xl font-semibold text-[var(--color-dark-blue)] text-left">У нас нет</h2>
                     </div>
