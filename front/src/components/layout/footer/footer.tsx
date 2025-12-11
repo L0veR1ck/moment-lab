@@ -46,13 +46,13 @@ function Footer() {
                         <Link to="/corporate-events" className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>Корпоративные мероприятия</Link>
                     </li>
                     <li>
-                        <Link to="/" className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>Частные мероприятия</Link>
+                        <Link to="/private" className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>Частные мероприятия</Link>
                     </li>
                     <li>
                         <Link to="/school-events" className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>События для школ</Link>
                     </li>
                     <li>
-                        <Link to="/" className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>Пространство для событий</Link>
+                        <Link to="/rent" className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>Пространство для событий</Link>
                     </li>
                 </ul>
             </div>
