@@ -7,7 +7,7 @@ function ProgramSection() {
             <div className="flex flex-col py-[32px] gap-[32px]">
                 <div className="flex overflow-hidden gap-[32px] w-full">
                     <ProgramCard
-                        link="/"
+                        link="/corporate-events"
                         title={"Корпоративные мероприятия"}
                         description={"События, от которых бегут мурашки, ощущаются моменты радости и вдохновения"}
                         imageUrl={"bg-[url(./src/assets/program-cards/card-1.jpg)]"}
@@ -23,7 +23,7 @@ function ProgramSection() {
                 </div>
                 <div className="flex overflow-hidden gap-[32px] w-full">
                     <ProgramCard
-                        link={"/"}
+                        link={"/school-events"}
                         title={"События для школ"}
                         description={"Это не просто мероприятия, а инвестиции в будущее вашего класса"}
                         imageUrl={"bg-[url(./src/assets/program-cards/card-3.png)]"}
