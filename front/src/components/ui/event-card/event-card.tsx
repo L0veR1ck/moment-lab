@@ -17,9 +17,9 @@ function EventCard({ urlImg, titleCard, description, path, imgPosition }: EventC
                     <p className="font-semibold text-[24px] text-[var(--color-dark-blue)]">{titleCard}</p>
                     <p className="text-[20px]/[145%] text-[var(--color-blue)]/80 mt-[8px]">{description}</p>
                 </div>
-                <Link to={path} className="flex flex-row gap-[8px] font-semibold text-[var(--color-dark-blue)] leading-none hover:gap-[12px] hover:text-[var(--color-dark-blue)]/80 ">
+                <Link to={path} className="flex flex-row gap-[8px] font-semibold text-[var(--color-dark-blue)] items-end leading-none hover:gap-[12px] hover:text-[var(--color-dark-blue)]/80 ">
                     Подробнее
-                    <img className="pt-[6px]" src="./src/assets/event-card/arrow.svg" />
+                    <img src="./src/assets/event-card/arrow.svg" />
                 </Link>
             </div>
         </div>

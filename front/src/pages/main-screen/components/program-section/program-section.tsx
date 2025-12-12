@@ -14,7 +14,7 @@ function ProgramSection() {
                         imagePosition={"bg-position-[center_10%]"}
                     />
                     <ProgramCard
-                        link={"/"}
+                        link={"/private"}
                         title={"Частные мероприятия"}
                         description={"Воплощаем ваши идеи"}
                         imageUrl={"bg-[url(./src/assets/program-cards/card-2.jpg)]"}
@@ -30,7 +30,7 @@ function ProgramSection() {
                         imagePosition={"bg-position-[center_52%]"}
                     />
                     <ProgramCard
-                        link={"/"}
+                        link={"/rent"}
                         title={"Пространство для событий"}
                         description={"Многофункциональный лофт, подходящий для организации вашего мероприятия"}
                         imageUrl={"bg-[url(./src/assets/program-cards/card-4.JPEG)]"}
