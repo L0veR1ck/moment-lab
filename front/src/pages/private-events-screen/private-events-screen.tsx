@@ -1,9 +1,9 @@
 import { useState } from "react";
-import Footer from "../../components/layout/footer/footer";
-import Header from "../../components/layout/header/header";
-import Button from "../../components/ui/button/button";
-import ModalForm from "../../components/ui/modal-form/modal-form";
-import InfoItem from "../../components/ui/info-item/info-item";
+import Footer from "../../components/layout/footer/footer.tsx";
+import Header from "../../components/layout/header/header.tsx";
+import Button from "../../components/ui/button/button.tsx";
+import ModalForm from "../../components/ui/modal-form/modal-form.tsx";
+import InfoItem from "../../components/ui/info-item/info-item.tsx";
 import Marquee from "react-fast-marquee";
 import { littleDiamond, pompon } from "../../assets/3d-objects/index.ts";
 import { useParallax } from "../../shared/use-parallax.ts";

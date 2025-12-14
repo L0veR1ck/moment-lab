@@ -14,32 +14,31 @@ function CorporateEventScreen() {
                         imgPosition="bg-position-[center_45%]"
                         titleCard={"Персональная разумная игра"}
                         description={"Адаптируемая интеллектуальная игра, разработанная индивидуально для вашей компании, подарит неповторимый опыт"}
-                        path={"/"}
+                        path={"/personal-iq-game"}
                     />
                     <EventCard
                         urlImg={"bg-[url(./src/assets/event-card/event-card-2.png)]"}
                         imgPosition="bg-position-[center_43%]"
                         titleCard={"Квесты живого действия"}
                         description={"Полное погружение в детективную историю: множество актеров-персонажей, сложный сюжет с разветвлениями, свобода исследования истории"}
-                        path={"/"}
+                        path={"/live-action-quests"}
                     />
                     <EventCard
                         urlImg={"bg-[url(./src/assets/event-card/event-card-3.png)]"}
                         titleCard={"Творческий тимбилдинг"}
                         description={"Приготовься раскрыть свой творческий потенциал и объединить усилия с командой ради общего успеха"}
-                        path={"/"}
+                        path={"/art-team-building"}
                     />
                     <EventCard
                         urlImg={"bg-[url(./src/assets/event-card/event-card-4.png)]"}
                         titleCard={"Семейные мероприятия"}
                         description={"Улучшение взаимодействия сотрудников, стимулирование лояльности, разрядка рабочей обстановки и формирование благоприятной атмосферы"}
-                        path={"/"}
+                        path={"/family-event"}
                     />
                 </section>
             </main>
             <Footer />
         </div>
-
     )
 }
 
