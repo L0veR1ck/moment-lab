@@ -12,11 +12,14 @@ import IntellectualGamesScreen from '../pages/intellectual-games-screen/intellec
 import EntertainmentGamesScreen from '../pages/entertainment-games-screen/entertainment-games-screen';
 import TrainingsScreen from '../pages/trainings-screen/trainings-screen';
 import AboutMomentLab from '../pages/about-moment-lab-screen/about-moment-lab-screen';
+import ScrollToTop from '../components/scroll-to-top/scroll-to-top';
+
 
 function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop/>
       <Routes>
         <Route path='/' element={<MainScreen />} />
         <Route path='/corporate-events' element={<CorporateEventScreen />} />
