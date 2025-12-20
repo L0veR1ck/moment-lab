@@ -10,7 +10,8 @@ type CarcassSubPagesProps = {
     section_1: {
         mainHeading: string,
         mainAnnotation: string,
-        handleModalClick: () => void,
+        handleModalOpen: () => void,
+        handleModalClose: () => void,
         isModalOpen: boolean
     },
     section_2: {
@@ -47,8 +48,8 @@ function CarcassSubPages(pageData: CarcassSubPagesProps) {
                     <p className="text-2xl text-[var(--color-blue)]/55 text-center mb-[32px]">
                         {pageData.section_1.mainAnnotation}
                     </p>
-                    <Button text="Хочу мероприятие 🎉" onClick={pageData.section_1.handleModalClick} theme={'dark'}></Button>
-                    {pageData.section_1.isModalOpen && <ModalForm onClose={pageData.section_1.handleModalClick} />}
+                    <Button text="Хочу мероприятие 🎉" onClick={pageData.section_1.handleModalOpen} theme={'dark'}></Button>
+                    {pageData.section_1.isModalOpen && <ModalForm onClose={pageData.section_1.handleModalClose} />}
                 </section>
                 <section className="flex flex-col items-center flex-wrap gap-[32px] py-[64px] max-w-[1280px] w-full">
                     <div className="flex gap-x-[256px] justify-between w-full">

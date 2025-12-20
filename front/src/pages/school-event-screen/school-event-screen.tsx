@@ -1,6 +1,7 @@
 import Footer from "../../components/layout/footer/footer";
 import Header from "../../components/layout/header/header";
 import EventCard from "../../components/ui/event-card/event-card";
+import { ROUTES } from "../../consts/routes";
 
 function SchoolEventScreen() {
     return (
@@ -14,27 +15,27 @@ function SchoolEventScreen() {
                         imgPosition="bg-position-[center_60%]"
                         titleCard={"Интеллектуальные игры"}
                         description={"Динамичные интеллектуальные батлы: команды соревнуются на большом экране в серии разноформатных мини-игр"}
-                        path={"/intellectual-games"}
+                        path={ROUTES.INTELLECTUAL_GAMES}
                     />
                     <EventCard
                         urlImg={"bg-[url(./src/assets/event-card/school-event-card-2.png)]"}
                         imgPosition="bg-position-[center_45%]"
                         titleCard={"Квесты  живого  действия"}
                         description={"Полное погружение в детективную историю: множество актеров-персонажей, сложный сюжет с разветвлениями, свобода исследования истории"}
-                        path={"/live-action-quests"}
+                        path={ROUTES.LIVE_ACTION_QUESTS}
                     />
                     <EventCard
                         urlImg={"bg-[url(./src/assets/event-card/school-event-card-3.png)]"}
                         imgPosition="bg-position-[center_65%]"
                         titleCard={"Развлекательные игры"}
                         description={"Драйвовые игры и челленджи для вашего класса, формат легко трансформируется и адаптируется под любой возраст"}
-                        path={"/entertainment-games"}
+                        path={ROUTES.ENTERTAINMENT_GAMES}
                     />
                     <EventCard
                         urlImg={"bg-[url(./src/assets/event-card/school-event-card-4.png)]"}
                         titleCard={"Тренинги"}
                         description={"Специальный тренинг для вашего класса, лидерство, командообразование, профориентация, опишите ваш запрос, а мы составим программу, специально для вас"}
-                        path={"/trainings"}
+                        path={ROUTES.TRAININGS}
                     />
                 </section>
             </main>

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Footer from "../../components/layout/footer/footer.tsx";
 import Header from "../../components/layout/header/header.tsx";
 import Button from "../../components/ui/button/button.tsx";
@@ -6,10 +5,11 @@ import ModalForm from "../../components/ui/modal-form/modal-form.tsx";
 import InfoItem from "../../components/ui/info-item/info-item.tsx";
 import Marquee from "react-fast-marquee";
 import { littleDiamond, pompon } from "../../assets/3d-objects/index.ts";
-import { useParallax } from "../../shared/use-parallax.ts";
+import { useParallax } from "../../shared/hooks/use-parallax.ts";
+import { useToggle } from "../../shared/hooks/useToggle.ts";
 
 function PrivateEventsScreen() {
-    const [isModalOpen, setModalOpen] = useState(false);
+    const modal = useToggle();
     const photos = Array.from({ length: 8 }, (_, i) => i + 1);
 
     const diamondOffset = useParallax(0.55, 100);
@@ -21,10 +21,6 @@ function PrivateEventsScreen() {
         { text: "Универсальность" },
         { text: "Простота и доступность" },
     ];
-
-    const handleModalClick = () => {
-        setModalOpen(prev => !prev)
-    }
 
     return (
         <div className='flex flex-col items-center'>
@@ -47,8 +43,8 @@ function PrivateEventsScreen() {
                         </h1>
                     </div>
                     <p className="text-2xl text-[var(--color-blue)]/55 text-center mb-[32px]">Создаем события по вашему запросу, начиная от Дня Рождения, заканчивая свадьбой и корпоративом. Разработка и реализация любой концепции</p>
-                    <Button text="Хочу мероприятие 🎉 " onClick={handleModalClick} theme={'dark'}></Button>
-                    {isModalOpen && <ModalForm onClose={handleModalClick} />}
+                    <Button text="Хочу мероприятие 🎉 " onClick={modal.open} theme={'dark'}></Button>
+                    {modal.isOpen && <ModalForm onClose={modal.close} />}
                 </section>
                 <section className="flex flex-col flex-wrap gap-[32px] py-[64px] max-w-[1280px] w-full">
                     <div className="relative">

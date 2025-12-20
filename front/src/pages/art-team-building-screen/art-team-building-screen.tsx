@@ -1,18 +1,18 @@
-import { useState } from "react";
 import CarcassSubPages from "../../components/layout/carcass-sub-pages/carcass-sub-pages";
+import { useToggle } from "../../shared/hooks/useToggle";
 
 
 function ArtTeamBuildingScreen() {
-    const [isModalOpen, setModalOpen] = useState(false)
-    const handleModalClick = () => setModalOpen(prev => !prev)
+    const modal = useToggle();
     const photos = Array.from({ length: 8 }, (_, i) => i + 1);
 
     const personalIqGameData = {
         section_1: {
             mainHeading: "Творческий тимбилдинг",
             mainAnnotation: "Приготовься раскрыть свой творческий потенциал и объединить усилия с командой ради общего успеха. Откажись от шаблонных подходов и погружайся в атмосферу вдохновения!",
-            handleModalClick: handleModalClick,
-            isModalOpen: isModalOpen
+            handleModalOpen: modal.open,
+            handleModalClose: modal.close,
+            isModalOpen: modal.isOpen,
         },
         section_2: {
             firstProgramList: {

@@ -3,13 +3,16 @@ import vk from '../../../assets/social-link/vk.svg'
 import telegram from '../../../assets/social-link/telegram.svg'
 import whatsapp from '../../../assets/social-link/whatsapp.svg'
 import { Link } from 'react-router-dom'
+import { ROUTES } from '../../../consts/routes';
 
 function Footer() {
     return (
         <footer className='flex w-full justify-between items-start border-t border-t-[var(--color-blue)]/25 max-w-[1280px]'>
             <div className='flex flex-col gap-[64px] py-[80px]'>
                 <div className='flex flex-col gap-2 items-start'>
-                    <img className="h-[32px]" src={logo} alt="Moment Lab Logo" />
+                    <Link to={ROUTES.MAIN} className="cursor-pointer hover:text-[var(--color-dark-blue)] block">
+                        <img className="h-[32px]" src={logo} alt="Moment Lab Logo" />
+                    </Link>
                     <p className='font-semibold text-lg text-[var(--color-blue)]/55'>
                         Креативное агентство по организации мероприятий
                     </p>
@@ -43,16 +46,16 @@ function Footer() {
                 <p className='font-semibold text-lg text-[var(--color-blue)] pb-[16px]'>Наши продукты</p>
                 <ul className='flex flex-col gap-[8px] text-lg text-[var(--color-blue)] '>
                     <li>
-                        <Link to="/corporate-events" className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>Корпоративные мероприятия</Link>
+                        <Link to={ROUTES.CORPORATE_EVENTS} className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>Корпоративные мероприятия</Link>
                     </li>
                     <li>
-                        <Link to="/private" className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>Частные мероприятия</Link>
+                        <Link to={ROUTES.PRIVATE_EVENTS} className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>Частные мероприятия</Link>
                     </li>
                     <li>
-                        <Link to="/school-events" className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>События для школ</Link>
+                        <Link to={ROUTES.SCHOOL_EVENTS} className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>События для школ</Link>
                     </li>
                     <li>
-                        <Link to="/rent" className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>Пространство для событий</Link>
+                        <Link to={ROUTES.RENT} className='cursor-pointer hover:text-[var(--color-dark-blue)] block'>Пространство для событий</Link>
                     </li>
                 </ul>
             </div>

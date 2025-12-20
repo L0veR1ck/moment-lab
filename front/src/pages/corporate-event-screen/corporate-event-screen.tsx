@@ -1,6 +1,7 @@
 import Footer from "../../components/layout/footer/footer";
 import Header from "../../components/layout/header/header";
 import EventCard from "../../components/ui/event-card/event-card";
+import { ROUTES } from "../../consts/routes";
 
 function CorporateEventScreen() {
     return (
@@ -14,26 +15,26 @@ function CorporateEventScreen() {
                         imgPosition="bg-position-[center_45%]"
                         titleCard={"Персональная разумная игра"}
                         description={"Адаптируемая интеллектуальная игра, разработанная индивидуально для вашей компании, подарит неповторимый опыт"}
-                        path={"/personal-iq-game"}
+                        path={ROUTES.PERSONAL_IQ_GAME}
                     />
                     <EventCard
                         urlImg={"bg-[url(./src/assets/event-card/event-card-2.png)]"}
                         imgPosition="bg-position-[center_43%]"
                         titleCard={"Квесты живого действия"}
                         description={"Полное погружение в детективную историю: множество актеров-персонажей, сложный сюжет с разветвлениями, свобода исследования истории"}
-                        path={"/live-action-quests"}
+                        path={ROUTES.LIVE_ACTION_QUESTS}
                     />
                     <EventCard
                         urlImg={"bg-[url(./src/assets/event-card/event-card-3.png)]"}
                         titleCard={"Творческий тимбилдинг"}
                         description={"Приготовься раскрыть свой творческий потенциал и объединить усилия с командой ради общего успеха"}
-                        path={"/art-team-building"}
+                        path={ROUTES.ART_TEAM_BUILDING}
                     />
                     <EventCard
                         urlImg={"bg-[url(./src/assets/event-card/event-card-4.png)]"}
                         titleCard={"Семейные мероприятия"}
                         description={"Улучшение взаимодействия сотрудников, стимулирование лояльности, разрядка рабочей обстановки и формирование благоприятной атмосферы"}
-                        path={"/family-event"}
+                        path={ROUTES.FAMILY_EVENT}
                     />
                 </section>
             </main>

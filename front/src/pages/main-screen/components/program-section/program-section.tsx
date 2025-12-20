@@ -1,3 +1,4 @@
+import { ROUTES } from "../../../../consts/routes";
 import ProgramCard from "./components/program-card/program-card";
 
 function ProgramSection() {
@@ -7,14 +8,14 @@ function ProgramSection() {
             <div className="flex flex-col py-[32px] gap-[32px]">
                 <div className="flex overflow-hidden gap-[32px] w-full">
                     <ProgramCard
-                        link="/corporate-events"
+                        link={ROUTES.CORPORATE_EVENTS}
                         title={"Корпоративные мероприятия"}
                         description={"События, от которых бегут мурашки, ощущаются моменты радости и вдохновения"}
                         imageUrl={"bg-[url(./src/assets/program-cards/card-1.jpg)]"}
                         imagePosition={"bg-position-[center_10%]"}
                     />
                     <ProgramCard
-                        link={"/private"}
+                        link={ROUTES.PRIVATE_EVENTS}
                         title={"Частные мероприятия"}
                         description={"Воплощаем ваши идеи"}
                         imageUrl={"bg-[url(./src/assets/program-cards/card-2.jpg)]"}
@@ -23,14 +24,14 @@ function ProgramSection() {
                 </div>
                 <div className="flex overflow-hidden gap-[32px] w-full">
                     <ProgramCard
-                        link={"/school-events"}
+                        link={ROUTES.SCHOOL_EVENTS}
                         title={"События для школ"}
                         description={"Это не просто мероприятия, а инвестиции в будущее вашего класса"}
                         imageUrl={"bg-[url(./src/assets/program-cards/card-3.png)]"}
                         imagePosition={"bg-position-[center_52%]"}
                     />
                     <ProgramCard
-                        link={"/rent"}
+                        link={ROUTES.RENT}
                         title={"Пространство для событий"}
                         description={"Многофункциональный лофт, подходящий для организации вашего мероприятия"}
                         imageUrl={"bg-[url(./src/assets/program-cards/card-4.JPEG)]"}
