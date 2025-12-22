@@ -31,7 +31,7 @@ type CarcassSubPagesProps = {
     section_3: {
         photos: number[],
         pathImages: string,
-        formatImages:string
+        formatImages: string
     }
 }
 
@@ -41,7 +41,7 @@ function CarcassSubPages(pageData: CarcassSubPagesProps) {
         <div className='flex flex-col items-center'>
             <Header />
             <main className='flex flex-col items-center'>
-                <section className="flex flex-wrap justify-center gap-[32px] pt-[64px] pb-[32px] max-w-[1280px] h-[calc(100vh-95px)]">
+                <section className="flex flex-wrap justify-center gap-[32px] pt-[64px] pb-[32px] max-w-[1280px]">
                     <h1 className="font-semibold text-[64px] text-[var(--color-dark-blue)]">
                         {pageData.section_1.mainHeading}
                     </h1>
@@ -51,6 +51,7 @@ function CarcassSubPages(pageData: CarcassSubPagesProps) {
                     <Button text="Хочу мероприятие 🎉" onClick={pageData.section_1.handleModalOpen} theme={'dark'}></Button>
                     {pageData.section_1.isModalOpen && <ModalForm onClose={pageData.section_1.handleModalClose} />}
                 </section>
+
                 <section className="flex flex-col items-center flex-wrap gap-[32px] py-[64px] max-w-[1280px] w-full">
                     <div className="flex gap-x-[256px] justify-between w-full">
                         <ProgramList heading={pageData.section_2.firstProgramList.heading} checklist={pageData.section_2.firstProgramList.checklist} />
@@ -62,6 +63,7 @@ function CarcassSubPages(pageData: CarcassSubPagesProps) {
                         ))}
                     </div>
                 </section>
+
                 <section className="flex flex-col w-screen py-[64px] gap-[32px] overflow-hidden">
                     <Marquee speed={60} direction="right" autoFill={true} pauseOnHover={true}>
                         {pageData.section_3.photos.map((photoNumber) => (
