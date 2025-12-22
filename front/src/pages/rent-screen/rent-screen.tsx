@@ -1,4 +1,3 @@
-import { useState } from "react";
 import Footer from "../../components/layout/footer/footer";
 import Header from "../../components/layout/header/header";
 import Button from "../../components/ui/button/button";
@@ -8,10 +7,11 @@ import { bottleIcon, cakeIcon, clockIcon, hangerIcon, megaphoneIcon, microphoneI
 import InfoItem from "../../components/ui/info-item/info-item";
 import Marquee from "react-fast-marquee";
 import { cross, check } from "../../assets/3d-objects/index.ts";
-import { useParallax } from "../../shared/use-parallax.ts";
+import { useParallax } from "../../shared/hooks/use-parallax.ts";
+import { useToggle } from "../../shared/hooks/useToggle.ts";
 
 function RentScreen() {
-    const [isModalOpen, setModalOpen] = useState(false);
+    const modal = useToggle();
     const photos = Array.from({ length: 12 }, (_, i) => i + 1);
 
     const checkOffset = useParallax(0.20, 70);
@@ -38,10 +38,6 @@ function RentScreen() {
         { icon: bottleIcon, text: "пробкового сбора" },
     ];
 
-    const handleModalClick = () => {
-        setModalOpen(prev => !prev)
-    }
-
     return (
         <div className='flex flex-col items-center'>
             <Header />
@@ -49,8 +45,8 @@ function RentScreen() {
                 <section className="flex flex-wrap justify-center gap-[32px] pt-[64px] pb-[32px] max-w-[1280px]">
                     <h1 className="font-semibold text-[64px] text-[var(--color-dark-blue)]">Пространство для событий</h1>
                     <p className="text-2xl text-[var(--color-blue)]/55 text-center mb-[32px]">Стильное и уютное место для ваших праздников, корпоративов, тренингов, фотосессий, мастер-классов и много другого!</p>
-                    <Button text="Арендовать 🎉" onClick={handleModalClick} theme={'dark'}></Button>
-                    {isModalOpen && <ModalForm onClose={handleModalClick} />}
+                    <Button text="Арендовать 🎉" onClick={modal.open} theme={'dark'}></Button>
+                    {modal.isOpen && <ModalForm onClose={modal.close} />}
                 </section>
                 <section className="flex flex-col flex-wrap gap-[32px] py-[64px] max-w-[1280px] w-full">
                     <div className="relative">

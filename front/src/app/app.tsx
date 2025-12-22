@@ -11,6 +11,7 @@ import FamilyEventScreen from '../pages/family-event-screen/family-event-screen'
 import IntellectualGamesScreen from '../pages/intellectual-games-screen/intellectual-games-screen';
 import EntertainmentGamesScreen from '../pages/entertainment-games-screen/entertainment-games-screen';
 import TrainingsScreen from '../pages/trainings-screen/trainings-screen';
+import {ROUTES} from '../consts/routes';
 import AboutMomentLab from '../pages/about-moment-lab-screen/about-moment-lab-screen';
 import ScrollToTop from '../components/scroll-to-top/scroll-to-top';
 
@@ -21,19 +22,19 @@ function App() {
     <BrowserRouter>
       <ScrollToTop/>
       <Routes>
-        <Route path='/' element={<MainScreen />} />
-        <Route path='/corporate-events' element={<CorporateEventScreen />} />
-        <Route path='/personal-iq-game' element={<PersonalIqGameScreen />} />
-        <Route path='/live-action-quests' element={<LiveActionQuestsScreen />} />
-        <Route path='/art-team-building' element={<ArtTeamBuildingScreen />} />
-        <Route path='/family-event' element={<FamilyEventScreen />} />
-        <Route path='/school-events' element={<SchoolEventScreen />} />
-        <Route path='/rent' element={<RentScreen />} />
-        <Route path='/private' element={<PrivateEventsScreen />} />
-        <Route path='/intellectual-games' element={<IntellectualGamesScreen/>} />
-        <Route path='/entertainment-games' element={<EntertainmentGamesScreen/>} />
-        <Route path='/trainings' element={<TrainingsScreen/>} />
-        <Route path='/about-moment-lab' element={<AboutMomentLab/>} />
+        <Route path={ROUTES.MAIN} element={<MainScreen />} />
+        <Route path={ROUTES.CORPORATE_EVENTS}  element={<CorporateEventScreen />} />
+        <Route path={ROUTES.PERSONAL_IQ_GAME} element={<PersonalIqGameScreen />} />
+        <Route path={ROUTES.LIVE_ACTION_QUESTS} element={<LiveActionQuestsScreen />} />
+        <Route path={ROUTES.ART_TEAM_BUILDING} element={<ArtTeamBuildingScreen />} />
+        <Route path={ROUTES.FAMILY_EVENT} element={<FamilyEventScreen />} />
+        <Route path={ROUTES.SCHOOL_EVENTS} element={<SchoolEventScreen />} />
+        <Route path={ROUTES.RENT} element={<RentScreen />} />
+        <Route path={ROUTES.PRIVATE_EVENTS} element={<PrivateEventsScreen />} />
+        <Route path={ROUTES.INTELLECTUAL_GAMES} element={<IntellectualGamesScreen/>} />
+        <Route path={ROUTES.ENTERTAINMENT_GAMES} element={<EntertainmentGamesScreen/>} />
+        <Route path={ROUTES.TRAININGS} element={<TrainingsScreen/>} />
+        <Route path={ROUTES.ABOUT_MOMENT_LAB} element={<AboutMomentLab/>} />
       </Routes>
     </BrowserRouter>
   );

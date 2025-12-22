@@ -1,18 +1,18 @@
-import { useState } from "react";
 import CarcassSubPages from "../../components/layout/carcass-sub-pages/carcass-sub-pages";
+import { useToggle } from "../../shared/hooks/useToggle";
 
 
 function LiveActionQuestsScreen() {
-    const [isModalOpen, setModalOpen] = useState(false)
-    const handleModalClick = () => setModalOpen(prev => !prev)
+    const modal = useToggle();
     const photos = Array.from({ length: 8 }, (_, i) => i + 1);
 
     const personalIqGameData = {
         section_1: {
             mainHeading: "Квесты живого действия",
             mainAnnotation: "Полное погружение в детективную историю: множество актеров-персонажей, сложный сюжет с разветвлениями, свобода исследования истории. Разгадка требует анализа и синтеза.",
-            handleModalClick: handleModalClick,
-            isModalOpen: isModalOpen
+            handleModalOpen: modal.open,
+            handleModalClose: modal.close,
+            isModalOpen: modal.isOpen,
         },
         section_2: {
             firstProgramList: {

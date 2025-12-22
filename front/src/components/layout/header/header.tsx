@@ -4,16 +4,13 @@ import logo from '../../../assets/logo/logo-moment-lab.svg';
 import Button from '../../ui/button/button';
 import ModalForm from '../../ui/modal-form/modal-form';
 import DropMenu from '../../common/drop-menu/drop-menu';
+import { ROUTES } from '../../../consts/routes';
+import { useToggle } from '../../../shared/hooks/useToggle';
 
 function Header() {
   const [isDropOpen, setDropOpen] = useState({ programs: false, about: false });
-  const [isModalOpen, setModalOpen] = useState(false);
   const wrapperRef = useRef<HTMLLIElement | null>(null);
-
-
-  const handleModalClick = () => {
-    setModalOpen(prev => !prev)
-  }
+  const modal = useToggle();
 
   useEffect(() => {
     function handleDocumentClick(e: MouseEvent) {
@@ -28,7 +25,7 @@ function Header() {
   return (
     <header className="sticky top-0 z-2 bg-[var(--color-beige)]/95 transition-shadow  w-full duration-300">
       <div className="flex justify-between items-center w-full py-[24px] max-w-[1280px] mx-auto">
-        <Link to="/" className="cursor-pointer hover:text-[var(--color-dark-blue)] block">
+        <Link to={ROUTES.MAIN} className="cursor-pointer hover:text-[var(--color-dark-blue)] block">
           <img className="h-[32px]" src={logo} alt="Moment Lab Logo" />
         </Link>
 
@@ -45,20 +42,20 @@ function Header() {
                 items={[
                   {
                     name: 'Корпоративные мероприятия',
-                    path: '/corporate-events'
+                    path: ROUTES.CORPORATE_EVENTS,
                   },
                   {
                     name: 'Частные мероприятия',
-                    path: '/private'
+                    path: ROUTES.PRIVATE_EVENTS
                   }, 
                   { 
                     name: 'События для школ',
-                    path: '/school-events'
+                    path: ROUTES.SCHOOL_EVENTS
 
                   }, 
                   { 
                     name: 'Пространство для событий',
-                    path: '/rent'
+                    path: ROUTES.RENT
                   }
                 ]}
               />
@@ -88,8 +85,8 @@ function Header() {
           </ul>
         </nav>
 
-        <Button text="Связатьcя" onClick={handleModalClick} />
-        {isModalOpen && <ModalForm onClose={handleModalClick} />}
+        <Button text="Связатьcя" onClick={modal.open} />
+        {modal.isOpen && <ModalForm onClose={modal.close} />}
       </div>
     </header>
   );
