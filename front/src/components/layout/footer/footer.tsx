@@ -9,7 +9,10 @@ function Footer() {
         <footer className='flex w-full justify-between items-start border-t border-t-[var(--color-blue)]/25 max-w-[1280px]'>
             <div className='flex flex-col gap-[64px] py-[80px]'>
                 <div className='flex flex-col gap-2 items-start'>
-                    <img className="h-[32px]" src={logo} alt="Moment Lab Logo" />
+                    <Link to="/" className="cursor-pointer hover:text-[var(--color-dark-blue)] block">
+                        <img className="h-[32px]" src={logo} alt="Moment Lab Logo" />
+                    </Link>
+
                     <p className='font-semibold text-lg text-[var(--color-blue)]/55'>
                         Креативное агентство по организации мероприятий
                     </p>

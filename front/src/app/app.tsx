@@ -11,11 +11,15 @@ import FamilyEventScreen from '../pages/family-event-screen/family-event-screen'
 import IntellectualGamesScreen from '../pages/intellectual-games-screen/intellectual-games-screen';
 import EntertainmentGamesScreen from '../pages/entertainment-games-screen/entertainment-games-screen';
 import TrainingsScreen from '../pages/trainings-screen/trainings-screen';
+import AboutMomentLab from '../pages/about-moment-lab-screen/about-moment-lab-screen';
+import ScrollToTop from '../components/scroll-to-top/scroll-to-top';
+
 
 function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop/>
       <Routes>
         <Route path='/' element={<MainScreen />} />
         <Route path='/corporate-events' element={<CorporateEventScreen />} />
@@ -29,6 +33,7 @@ function App() {
         <Route path='/intellectual-games' element={<IntellectualGamesScreen/>} />
         <Route path='/entertainment-games' element={<EntertainmentGamesScreen/>} />
         <Route path='/trainings' element={<TrainingsScreen/>} />
+        <Route path='/about-moment-lab' element={<AboutMomentLab/>} />
       </Routes>
     </BrowserRouter>
   );

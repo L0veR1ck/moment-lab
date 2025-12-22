@@ -75,7 +75,7 @@ function Header() {
                 items={[
                   {
                     name: "О Момент.Лаб",
-                    path: '/'
+                    path: '/about-moment-lab'
                   }, 
                   {
                     name: 'Портфолио',
