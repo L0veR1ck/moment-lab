@@ -41,7 +41,7 @@ function CarcassSubPages(pageData: CarcassSubPagesProps) {
         <div className='flex flex-col items-center'>
             <Header />
             <main className='flex flex-col items-center'>
-                <section className="flex flex-wrap justify-center gap-[32px] pt-[64px] pb-[32px] max-w-[1280px]">
+                <section className="flex flex-wrap justify-center gap-[32px] pt-[64px] pb-[32px] max-w-[1280px] h-[calc(100vh-95px)]">
                     <h1 className="font-semibold text-[64px] text-[var(--color-dark-blue)]">
                         {pageData.section_1.mainHeading}
                     </h1>

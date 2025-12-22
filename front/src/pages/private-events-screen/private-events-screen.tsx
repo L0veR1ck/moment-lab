@@ -26,7 +26,7 @@ function PrivateEventsScreen() {
         <div className='flex flex-col items-center'>
             <Header />
             <main className='flex flex-col items-center'>
-                <section className="flex flex-wrap justify-center gap-[32px] pt-[64px] pb-[32px] max-w-[1280px]">
+                <section className="flex flex-wrap justify-center gap-[32px] pt-[64px] pb-[32px] h-[calc(50vh-47px)] max-w-[1280px]">
                     <div className="relative">
                         <img 
                             src={littleDiamond} 
@@ -46,7 +46,7 @@ function PrivateEventsScreen() {
                     <Button text="Хочу мероприятие 🎉 " onClick={modal.open} theme={'dark'}></Button>
                     {modal.isOpen && <ModalForm onClose={modal.close} />}
                 </section>
-                <section className="flex flex-col flex-wrap gap-[32px] py-[64px] max-w-[1280px] w-full">
+                <section className="flex flex-col flex-wrap gap-[32px] py-[64px] h-[calc(50vh-47px)] max-w-[1280px] w-full">
                     <div className="relative">
                         <img 
                             src={pompon} 

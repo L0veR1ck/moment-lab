@@ -11,5 +11,6 @@ export const ROUTES = {
     INTELLECTUAL_GAMES: '/intellectual-games',
     ENTERTAINMENT_GAMES: '/entertainment-games',
     TRAININGS: '/trainings',
+    ABOUT_MOMENT_LAB: '/about-moment-lab',
   } as const;
   

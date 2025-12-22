@@ -12,11 +12,15 @@ import IntellectualGamesScreen from '../pages/intellectual-games-screen/intellec
 import EntertainmentGamesScreen from '../pages/entertainment-games-screen/entertainment-games-screen';
 import TrainingsScreen from '../pages/trainings-screen/trainings-screen';
 import {ROUTES} from '../consts/routes';
+import AboutMomentLab from '../pages/about-moment-lab-screen/about-moment-lab-screen';
+import ScrollToTop from '../components/scroll-to-top/scroll-to-top';
+
 
 function App() {
 
   return (
     <BrowserRouter>
+      <ScrollToTop/>
       <Routes>
         <Route path={ROUTES.MAIN} element={<MainScreen />} />
         <Route path={ROUTES.CORPORATE_EVENTS}  element={<CorporateEventScreen />} />
@@ -30,6 +34,7 @@ function App() {
         <Route path={ROUTES.INTELLECTUAL_GAMES} element={<IntellectualGamesScreen/>} />
         <Route path={ROUTES.ENTERTAINMENT_GAMES} element={<EntertainmentGamesScreen/>} />
         <Route path={ROUTES.TRAININGS} element={<TrainingsScreen/>} />
+        <Route path={ROUTES.ABOUT_MOMENT_LAB} element={<AboutMomentLab/>} />
       </Routes>
     </BrowserRouter>
   );

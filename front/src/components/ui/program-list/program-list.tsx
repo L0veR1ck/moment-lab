@@ -10,8 +10,8 @@ function ProgramList({ heading, checklist }: ProgramListProps) {
                 {heading}
             </p>
             <ul className="list-disc list-inside">
-                {checklist.map(listItem =>
-                    <li className="font-bold text-base text-[var(--color-blue)]/55">{listItem}</li>
+                {checklist.map((listItem, itemIndex) =>
+                    <li key={itemIndex} className="font-bold text-base text-[var(--color-blue)]/55">{listItem}</li>
                 )}
             </ul>
         </div>
