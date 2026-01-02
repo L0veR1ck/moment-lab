@@ -22,8 +22,10 @@ public class ApplicationsController(
             {
                 ClientName = request.ClientName,
                 ClientPhone = request.ClientPhone,
-                RequestDate = request.RequestDate,
-                Status = ApplicationStatus.New,
+                RequestDate = request.RequestDate.Kind == DateTimeKind.Utc 
+                    ? request.RequestDate 
+                    : DateTime.SpecifyKind(request.RequestDate, DateTimeKind.Utc),
+                Status = (ApplicationStatus)request.Status,
                 IsTelegramNotificationSent = false,
                 IsBitrixSent = false,
                 IsEmailSent = false
@@ -132,6 +134,50 @@ public class ApplicationsController(
         catch (Exception ex)
         {
             logger.LogError(ex, "Error getting application {ApplicationId}", id);
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
+    [HttpPut("{id:guid}")]
+    public async Task<ActionResult<ApplicationResponse>> Update(Guid id, [FromBody] UpdateApplicationRequest request)
+    {
+        try
+        {
+            var application = await repository.GetByIdAsync(id);
+
+            if (application == null)
+                return NotFound();
+
+            application.ClientName = request.ClientName;
+            application.ClientPhone = request.ClientPhone;
+            application.RequestDate = request.RequestDate.Kind == DateTimeKind.Utc 
+                ? request.RequestDate 
+                : DateTime.SpecifyKind(request.RequestDate, DateTimeKind.Utc);
+            application.Status = (ApplicationStatus)request.Status;
+
+            var updated = await repository.UpdateAsync(application);
+
+            logger.LogInformation("Application {ApplicationId} updated", id);
+
+            var response = new ApplicationResponse(
+                updated.Id,
+                updated.ClientName,
+                updated.ClientPhone,
+                updated.RequestDate,
+                updated.Status,
+                updated.IsTelegramNotificationSent,
+                updated.IsBitrixSent,
+                updated.IsEmailSent,
+                updated.BitrixDealId,
+                updated.CreatedAt,
+                updated.UpdatedAt
+            );
+
+            return Ok(response);
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error updating application {ApplicationId}", id);
             return StatusCode(500, "Internal server error");
         }
     }

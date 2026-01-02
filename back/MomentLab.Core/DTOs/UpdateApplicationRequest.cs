@@ -1,9 +1,9 @@
 namespace MomentLab.Core.DTOs;
 
-public record CreateApplicationRequest(
+public record UpdateApplicationRequest(
     string ClientName,
     string ClientPhone,
     DateTime RequestDate,
-    int Status = 0
+    int Status
 );
 

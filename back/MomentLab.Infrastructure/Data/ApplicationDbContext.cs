@@ -8,6 +8,11 @@ public class ApplicationDbContext(
 ) : DbContext(options)
 {
     public DbSet<ApplicationRequest> ApplicationRequests { get; set; }
+    public DbSet<Event> Events { get; set; }
+    public DbSet<EventCharacteristic> EventCharacteristics { get; set; }
+    public DbSet<EventPhoto> EventPhotos { get; set; }
+    public DbSet<Review> Reviews { get; set; }
+    public DbSet<TeamMember> TeamMembers { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -26,6 +31,78 @@ public class ApplicationDbContext(
 
             entity.HasIndex(e => e.Status);
             entity.HasIndex(e => e.CreatedAt);
+        });
+
+        modelBuilder.Entity<Event>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Title).IsRequired().HasMaxLength(200);
+            entity.Property(e => e.Description).IsRequired().HasMaxLength(2000);
+            entity.Property(e => e.ProgramDescription).IsRequired().HasMaxLength(2000);
+            entity.Property(e => e.KeyValues).IsRequired().HasMaxLength(2000);
+            entity.Property(e => e.MainPhotoUrl).HasMaxLength(500);
+            entity.Property(e => e.CreatedAt).IsRequired();
+            entity.Property(e => e.UpdatedAt).IsRequired();
+
+            entity.HasIndex(e => e.IsActive);
+            entity.HasIndex(e => e.DisplayOrder);
+            
+            entity.HasMany(e => e.Characteristics)
+                .WithOne(c => c.Event)
+                .HasForeignKey(c => c.EventId)
+                .OnDelete(DeleteBehavior.Cascade);
+                
+            entity.HasMany(e => e.Photos)
+                .WithOne(p => p.Event)
+                .HasForeignKey(p => p.EventId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        modelBuilder.Entity<EventCharacteristic>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.Value).IsRequired().HasMaxLength(500);
+            
+            entity.HasIndex(e => e.EventId);
+        });
+
+        modelBuilder.Entity<EventPhoto>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.PhotoUrl).IsRequired().HasMaxLength(500);
+            entity.Property(e => e.UploadedAt).IsRequired();
+            
+            entity.HasIndex(e => e.EventId);
+        });
+
+        modelBuilder.Entity<Review>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.ClientName).IsRequired().HasMaxLength(200);
+            entity.Property(e => e.ReviewText).IsRequired().HasMaxLength(2000);
+            entity.Property(e => e.CreatedAt).IsRequired();
+            entity.Property(e => e.UpdatedAt).IsRequired();
+            
+            entity.HasIndex(e => e.IsApproved);
+            entity.HasIndex(e => e.CreatedAt);
+        });
+
+        modelBuilder.Entity<TeamMember>(entity =>
+        {
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.FirstName).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.LastName).IsRequired().HasMaxLength(100);
+            entity.Property(e => e.Position).HasMaxLength(200);
+            entity.Property(e => e.PhotoUrl).HasMaxLength(500);
+            entity.Property(e => e.PhoneNumber).HasMaxLength(50);
+            entity.Property(e => e.Wishes).HasMaxLength(1000);
+            entity.Property(e => e.AttachmentUrl).HasMaxLength(500);
+            entity.Property(e => e.CreatedAt).IsRequired();
+            entity.Property(e => e.UpdatedAt).IsRequired();
+            
+            entity.HasIndex(e => e.IsActive);
+            entity.HasIndex(e => e.DisplayOrder);
         });
     }
 }
