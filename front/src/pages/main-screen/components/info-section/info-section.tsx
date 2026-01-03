@@ -1,11 +1,11 @@
-import ConditionItem from "../../../../components/ui/ condition-item/ condition-item";
+import ConditionItem from '../../../../components/ui/ condition-item/ condition-item';
 
 function InfoSection() {
   const statsData = [
-    { value: "15 лет", description: "опыта проведения мероприятий" },
-    { value: "100+", description: "реализованных проектов" },
-    { value: "500+", description: "частных мероприятий" },
-    { value: "250+", description: "интерактивов  " },
+    { value: '15 лет', description: 'опыта проведения мероприятий' },
+    { value: '100+', description: 'реализованных проектов' },
+    { value: '500+', description: 'частных мероприятий' },
+    { value: '250+', description: 'интерактивов  ' },
   ];
 
   return (

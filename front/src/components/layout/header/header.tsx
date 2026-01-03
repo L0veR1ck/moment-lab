@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from "react";
-import { Link } from "react-router-dom";
-import logo from "../../../assets/logo/logo-moment-lab.svg";
-import Button from "../../ui/button/button";
-import ModalForm from "../../ui/modal-form/modal-form";
-import DropMenu from "../../common/drop-menu/drop-menu";
-import { ROUTES } from "../../../consts/routes";
-import { useToggle } from "../../../shared/hooks/useToggle";
+import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
+import logo from '../../../assets/logo/logo-moment-lab.svg';
+import Button from '../../ui/button/button';
+import ModalForm from '../../ui/modal-form/modal-form';
+import DropMenu from '../../common/drop-menu/drop-menu';
+import { ROUTES } from '../../../consts/routes';
+import { useToggle } from '../../../shared/hooks/useToggle';
 
 function Header() {
   const [isDropOpen, setDropOpen] = useState({ programs: false, about: false });
@@ -21,8 +21,8 @@ function Header() {
         setDropOpen({ programs: false, about: false });
       }
     }
-    document.addEventListener("click", handleDocumentClick);
-    return () => document.removeEventListener("click", handleDocumentClick);
+    document.addEventListener('click', handleDocumentClick);
+    return () => document.removeEventListener('click', handleDocumentClick);
   }, []);
 
   return (
@@ -47,19 +47,19 @@ function Header() {
                 }}
                 items={[
                   {
-                    name: "Корпоративные мероприятия",
+                    name: 'Корпоративные мероприятия',
                     path: ROUTES.CORPORATE_EVENTS,
                   },
                   {
-                    name: "Частные мероприятия",
+                    name: 'Частные мероприятия',
                     path: ROUTES.PRIVATE_EVENTS,
                   },
                   {
-                    name: "События для школ",
+                    name: 'События для школ',
                     path: ROUTES.SCHOOL_EVENTS,
                   },
                   {
-                    name: "Пространство для событий",
+                    name: 'Пространство для событий',
                     path: ROUTES.RENT,
                   },
                 ]}
@@ -76,12 +76,12 @@ function Header() {
                 }}
                 items={[
                   {
-                    name: "О Момент.Лаб",
-                    path: "/about-moment-lab",
+                    name: 'О Момент.Лаб',
+                    path: '/about-moment-lab',
                   },
                   {
-                    name: "Портфолио",
-                    path: "/",
+                    name: 'Портфолио',
+                    path: '/',
                   },
                 ]}
               />

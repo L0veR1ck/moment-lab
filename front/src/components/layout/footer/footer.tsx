@@ -1,9 +1,9 @@
-import logo from "../../../assets/logo/logo-moment-lab.svg";
-import vk from "../../../assets/social-link/vk.svg";
-import telegram from "../../../assets/social-link/telegram.svg";
-import whatsapp from "../../../assets/social-link/whatsapp.svg";
-import { Link } from "react-router-dom";
-import { ROUTES } from "../../../consts/routes";
+import logo from '../../../assets/logo/logo-moment-lab.svg';
+import vk from '../../../assets/social-link/vk.svg';
+import telegram from '../../../assets/social-link/telegram.svg';
+import whatsapp from '../../../assets/social-link/whatsapp.svg';
+import { Link } from 'react-router-dom';
+import { ROUTES } from '../../../consts/routes';
 
 function Footer() {
   return (

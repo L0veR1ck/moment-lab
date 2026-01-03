@@ -1,6 +1,6 @@
-import { mask } from "../../../../assets/3d-objects";
-import Form from "../../../../components/ui/form/form";
-import { useParallax } from "../../../../shared/hooks/use-parallax";
+import { mask } from '../../../../assets/3d-objects';
+import Form from '../../../../components/ui/form/form';
+import { useParallax } from '../../../../shared/hooks/use-parallax';
 
 function FormSection() {
   const maskParallax = useParallax(0.5, 70);
@@ -26,10 +26,10 @@ function FormSection() {
           alt=""
           className="absolute pointer-events-none"
           style={{
-            top: "220px",
-            left: "-80px",
+            top: '220px',
+            left: '-80px',
             transform: `translateY(${maskParallax?.offset ?? 0}px)`,
-            willChange: "transform",
+            willChange: 'transform',
           }}
         />
       </div>

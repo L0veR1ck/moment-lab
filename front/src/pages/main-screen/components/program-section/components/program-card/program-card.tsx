@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 type ProgramCardProps = {
   link: string;
@@ -16,7 +16,7 @@ function ProgramCard({
   imagePosition,
 }: ProgramCardProps) {
   const divClassBase =
-    "flex-1 bg-cover bg-no-repeat w-full border-x-[8px] border-t-[8px] border-[var(--color-beige)] rounded-t-[32px]";
+    'flex-1 bg-cover bg-no-repeat w-full border-x-[8px] border-t-[8px] border-[var(--color-beige)] rounded-t-[32px]';
   return (
     <Link
       to={link}

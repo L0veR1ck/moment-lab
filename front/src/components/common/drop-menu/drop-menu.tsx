@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
-import type { MouseEvent } from "react";
+import { Link } from 'react-router-dom';
+import type { MouseEvent } from 'react';
 
 type DropMenuProps = {
   label: string;
@@ -21,7 +21,7 @@ function DropMenu({ label, isOpen, onToggle, items }: DropMenuProps) {
       {isOpen && (
         <ul
           className={
-            "absolute left-1/2 transform -translate-x-1/2 mt-2 bg-[var(--color-beige)] rounded-sm shadow-[0_6px_14px_rgba(0,0,0,0.25)] p-4 flex flex-col gap-4 text-sm text-[var(--color-blue)]"
+            'absolute left-1/2 transform -translate-x-1/2 mt-2 bg-[var(--color-beige)] rounded-sm shadow-[0_6px_14px_rgba(0,0,0,0.25)] p-4 flex flex-col gap-4 text-sm text-[var(--color-blue)]'
           }
         >
           {items.map((item, idx) => (

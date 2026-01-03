@@ -1,4 +1,4 @@
-import Marquee from "react-fast-marquee";
+import Marquee from 'react-fast-marquee';
 
 function ClientsSection() {
   const logos = Array.from({ length: 8 }, (_, i) => i + 1);

@@ -1,5 +1,5 @@
-import { ROUTES } from "../../../../consts/routes";
-import ProgramCard from "./components/program-card/program-card";
+import { ROUTES } from '../../../../consts/routes';
+import ProgramCard from './components/program-card/program-card';
 
 function ProgramSection() {
   return (
@@ -11,39 +11,39 @@ function ProgramSection() {
         <div className="flex overflow-hidden gap-[32px] w-full">
           <ProgramCard
             link={ROUTES.CORPORATE_EVENTS}
-            title={"Корпоративные мероприятия"}
+            title={'Корпоративные мероприятия'}
             description={
-              "События, от которых бегут мурашки, ощущаются моменты радости и вдохновения"
+              'События, от которых бегут мурашки, ощущаются моменты радости и вдохновения'
             }
-            imageUrl={"bg-[url(./src/assets/program-cards/card-1.jpg)]"}
-            imagePosition={"bg-position-[center_10%]"}
+            imageUrl={'bg-[url(./src/assets/program-cards/card-1.jpg)]'}
+            imagePosition={'bg-position-[center_10%]'}
           />
           <ProgramCard
             link={ROUTES.PRIVATE_EVENTS}
-            title={"Частные мероприятия"}
-            description={"Воплощаем ваши идеи"}
-            imageUrl={"bg-[url(./src/assets/program-cards/card-2.jpg)]"}
-            imagePosition={"bg-position-[center_20%]"}
+            title={'Частные мероприятия'}
+            description={'Воплощаем ваши идеи'}
+            imageUrl={'bg-[url(./src/assets/program-cards/card-2.jpg)]'}
+            imagePosition={'bg-position-[center_20%]'}
           />
         </div>
         <div className="flex overflow-hidden gap-[32px] w-full">
           <ProgramCard
             link={ROUTES.SCHOOL_EVENTS}
-            title={"События для школ"}
+            title={'События для школ'}
             description={
-              "Это не просто мероприятия, а инвестиции в будущее вашего класса"
+              'Это не просто мероприятия, а инвестиции в будущее вашего класса'
             }
-            imageUrl={"bg-[url(./src/assets/program-cards/card-3.png)]"}
-            imagePosition={"bg-position-[center_52%]"}
+            imageUrl={'bg-[url(./src/assets/program-cards/card-3.png)]'}
+            imagePosition={'bg-position-[center_52%]'}
           />
           <ProgramCard
             link={ROUTES.RENT}
-            title={"Пространство для событий"}
+            title={'Пространство для событий'}
             description={
-              "Многофункциональный лофт, подходящий для организации вашего мероприятия"
+              'Многофункциональный лофт, подходящий для организации вашего мероприятия'
             }
-            imageUrl={"bg-[url(./src/assets/program-cards/card-4.JPEG)]"}
-            imagePosition={"bg-position-[center_45%]"}
+            imageUrl={'bg-[url(./src/assets/program-cards/card-4.JPEG)]'}
+            imagePosition={'bg-position-[center_45%]'}
           />
         </div>
       </div>

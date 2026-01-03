@@ -44,7 +44,7 @@ function Form({ isModal, onClose }: FormProps) {
           className="font-semibold text-[var(--color-dark-blue)] text-lg"
           htmlFor="name"
         >
-          Имя
+          Имя <span className="text-[var(--color-red)]">*</span>
         </label>
         <input
           className="border border-[var(--color-blue)]/25 rounded-sm px-[16px] py-[8px] placeholder:text-[var(--color-blue)] placeholder:opacity-55"
@@ -75,7 +75,7 @@ function Form({ isModal, onClose }: FormProps) {
           className="font-semibold text-[var(--color-dark-blue)] text-lg"
           htmlFor="phone"
         >
-          Номер телефона
+          Номер телефона <span className="text-[var(--color-red)]">*</span>
         </label>
         <input
           className="border border-[var(--color-blue)]/25 rounded-sm px-[16px] py-[8px] placeholder:text-[var(--color-blue)] placeholder:opacity-55"
@@ -105,6 +105,7 @@ function Form({ isModal, onClose }: FormProps) {
         <label className="sr-only">Выберите файл</label>
         <input
           type="file"
+          accept=".txt,.pdf,.doc,.docx"
           className="block w-full text-sm text-gray-500
                             file:py-2 file:px-4
                             file:rounded-sm file:border-0

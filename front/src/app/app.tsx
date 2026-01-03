@@ -1,19 +1,19 @@
-import CorporateEventScreen from "../pages/corporate-event-screen/corporate-event-screen";
-import MainScreen from "../pages/main-screen/main-screen";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import SchoolEventScreen from "../pages/school-event-screen/school-event-screen";
-import RentScreen from "../pages/rent-screen/rent-screen";
-import PrivateEventsScreen from "../pages/private-events-screen/private-events-screen";
-import PersonalIqGameScreen from "../pages/personal-iq-game-screen/personal-iq-game-screen";
-import LiveActionQuestsScreen from "../pages/live-action-quests-screen/live-action-quests-screen";
-import ArtTeamBuildingScreen from "../pages/art-team-building-screen/art-team-building-screen";
-import FamilyEventScreen from "../pages/family-event-screen/family-event-screen";
-import IntellectualGamesScreen from "../pages/intellectual-games-screen/intellectual-games-screen";
-import EntertainmentGamesScreen from "../pages/entertainment-games-screen/entertainment-games-screen";
-import TrainingsScreen from "../pages/trainings-screen/trainings-screen";
-import { ROUTES } from "../consts/routes";
-import AboutMomentLab from "../pages/about-moment-lab-screen/about-moment-lab-screen";
-import ScrollToTop from "../components/scroll-to-top/scroll-to-top";
+import CorporateEventScreen from '../pages/corporate-event-screen/corporate-event-screen';
+import MainScreen from '../pages/main-screen/main-screen';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import SchoolEventScreen from '../pages/school-event-screen/school-event-screen';
+import RentScreen from '../pages/rent-screen/rent-screen';
+import PrivateEventsScreen from '../pages/private-events-screen/private-events-screen';
+import PersonalIqGameScreen from '../pages/personal-iq-game-screen/personal-iq-game-screen';
+import LiveActionQuestsScreen from '../pages/live-action-quests-screen/live-action-quests-screen';
+import ArtTeamBuildingScreen from '../pages/art-team-building-screen/art-team-building-screen';
+import FamilyEventScreen from '../pages/family-event-screen/family-event-screen';
+import IntellectualGamesScreen from '../pages/intellectual-games-screen/intellectual-games-screen';
+import EntertainmentGamesScreen from '../pages/entertainment-games-screen/entertainment-games-screen';
+import TrainingsScreen from '../pages/trainings-screen/trainings-screen';
+import { ROUTES } from '../consts/routes';
+import AboutMomentLab from '../pages/about-moment-lab-screen/about-moment-lab-screen';
+import ScrollToTop from '../components/scroll-to-top/scroll-to-top';
 
 function App() {
   return (
