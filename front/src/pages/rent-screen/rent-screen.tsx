@@ -32,8 +32,8 @@ function RentScreen() {
       value: '3 зала',
       description: 'площадью 300м², 100м², 70м² соответственно',
     },
-    { value: 'до 300', description: 'человек вместисмость пространства' },
-    { value: '3,5 м', description: 'высота пололков' },
+    { value: 'до 300', description: 'человек вместимость пространства' },
+    { value: '3,5 м', description: 'высота потолков' },
   ];
 
   const infoDataPresent = [
