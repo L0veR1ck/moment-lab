@@ -1,5 +1,5 @@
 import Marquee from 'react-fast-marquee';
-import ConditionItem from '../../ui/ condition-item/ condition-item';
+import ConditionItem from '../../ui/condition-item/condition-item';
 import Button from '../../ui/button/button';
 import ModalForm from '../../ui/modal-form/modal-form';
 import ProgramList from '../../ui/program-list/program-list';

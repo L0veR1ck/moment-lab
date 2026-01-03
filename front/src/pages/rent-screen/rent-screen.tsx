@@ -2,7 +2,7 @@ import Footer from '../../components/layout/footer/footer';
 import Header from '../../components/layout/header/header';
 import Button from '../../components/ui/button/button';
 import ModalForm from '../../components/ui/modal-form/modal-form';
-import ConditionItem from '../../components/ui/ condition-item/ condition-item';
+import ConditionItem from '../../components/ui/condition-item/condition-item.tsx';
 import {
   bottleIcon,
   cakeIcon,

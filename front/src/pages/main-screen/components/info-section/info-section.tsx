@@ -1,4 +1,4 @@
-import ConditionItem from '../../../../components/ui/ condition-item/ condition-item';
+import ConditionItem from '../../../../components/ui/condition-item/condition-item';
 
 function InfoSection() {
   const statsData = [
