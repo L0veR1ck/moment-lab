@@ -74,16 +74,6 @@ function RentScreen() {
             <h2 className="text-5xl font-semibold text-[var(--color-dark-blue)] text-left pr-10">
               У нас есть
             </h2>
-            {/* <img
-                            src={check}
-                            className="absolute top-[-50px] left-[200px] -mt-12"
-                            style={{
-                                transform: `translateY(calc(-50% + ${checkOffset}px))`,
-                                transition: 'transform 0.2s ease-out',
-                                willChange: 'transform'
-                            }}
-                            alt=""
-                        /> */}
             <div
               ref={checkOffset.ref}
               className="relative w-full pointer-events-none"

@@ -66,7 +66,7 @@ function PrivateEventsScreen() {
             <div
               ref={pomponParallax.ref}
               className="relative w-full pointer-events-none"
-              style={{ height: '1px', marginTop: '-40px' }} // подними выше — сработает раньше
+              style={{ height: '1px', marginTop: '-40px' }}
             >
               <img
                 src={pompon}
