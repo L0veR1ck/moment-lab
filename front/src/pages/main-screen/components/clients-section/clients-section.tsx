@@ -8,7 +8,12 @@ function ClientsSection() {
         Наши клиенты
       </h2>
 
-      <Marquee className="pt-[24px]" autoFill={true} pauseOnHover={true} speed={60}>
+      <Marquee
+        className="pt-[24px]"
+        autoFill={true}
+        pauseOnHover={true}
+        speed={60}
+      >
         {logos.map((logoNumber) => (
           <img
             key={logoNumber}
@@ -20,6 +25,6 @@ function ClientsSection() {
       </Marquee>
     </section>
   );
-};
+}
 
 export default ClientsSection;

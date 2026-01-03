@@ -1,12 +1,12 @@
-import Marquee from "react-fast-marquee";
-import ConditionItem from "../../ui/ condition-item/ condition-item";
-import Button from "../../ui/button/button";
-import ModalForm from "../../ui/modal-form/modal-form";
-import ProgramList from "../../ui/program-list/program-list";
-import Header from "../header/header";
-import Footer from "../footer/footer";
-import { useParallax } from "../../../shared/hooks/use-parallax";
-import { littleDiamond } from "../../../assets/3d-objects";
+import Marquee from 'react-fast-marquee';
+import ConditionItem from '../../ui/ condition-item/ condition-item';
+import Button from '../../ui/button/button';
+import ModalForm from '../../ui/modal-form/modal-form';
+import ProgramList from '../../ui/program-list/program-list';
+import Header from '../header/header';
+import Footer from '../footer/footer';
+import { useParallax } from '../../../shared/hooks/use-parallax';
+import { littleDiamond } from '../../../assets/3d-objects';
 
 type CarcassSubPagesProps = {
   section_1: {
@@ -52,8 +52,8 @@ function CarcassSubPages(pageData: CarcassSubPagesProps) {
               className="absolute left-[-230px] top-0 pointer-events-none"
               style={{
                 transform: `translateY(${diamondParallax.offset}px)`,
-                transition: "transform 0.2s ease-out",
-                willChange: "transform",
+                transition: 'transform 0.2s ease-out',
+                willChange: 'transform',
               }}
             >
               <img src={littleDiamond} alt="" className="-translate-y-1/2" />
@@ -77,8 +77,8 @@ function CarcassSubPages(pageData: CarcassSubPagesProps) {
               className="absolute right-[-450px] top-[-25px] pointer-events-none"
               style={{
                 transform: `translateY(${diamondRightParallax.offset}px)`,
-                transition: "transform 0.2s ease-out",
-                willChange: "transform",
+                transition: 'transform 0.2s ease-out',
+                willChange: 'transform',
               }}
             >
               <img
@@ -128,7 +128,7 @@ function CarcassSubPages(pageData: CarcassSubPagesProps) {
                 <img
                   className="h-full w-full object-cover rounded-2xl"
                   src={`${pageData.section_3.pathImages}-${photoNumber}.${pageData.section_3.formatImages}`}
-                  alt={""}
+                  alt={''}
                 />
               </div>
             ))}

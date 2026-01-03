@@ -1,12 +1,12 @@
-import { useState } from "react";
-import Footer from "../../components/layout/footer/footer";
-import Header from "../../components/layout/header/header";
-import Button from "../../components/ui/button/button";
-import PersonCard from "../../components/ui/person-card/person-card";
-import ModalForm from "../../components/ui/modal-form/modal-form";
-import MyMap from "../../components/ui/my-map/my-map";
-import { useParallax } from "../../shared/hooks/use-parallax";
-import { gift } from "../../assets/3d-objects";
+import { useState } from 'react';
+import Footer from '../../components/layout/footer/footer';
+import Header from '../../components/layout/header/header';
+import Button from '../../components/ui/button/button';
+import PersonCard from '../../components/ui/person-card/person-card';
+import ModalForm from '../../components/ui/modal-form/modal-form';
+import MyMap from '../../components/ui/my-map/my-map';
+import { useParallax } from '../../shared/hooks/use-parallax';
+import { gift } from '../../assets/3d-objects';
 
 function AboutMomentLab() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -24,7 +24,7 @@ function AboutMomentLab() {
                 Момент.лаб
               </h1>
               <p className="text-[24px] text-[var(--color-blue)]/55">
-                Креативное агентство по организации мероприятий со смыслом{" "}
+                Креативное агентство по организации мероприятий со смыслом{' '}
                 <br />
                 Наша суперсила — уникальные события, от которых бегут мурашки
               </p>
@@ -50,11 +50,11 @@ function AboutMomentLab() {
             src={gift}
             className="absolute left-1/2 -translate-x-1/2"
             style={{
-              width: "450px",
-              top: "-350px",
-              left: "45%",
+              width: '450px',
+              top: '-350px',
+              left: '45%',
               transform: `translateY(${giftParallax.offset}px)`,
-              willChange: "transform",
+              willChange: 'transform',
             }}
           />
         </div>
@@ -64,24 +64,24 @@ function AboutMomentLab() {
           </h2>
           <div className="flex gap-[32px] h-[320px]">
             <PersonCard
-              bgImage={"bg-[url(./src/assets/about-screen/person.png)]"}
-              name={"Иван Иванов"}
-              job={"Котенок момент.лаб"}
+              bgImage={'bg-[url(./src/assets/about-screen/person.png)]'}
+              name={'Иван Иванов'}
+              job={'Котенок момент.лаб'}
             />
             <PersonCard
-              bgImage={"bg-[url(./src/assets/about-screen/person.png)]"}
-              name={"Иван Иванов"}
-              job={"Котенок момент.лаб"}
+              bgImage={'bg-[url(./src/assets/about-screen/person.png)]'}
+              name={'Иван Иванов'}
+              job={'Котенок момент.лаб'}
             />
             <PersonCard
-              bgImage={"bg-[url(./src/assets/about-screen/person.png)]"}
-              name={"Иван Иванов"}
-              job={"Котенок момент.лаб"}
+              bgImage={'bg-[url(./src/assets/about-screen/person.png)]'}
+              name={'Иван Иванов'}
+              job={'Котенок момент.лаб'}
             />
             <PersonCard
-              bgImage={"bg-[url(./src/assets/about-screen/person.png)]"}
-              name={"Иван Иванов"}
-              job={"Котенок момент.лаб"}
+              bgImage={'bg-[url(./src/assets/about-screen/person.png)]'}
+              name={'Иван Иванов'}
+              job={'Котенок момент.лаб'}
             />
           </div>
         </section>

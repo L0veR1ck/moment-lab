@@ -1,12 +1,12 @@
-import Footer from "../../components/layout/footer/footer.tsx";
-import Header from "../../components/layout/header/header.tsx";
-import Button from "../../components/ui/button/button.tsx";
-import ModalForm from "../../components/ui/modal-form/modal-form.tsx";
-import InfoItem from "../../components/ui/info-item/info-item.tsx";
-import Marquee from "react-fast-marquee";
-import { littleDiamond, pompon } from "../../assets/3d-objects/index.ts";
-import { useParallax } from "../../shared/hooks/use-parallax.ts";
-import { useToggle } from "../../shared/hooks/useToggle.ts";
+import Footer from '../../components/layout/footer/footer.tsx';
+import Header from '../../components/layout/header/header.tsx';
+import Button from '../../components/ui/button/button.tsx';
+import ModalForm from '../../components/ui/modal-form/modal-form.tsx';
+import InfoItem from '../../components/ui/info-item/info-item.tsx';
+import Marquee from 'react-fast-marquee';
+import { littleDiamond, pompon } from '../../assets/3d-objects/index.ts';
+import { useParallax } from '../../shared/hooks/use-parallax.ts';
+import { useToggle } from '../../shared/hooks/useToggle.ts';
 
 function PrivateEventsScreen() {
   const modal = useToggle();
@@ -16,10 +16,10 @@ function PrivateEventsScreen() {
   const pomponParallax = useParallax(0.35, 240);
 
   const infoDataPresent = [
-    { text: "Уникальность" },
-    { text: "Веселье и азарт" },
-    { text: "Универсальность" },
-    { text: "Простота и доступность" },
+    { text: 'Уникальность' },
+    { text: 'Веселье и азарт' },
+    { text: 'Универсальность' },
+    { text: 'Простота и доступность' },
   ];
 
   return (
@@ -31,16 +31,16 @@ function PrivateEventsScreen() {
             <div
               ref={diamondParallax.ref}
               className="relative w-full pointer-events-none"
-              style={{ height: "1px", marginTop: "-70px" }}
+              style={{ height: '1px', marginTop: '-70px' }}
             >
               <img
                 src={littleDiamond}
                 className="absolute left-[-230px] -translate-y-1/2"
                 style={{
-                  top: "40%",
+                  top: '40%',
                   transform: `translateY(${diamondParallax.offset}px)`,
-                  transition: "transform 0.2s ease-out",
-                  willChange: "transform",
+                  transition: 'transform 0.2s ease-out',
+                  willChange: 'transform',
                 }}
                 alt=""
               />
@@ -57,7 +57,7 @@ function PrivateEventsScreen() {
           <Button
             text="Хочу мероприятие 🎉 "
             onClick={modal.open}
-            theme={"dark"}
+            theme={'dark'}
           ></Button>
           {modal.isOpen && <ModalForm onClose={modal.close} />}
         </section>
@@ -66,16 +66,16 @@ function PrivateEventsScreen() {
             <div
               ref={pomponParallax.ref}
               className="relative w-full pointer-events-none"
-              style={{ height: "1px", marginTop: "-40px" }} // подними выше — сработает раньше
+              style={{ height: '1px', marginTop: '-40px' }} // подними выше — сработает раньше
             >
               <img
                 src={pompon}
                 className="absolute right-[10px] -translate-y-1/2"
                 style={{
-                  top: "40%",
+                  top: '40%',
                   transform: `translateY(${pomponParallax.offset}px)`,
-                  transition: "transform 0.2s ease-out",
-                  willChange: "transform",
+                  transition: 'transform 0.2s ease-out',
+                  willChange: 'transform',
                 }}
                 alt="Помпон"
               />
@@ -106,7 +106,7 @@ function PrivateEventsScreen() {
                 <img
                   className="h-full w-full object-cover rounded-2xl"
                   src={`./src/assets/private/private-${photoNumber}.webp`}
-                  alt={""}
+                  alt={''}
                 />
               </div>
             ))}

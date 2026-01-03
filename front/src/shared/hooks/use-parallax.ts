@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from 'react';
 
 export const useParallax = (speed = 0.5, maxOffset?: number) => {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -18,7 +18,7 @@ export const useParallax = (speed = 0.5, maxOffset?: number) => {
       },
       {
         threshold: 0,
-      }
+      },
     );
 
     observer.observe(ref.current);
@@ -48,10 +48,10 @@ export const useParallax = (speed = 0.5, maxOffset?: number) => {
       rafId = requestAnimationFrame(handleScroll);
     };
 
-    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener('scroll', onScroll, { passive: true });
 
     return () => {
-      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener('scroll', onScroll);
       if (rafId) cancelAnimationFrame(rafId);
     };
   }, [speed, maxOffset]);

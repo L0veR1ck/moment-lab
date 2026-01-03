@@ -1,9 +1,9 @@
-import { cake } from "../../assets/3d-objects";
-import Footer from "../../components/layout/footer/footer";
-import Header from "../../components/layout/header/header";
-import EventCard from "../../components/ui/event-card/event-card";
-import { ROUTES } from "../../consts/routes";
-import { useParallax } from "../../shared/hooks/use-parallax";
+import { cake } from '../../assets/3d-objects';
+import Footer from '../../components/layout/footer/footer';
+import Header from '../../components/layout/header/header';
+import EventCard from '../../components/ui/event-card/event-card';
+import { ROUTES } from '../../consts/routes';
+import { useParallax } from '../../shared/hooks/use-parallax';
 
 function CorporateEventScreen() {
   const cakeParallax = useParallax(0.2, 40);
@@ -17,20 +17,20 @@ function CorporateEventScreen() {
         </h1>
         <section className="flex flex-row flex-wrap justify-center gap-[32px] py-[64px] max-w-[1280px]">
           <EventCard
-            urlImg={"bg-[url(./src/assets/event-card/event-card-1.png)]"}
+            urlImg={'bg-[url(./src/assets/event-card/event-card-1.png)]'}
             imgPosition="bg-position-[center_45%]"
-            titleCard={"Персональная разумная игра"}
+            titleCard={'Персональная разумная игра'}
             description={
-              "Адаптируемая интеллектуальная игра, разработанная индивидуально для вашей компании, подарит неповторимый опыт"
+              'Адаптируемая интеллектуальная игра, разработанная индивидуально для вашей компании, подарит неповторимый опыт'
             }
             path={ROUTES.PERSONAL_IQ_GAME}
           />
           <EventCard
-            urlImg={"bg-[url(./src/assets/event-card/event-card-2.png)]"}
+            urlImg={'bg-[url(./src/assets/event-card/event-card-2.png)]'}
             imgPosition="bg-position-[center_43%]"
-            titleCard={"Квесты живого действия"}
+            titleCard={'Квесты живого действия'}
             description={
-              "Полное погружение в детективную историю: множество актеров-персонажей, сложный сюжет с разветвлениями, свобода исследования истории"
+              'Полное погружение в детективную историю: множество актеров-персонажей, сложный сюжет с разветвлениями, свобода исследования истории'
             }
             path={ROUTES.LIVE_ACTION_QUESTS}
           />
@@ -43,25 +43,25 @@ function CorporateEventScreen() {
               src={cake}
               className="absolute left-1/2 -translate-x-1/2"
               style={{
-                top: "-140px",
+                top: '-140px',
                 transform: `translateY(${cakeParallax.offset}px)`,
-                willChange: "transform",
+                willChange: 'transform',
               }}
             />
           </div>
           <EventCard
-            urlImg={"bg-[url(./src/assets/event-card/event-card-3.png)]"}
-            titleCard={"Творческий тимбилдинг"}
+            urlImg={'bg-[url(./src/assets/event-card/event-card-3.png)]'}
+            titleCard={'Творческий тимбилдинг'}
             description={
-              "Приготовься раскрыть свой творческий потенциал и объединить усилия с командой ради общего успеха"
+              'Приготовься раскрыть свой творческий потенциал и объединить усилия с командой ради общего успеха'
             }
             path={ROUTES.ART_TEAM_BUILDING}
           />
           <EventCard
-            urlImg={"bg-[url(./src/assets/event-card/event-card-4.png)]"}
-            titleCard={"Семейные мероприятия"}
+            urlImg={'bg-[url(./src/assets/event-card/event-card-4.png)]'}
+            titleCard={'Семейные мероприятия'}
             description={
-              "Улучшение взаимодействия сотрудников, стимулирование лояльности, разрядка рабочей обстановки и формирование благоприятной атмосферы"
+              'Улучшение взаимодействия сотрудников, стимулирование лояльности, разрядка рабочей обстановки и формирование благоприятной атмосферы'
             }
             path={ROUTES.FAMILY_EVENT}
           />

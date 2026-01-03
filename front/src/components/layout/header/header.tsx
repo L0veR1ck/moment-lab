@@ -1,11 +1,11 @@
-import { useEffect, useRef, useState } from 'react';
-import { Link } from 'react-router-dom';
-import logo from '../../../assets/logo/logo-moment-lab.svg';
-import Button from '../../ui/button/button';
-import ModalForm from '../../ui/modal-form/modal-form';
-import DropMenu from '../../common/drop-menu/drop-menu';
-import { ROUTES } from '../../../consts/routes';
-import { useToggle } from '../../../shared/hooks/useToggle';
+import { useEffect, useRef, useState } from "react";
+import { Link } from "react-router-dom";
+import logo from "../../../assets/logo/logo-moment-lab.svg";
+import Button from "../../ui/button/button";
+import ModalForm from "../../ui/modal-form/modal-form";
+import DropMenu from "../../common/drop-menu/drop-menu";
+import { ROUTES } from "../../../consts/routes";
+import { useToggle } from "../../../shared/hooks/useToggle";
 
 function Header() {
   const [isDropOpen, setDropOpen] = useState({ programs: false, about: false });
@@ -14,18 +14,24 @@ function Header() {
 
   useEffect(() => {
     function handleDocumentClick(e: MouseEvent) {
-      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+      if (
+        wrapperRef.current &&
+        !wrapperRef.current.contains(e.target as Node)
+      ) {
         setDropOpen({ programs: false, about: false });
       }
     }
-    document.addEventListener('click', handleDocumentClick);
-    return () => document.removeEventListener('click', handleDocumentClick);
+    document.addEventListener("click", handleDocumentClick);
+    return () => document.removeEventListener("click", handleDocumentClick);
   }, []);
 
   return (
     <header className="sticky top-0 z-2 bg-[var(--color-beige)]/95 transition-shadow  w-full duration-300">
       <div className="flex justify-between items-center w-full py-[24px] max-w-[1280px] mx-auto">
-        <Link to={ROUTES.MAIN} className="cursor-pointer hover:text-[var(--color-dark-blue)] block">
+        <Link
+          to={ROUTES.MAIN}
+          className="cursor-pointer hover:text-[var(--color-dark-blue)] block"
+        >
           <img className="h-[32px]" src={logo} alt="Moment Lab Logo" />
         </Link>
 
@@ -41,22 +47,21 @@ function Header() {
                 }}
                 items={[
                   {
-                    name: 'Корпоративные мероприятия',
+                    name: "Корпоративные мероприятия",
                     path: ROUTES.CORPORATE_EVENTS,
                   },
                   {
-                    name: 'Частные мероприятия',
-                    path: ROUTES.PRIVATE_EVENTS
-                  }, 
-                  { 
-                    name: 'События для школ',
-                    path: ROUTES.SCHOOL_EVENTS
-
-                  }, 
-                  { 
-                    name: 'Пространство для событий',
-                    path: ROUTES.RENT
-                  }
+                    name: "Частные мероприятия",
+                    path: ROUTES.PRIVATE_EVENTS,
+                  },
+                  {
+                    name: "События для школ",
+                    path: ROUTES.SCHOOL_EVENTS,
+                  },
+                  {
+                    name: "Пространство для событий",
+                    path: ROUTES.RENT,
+                  },
                 ]}
               />
             </li>
@@ -72,16 +77,15 @@ function Header() {
                 items={[
                   {
                     name: "О Момент.Лаб",
-                    path: '/about-moment-lab'
-                  }, 
+                    path: "/about-moment-lab",
+                  },
                   {
-                    name: 'Портфолио',
-                    path: '/'
-                  }
+                    name: "Портфолио",
+                    path: "/",
+                  },
                 ]}
               />
             </li>
-
           </ul>
         </nav>
 

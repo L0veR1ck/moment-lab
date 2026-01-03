@@ -1,13 +1,13 @@
-import { gift, music, pompon } from "../../assets/3d-objects";
-import Footer from "../../components/layout/footer/footer";
-import Header from "../../components/layout/header/header";
-import { useParallax } from "../../shared/hooks/use-parallax";
-import ClientsSection from "./components/clients-section/clients-section";
-import FormSection from "./components/form-section/form-section";
-import InfoSection from "./components/info-section/info-section";
-import ProgramSection from "./components/program-section/program-section";
-import ReviewsSection from "./components/review-section/reviews-section";
-import StartSection from "./components/start-section/start-section";
+import { gift, music, pompon } from '../../assets/3d-objects';
+import Footer from '../../components/layout/footer/footer';
+import Header from '../../components/layout/header/header';
+import { useParallax } from '../../shared/hooks/use-parallax';
+import ClientsSection from './components/clients-section/clients-section';
+import FormSection from './components/form-section/form-section';
+import InfoSection from './components/info-section/info-section';
+import ProgramSection from './components/program-section/program-section';
+import ReviewsSection from './components/review-section/reviews-section';
+import StartSection from './components/start-section/start-section';
 
 function MainScreen() {
   const giftParallax = useParallax(0.4, 80);
@@ -30,9 +30,9 @@ function MainScreen() {
             src={gift}
             className="absolute left-1/2 -translate-x-1/2"
             style={{
-              top: "-350px",
+              top: '-350px',
               transform: `translateY(${giftParallax.offset}px)`,
-              willChange: "transform",
+              willChange: 'transform',
             }}
           />
         </div>
@@ -46,9 +46,9 @@ function MainScreen() {
             src={pompon}
             className="absolute right-0"
             style={{
-              top: "0px",
+              top: '0px',
               transform: `translateY(${pomponParallax.offset}px)`,
-              willChange: "transform",
+              willChange: 'transform',
             }}
           />
         </div>
@@ -61,7 +61,7 @@ function MainScreen() {
             className="absolute top-[-720px] left-1/2 -translate-x-1/2"
             style={{
               transform: `translateY(${musicParallax.offset}px)`,
-              willChange: "transform",
+              willChange: 'transform',
             }}
           />
         </div>

@@ -1,8 +1,8 @@
-import Footer from "../../components/layout/footer/footer";
-import Header from "../../components/layout/header/header";
-import Button from "../../components/ui/button/button";
-import ModalForm from "../../components/ui/modal-form/modal-form";
-import ConditionItem from "../../components/ui/ condition-item/ condition-item";
+import Footer from '../../components/layout/footer/footer';
+import Header from '../../components/layout/header/header';
+import Button from '../../components/ui/button/button';
+import ModalForm from '../../components/ui/modal-form/modal-form';
+import ConditionItem from '../../components/ui/ condition-item/ condition-item';
 import {
   bottleIcon,
   cakeIcon,
@@ -12,12 +12,12 @@ import {
   microphoneIcon,
   parkingIcon,
   sofaIcon,
-} from "../../assets/icons";
-import InfoItem from "../../components/ui/info-item/info-item";
-import Marquee from "react-fast-marquee";
-import { cross, check } from "../../assets/3d-objects/index.ts";
-import { useParallax } from "../../shared/hooks/use-parallax.ts";
-import { useToggle } from "../../shared/hooks/useToggle.ts";
+} from '../../assets/icons';
+import InfoItem from '../../components/ui/info-item/info-item';
+import Marquee from 'react-fast-marquee';
+import { cross, check } from '../../assets/3d-objects/index.ts';
+import { useParallax } from '../../shared/hooks/use-parallax.ts';
+import { useToggle } from '../../shared/hooks/useToggle.ts';
 
 function RentScreen() {
   const modal = useToggle();
@@ -27,27 +27,27 @@ function RentScreen() {
   const crossOffset = useParallax(0.3, 120);
 
   const conditionData = [
-    { value: "500 м²", description: "общая площадь пространства" },
+    { value: '500 м²', description: 'общая площадь пространства' },
     {
-      value: "3 зала",
-      description: "площадью 300м², 100м², 70м² соответственно",
+      value: '3 зала',
+      description: 'площадью 300м², 100м², 70м² соответственно',
     },
-    { value: "до 300", description: "человек вместисмость пространства" },
-    { value: "3,5 м", description: "высота пололков" },
+    { value: 'до 300', description: 'человек вместисмость пространства' },
+    { value: '3,5 м', description: 'высота пололков' },
   ];
 
   const infoDataPresent = [
-    { icon: hangerIcon, text: "гардероб" },
-    { icon: parkingIcon, text: "охраняемая парковка" },
-    { icon: cakeIcon, text: "место под кейтеринг" },
-    { icon: sofaIcon, text: "необходимая мебель" },
-    { icon: microphoneIcon, text: "профессиональное оборудование" },
+    { icon: hangerIcon, text: 'гардероб' },
+    { icon: parkingIcon, text: 'охраняемая парковка' },
+    { icon: cakeIcon, text: 'место под кейтеринг' },
+    { icon: sofaIcon, text: 'необходимая мебель' },
+    { icon: microphoneIcon, text: 'профессиональное оборудование' },
   ];
 
   const infoDataAbsent = [
-    { icon: clockIcon, text: "ограничений по времени" },
-    { icon: megaphoneIcon, text: "ограничений по громкости" },
-    { icon: bottleIcon, text: "пробкового сбора" },
+    { icon: clockIcon, text: 'ограничений по времени' },
+    { icon: megaphoneIcon, text: 'ограничений по громкости' },
+    { icon: bottleIcon, text: 'пробкового сбора' },
   ];
 
   return (
@@ -65,7 +65,7 @@ function RentScreen() {
           <Button
             text="Арендовать 🎉"
             onClick={modal.open}
-            theme={"dark"}
+            theme={'dark'}
           ></Button>
           {modal.isOpen && <ModalForm onClose={modal.close} />}
         </section>
@@ -74,29 +74,29 @@ function RentScreen() {
             <h2 className="text-5xl font-semibold text-[var(--color-dark-blue)] text-left pr-10">
               У нас есть
             </h2>
-            {/* <img 
-                            src={check} 
-                            className="absolute top-[-50px] left-[200px] -mt-12" 
-                            style={{ 
+            {/* <img
+                            src={check}
+                            className="absolute top-[-50px] left-[200px] -mt-12"
+                            style={{
                                 transform: `translateY(calc(-50% + ${checkOffset}px))`,
                                 transition: 'transform 0.2s ease-out',
                                 willChange: 'transform'
                             }}
-                            alt="" 
+                            alt=""
                         /> */}
             <div
               ref={checkOffset.ref}
               className="relative w-full pointer-events-none"
-              style={{ height: "1px" }}
+              style={{ height: '1px' }}
             >
               <img
                 src={check}
                 className="absolute left-[200px] -translate-y-[320px]"
                 style={{
-                  top: "50%",
+                  top: '50%',
                   transform: `translateY(${checkOffset.offset}px)`,
-                  transition: "transform 0.2s ease-out",
-                  willChange: "transform",
+                  transition: 'transform 0.2s ease-out',
+                  willChange: 'transform',
                 }}
                 alt=""
               />
@@ -119,29 +119,29 @@ function RentScreen() {
         </section>
         <section className="flex flex-col flex-wrap gap-[32px] py-[32px] max-w-[1280px] w-full">
           <div className="relative">
-            {/* <img 
-                            src={cross} 
-                            className="absolute top-2/5 right-[10px] -mt-12" 
-                            style={{ 
+            {/* <img
+                            src={cross}
+                            className="absolute top-2/5 right-[10px] -mt-12"
+                            style={{
                                 transform: `translateY(calc(-50% + ${crossOffset}px))`,
                                 transition: 'transform 0.2s ease-out',
                                 willChange: 'transform'
                             }}
-                            alt="" 
+                            alt=""
                         /> */}
             <div
               ref={crossOffset.ref}
               className="relative w-full pointer-events-none"
-              style={{ height: "1px", marginTop: "-40px" }}
+              style={{ height: '1px', marginTop: '-40px' }}
             >
               <img
                 src={cross}
                 className="absolute right-[10px] -translate-y-1/2"
                 style={{
-                  top: "50%",
+                  top: '50%',
                   transform: `translateY(${crossOffset.offset}px)`,
-                  transition: "transform 0.2s ease-out",
-                  willChange: "transform",
+                  transition: 'transform 0.2s ease-out',
+                  willChange: 'transform',
                 }}
                 alt=""
               />
@@ -180,7 +180,7 @@ function RentScreen() {
                 <img
                   className="h-full w-full object-cover rounded-2xl"
                   src={`./src/assets/room/room-${roomNumber}.JPEG`}
-                  alt={""}
+                  alt={''}
                 />
               </div>
             ))}
