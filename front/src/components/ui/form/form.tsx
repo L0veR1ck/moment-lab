@@ -28,7 +28,7 @@ function Form({ isModal, onClose }: FormProps) {
       {!isSuccess && (
         <form
           onSubmit={handleSubmit}
-          className="relative flex flex-col gap-[16px] bg-[var(--color-beige)] rounded-xl px-[42px] py-[24px]"
+          className="relative flex flex-col gap-3 sm:gap-4 md:gap-[16px] bg-[var(--color-beige)] rounded-xl px-4 sm:px-6 md:px-[42px] py-4 sm:py-6 md:py-[24px] w-full min-w-0"
           aria-labelledby="form-title"
         >
           {isModal && (
@@ -44,7 +44,7 @@ function Form({ isModal, onClose }: FormProps) {
                 </span>
               </button>
               <p
-                className="text-center whitespace-nowrap font-semibold text-2xl text-[var(--color-dark-blue)] mt-[12px]"
+                className="text-center font-semibold text-lg sm:text-xl md:text-2xl text-[var(--color-dark-blue)] mt-2 sm:mt-3 md:mt-[12px] break-words"
                 id="form-title"
               >
                 Расскажите о вашем мероприятии
@@ -54,13 +54,13 @@ function Form({ isModal, onClose }: FormProps) {
 
           <div className="flex flex-col">
             <label
-              className="font-semibold text-[var(--color-dark-blue)] text-lg"
+              className="font-semibold text-[var(--color-dark-blue)] text-sm sm:text-base md:text-lg"
               htmlFor="name"
             >
               Имя <span className="text-[var(--color-red)]">*</span>
             </label>
             <input
-              className="border border-[var(--color-blue)]/25 rounded-sm px-[16px] py-[8px] placeholder:text-[var(--color-blue)] placeholder:opacity-55"
+              className="border border-[var(--color-blue)]/25 rounded-sm px-3 sm:px-4 md:px-[16px] py-2 sm:py-[6px] md:py-[8px] placeholder:text-[var(--color-blue)] placeholder:opacity-55 text-sm sm:text-base"
               id="name"
               type="text"
               placeholder="Введите имя"
@@ -70,13 +70,13 @@ function Form({ isModal, onClose }: FormProps) {
 
           <div className="flex flex-col">
             <label
-              className="font-semibold text-[var(--color-dark-blue)] text-lg"
+              className="font-semibold text-[var(--color-dark-blue)] text-sm sm:text-base md:text-lg"
               htmlFor="mail"
             >
               Электронная почта
             </label>
             <input
-              className="border border-[var(--color-blue)]/25 rounded-sm px-[16px] py-[8px] placeholder:text-[var(--color-blue)] placeholder:opacity-55"
+              className="border border-[var(--color-blue)]/25 rounded-sm px-3 sm:px-4 md:px-[16px] py-2 sm:py-[6px] md:py-[8px] placeholder:text-[var(--color-blue)] placeholder:opacity-55 text-sm sm:text-base"
               id="mail"
               type="email"
               placeholder="Введите электронную почту"
@@ -85,13 +85,13 @@ function Form({ isModal, onClose }: FormProps) {
 
           <div className="flex flex-col">
             <label
-              className="font-semibold text-[var(--color-dark-blue)] text-lg"
+              className="font-semibold text-[var(--color-dark-blue)] text-sm sm:text-base md:text-lg"
               htmlFor="phone"
             >
               Номер телефона <span className="text-[var(--color-red)]">*</span>
             </label>
             <input
-              className="border border-[var(--color-blue)]/25 rounded-sm px-[16px] py-[8px] placeholder:text-[var(--color-blue)] placeholder:opacity-55"
+              className="border border-[var(--color-blue)]/25 rounded-sm px-3 sm:px-4 md:px-[16px] py-2 sm:py-[6px] md:py-[8px] placeholder:text-[var(--color-blue)] placeholder:opacity-55 text-sm sm:text-base"
               id="phone"
               type="tel"
               placeholder="Введите номер телефона"
@@ -101,13 +101,13 @@ function Form({ isModal, onClose }: FormProps) {
 
           <div className="flex flex-col">
             <label
-              className="font-semibold text-[var(--color-dark-blue)] text-lg"
+              className="font-semibold text-[var(--color-dark-blue)] text-sm sm:text-base md:text-lg"
               htmlFor="wishes"
             >
               Ваши пожелания
             </label>
             <textarea
-              className="border border-[var(--color-blue)]/25 rounded-sm px-[16px] py-[8px] placeholder:text-[var(--color-blue)] placeholder:opacity-55 max-h-[200px]"
+              className="border border-[var(--color-blue)]/25 rounded-sm px-3 sm:px-4 md:px-[16px] py-2 sm:py-[6px] md:py-[8px] placeholder:text-[var(--color-blue)] placeholder:opacity-55 max-h-[200px] text-sm sm:text-base"
               id="wishes"
               rows={3}
               placeholder="Введите ваши пожелания "

@@ -26,19 +26,20 @@ function StartSection() {
     >
       <div
         className="
-          flex flex-col sm:flex-row
-          gap-8 sm:gap-[164px]
-          pb-16 sm:pb-[64px]
-          items-center justify-center sm:justify-between
-          w-full max-w-[1280px] px-4
+          flex flex-col md:flex-row
+          gap-8 md:gap-[164px]
+          pb-16 md:pb-[64px]
+          items-start md:items-end justify-start md:justify-between
+          w-full max-w-[1280px] px-4 mx-auto
         "
       >
         <h1
           className="
-            text-l sm:text-3xl md:text-4xl
+            text-xl sm:text-2xl md:text-3xl lg:text-4xl
             font-semibold
             text-[var(--color-beige)]
             text-left
+            max-w-full
           "
         >
           Наша суперсила — уникальные события, от которых бегут мурашки
