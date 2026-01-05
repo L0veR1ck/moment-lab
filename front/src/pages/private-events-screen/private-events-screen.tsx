@@ -45,10 +45,12 @@ function PrivateEventsScreen() {
                 alt=""
               />
             </div>
-            <h1 className="text-center font-semibold
+            <h1
+              className="text-center font-semibold
                  text-3xl sm:text-4xl md:text-5xl lg:text-[64px]
-                 text-[var(--color-dark-blue)] break-words">
-            Частные мероприятия
+                 text-[var(--color-dark-blue)] break-words"
+            >
+              Частные мероприятия
             </h1>
           </div>
           <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-[var(--color-blue)]/55 text-center mb-4 sm:mb-6 md:mb-8 lg:mb-[32px] break-words max-w-4xl">
@@ -104,7 +106,10 @@ function PrivateEventsScreen() {
             pauseOnHover={true}
           >
             {photos.map((photoNumber) => (
-              <div key={photoNumber} className="h-[250px] sm:h-[300px] md:h-[350px] lg:h-[410px] w-[200px] sm:w-[240px] md:w-[280px] lg:w-[304px] px-2 sm:px-4 md:px-[8px]">
+              <div
+                key={photoNumber}
+                className="h-[250px] sm:h-[300px] md:h-[350px] lg:h-[410px] w-[200px] sm:w-[240px] md:w-[280px] lg:w-[304px] px-2 sm:px-4 md:px-[8px]"
+              >
                 <img
                   className="h-full w-full object-cover rounded-xl sm:rounded-2xl"
                   src={`./src/assets/private/private-${photoNumber}.webp`}

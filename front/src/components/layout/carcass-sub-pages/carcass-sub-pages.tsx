@@ -42,27 +42,31 @@ function CarcassSubPages(pageData: CarcassSubPagesProps) {
   const diamondRightParallax = useParallax(0.45, 100);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-full overflow-x-hidden">
       <Header />
-      <main className="flex flex-col items-center">
-        <section className="flex flex-wrap justify-center gap-[32px] pt-[64px] pb-[32px] max-w-[1280px]">
-          <h1 className="relative font-semibold text-[64px] text-[var(--color-dark-blue)]">
+      <main className="flex flex-col items-center w-full overflow-x-hidden">
+        <section className="flex flex-col items-center justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-[32px] pt-8 sm:pt-12 md:pt-16 lg:pt-[64px] pb-8 sm:pb-12 md:pb-[32px] max-w-[1280px] px-4 sm:px-6 md:px-8 lg:px-8 xl:px-0 w-full">
+          <h1 className="relative font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[64px] text-[var(--color-dark-blue)] text-center break-words">
             <span
               ref={diamondParallax.ref}
-              className="absolute left-[-230px] top-0 pointer-events-none"
+              className="absolute left-[-180px] top-0 pointer-events-none hidden xl:block"
               style={{
                 transform: `translateY(${diamondParallax.offset}px)`,
                 transition: 'transform 0.2s ease-out',
                 willChange: 'transform',
               }}
             >
-              <img src={littleDiamond} alt="" className="-translate-y-1/2" />
+              <img
+                src={littleDiamond}
+                alt=""
+                className="-translate-y-1/2 w-auto"
+              />
             </span>
 
             {pageData.section_1.mainHeading}
           </h1>
 
-          <p className="text-2xl text-[var(--color-blue)]/55 text-center mb-[32px]">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-[var(--color-blue)]/55 text-center mb-4 sm:mb-6 md:mb-8 lg:mb-[32px] break-words max-w-4xl">
             {pageData.section_1.mainAnnotation}
           </p>
 
@@ -74,7 +78,7 @@ function CarcassSubPages(pageData: CarcassSubPagesProps) {
             />
             <span
               ref={diamondRightParallax.ref}
-              className="absolute right-[-450px] top-[-25px] pointer-events-none"
+              className="absolute right-[-450px] top-[-25px] pointer-events-none hidden xl:block"
               style={{
                 transform: `translateY(${diamondRightParallax.offset}px)`,
                 transition: 'transform 0.2s ease-out',
@@ -84,7 +88,7 @@ function CarcassSubPages(pageData: CarcassSubPagesProps) {
               <img
                 src={littleDiamond}
                 alt=""
-                className="-translate-y-1/2  scale-x-[-1]"
+                className="-translate-y-1/2 scale-x-[-1] w-auto"
               />
             </span>
           </div>
@@ -94,8 +98,8 @@ function CarcassSubPages(pageData: CarcassSubPagesProps) {
           )}
         </section>
 
-        <section className="flex flex-col items-center flex-wrap gap-[32px] py-[64px] max-w-[1280px] w-full">
-          <div className="flex gap-x-[256px] justify-between w-full">
+        <section className="flex flex-col items-center gap-6 sm:gap-8 md:gap-[32px] py-8 sm:py-12 md:py-16 lg:py-[64px] max-w-[1280px] w-full px-4 sm:px-6 md:px-8 lg:px-8 xl:px-0">
+          <div className="flex flex-col lg:flex-row gap-8 sm:gap-12 md:gap-16 lg:gap-x-[256px] lg:justify-between w-full">
             <ProgramList
               heading={pageData.section_2.firstProgramList.heading}
               checklist={pageData.section_2.firstProgramList.checklist}
@@ -105,7 +109,7 @@ function CarcassSubPages(pageData: CarcassSubPagesProps) {
               checklist={pageData.section_2.secondProgramList.checklist}
             />
           </div>
-          <div className="flex justify-evenly w-full">
+          <div className="flex flex-wrap justify-center sm:justify-evenly gap-x-4 sm:gap-x-8 md:gap-x-12 lg:gap-x-16 gap-y-4 sm:gap-y-6 w-full">
             {pageData.section_2.conditionData.map((condition, index) => (
               <ConditionItem
                 key={index}
@@ -116,7 +120,7 @@ function CarcassSubPages(pageData: CarcassSubPagesProps) {
           </div>
         </section>
 
-        <section className="flex flex-col w-screen py-[64px] gap-[32px] overflow-hidden">
+        <section className="flex flex-col w-screen py-4 sm:py-6 md:py-8 lg:py-[64px] gap-4 sm:gap-6 md:gap-8 lg:gap-[32px] overflow-hidden">
           <Marquee
             speed={60}
             direction="right"
@@ -124,11 +128,14 @@ function CarcassSubPages(pageData: CarcassSubPagesProps) {
             pauseOnHover={true}
           >
             {pageData.section_3.photos.map((photoNumber) => (
-              <div key={photoNumber} className="h-[410px] w-[304px] px-[8px]">
+              <div
+                key={photoNumber}
+                className="h-[250px] sm:h-[300px] md:h-[350px] lg:h-[410px] w-[200px] sm:w-[240px] md:w-[280px] lg:w-[304px] px-2 sm:px-4 md:px-[8px]"
+              >
                 <img
-                  className="h-full w-full object-cover rounded-2xl"
+                  className="h-full w-full object-cover rounded-xl sm:rounded-2xl"
                   src={`${pageData.section_3.pathImages}-${photoNumber}.${pageData.section_3.formatImages}`}
-                  alt={''}
+                  alt={`Фото ${photoNumber}`}
                 />
               </div>
             ))}

@@ -139,7 +139,10 @@ function RentScreen() {
         <section className="flex flex-col w-screen py-4 sm:py-6 md:py-8 lg:py-[64px] gap-4 sm:gap-6 md:gap-8 lg:gap-[32px] overflow-hidden">
           <Marquee speed={60} autoFill={true} pauseOnHover={true}>
             {photos.slice(0, 6).map((roomNumber) => (
-              <div key={roomNumber} className="h-[180px] sm:h-[200px] md:h-[210px] lg:h-[225px] w-[270px] sm:w-[300px] md:w-[320px] lg:w-[340px] px-2 sm:px-4 md:px-[8px]">
+              <div
+                key={roomNumber}
+                className="h-[180px] sm:h-[200px] md:h-[210px] lg:h-[225px] w-[270px] sm:w-[300px] md:w-[320px] lg:w-[340px] px-2 sm:px-4 md:px-[8px]"
+              >
                 <img
                   className="h-full w-full object-cover rounded-xl sm:rounded-2xl"
                   src={`./src/assets/room/room-${roomNumber}.JPEG`}
@@ -156,7 +159,10 @@ function RentScreen() {
             pauseOnHover={true}
           >
             {photos.slice(6, 12).map((roomNumber) => (
-              <div key={roomNumber} className="h-[180px] sm:h-[200px] md:h-[210px] lg:h-[225px] w-[270px] sm:w-[300px] md:w-[320px] lg:w-[340px] px-2 sm:px-4 md:px-[8px]">
+              <div
+                key={roomNumber}
+                className="h-[180px] sm:h-[200px] md:h-[210px] lg:h-[225px] w-[270px] sm:w-[300px] md:w-[320px] lg:w-[340px] px-2 sm:px-4 md:px-[8px]"
+              >
                 <img
                   className="h-full w-full object-cover rounded-xl sm:rounded-2xl"
                   src={`./src/assets/room/room-${roomNumber}.JPEG`}
