@@ -4,8 +4,8 @@ type ProgramCardProps = {
   link: string;
   title: string;
   description: string;
-  imageUrl: string;       // tailwind bg-[url(...)]
-  imagePosition: string; // tailwind bg-position-[...]
+  imageUrl: string;
+  imagePosition: string;
 };
 
 function ProgramCard({
@@ -31,9 +31,11 @@ function ProgramCard({
         {title}
       </p>
 
-      <p className="text-sm sm:text-base md:text-lg text-[var(--color-blue)]/55
+      <p
+        className="text-sm sm:text-base md:text-lg text-[var(--color-blue)]/55
                     min-h-[50px] sm:min-h-[60px] md:min-h-[70px]
-                    break-words">
+                    break-words"
+      >
         {description}
       </p>
 

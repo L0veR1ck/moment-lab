@@ -9,21 +9,21 @@ function SchoolEventScreen() {
   const ballParallax = useParallax(0.4, 100);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-full overflow-x-hidden">
       <Header />
-      <main className="flex flex-col items-center">
-        <h1 className="font-semibold text-[64px] text-[var(--color-dark-blue)] pt-[64px]">
+      <main className="flex flex-col items-center w-full overflow-x-hidden">
+        <h1 className="font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[64px] text-[var(--color-dark-blue)] pt-8 sm:pt-12 md:pt-16 lg:pt-[64px] px-4 text-center break-words">
           События для школ
         </h1>
-        <section className="flex flex-row flex-wrap justify-center gap-[32px] py-[64px] max-w-[1280px]">
+        <section className="flex flex-row flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-[32px] py-8 sm:py-12 md:py-16 lg:py-[64px] max-w-[1280px] px-4 sm:px-6 md:px-8 lg:px-8 xl:px-0 w-full">
           <div
             ref={ballParallax.ref}
-            className="relative w-full pointer-events-none"
+            className="relative w-full pointer-events-none hidden lg:block"
             style={{ height: 0 }}
           >
             <img
               src={ball}
-              className="absolute left-[-60px]"
+              className="absolute w-auto"
               style={{
                 top: '-280px',
                 transform: `translateY(${ballParallax.offset}px)`,

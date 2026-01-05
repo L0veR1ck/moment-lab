@@ -9,13 +9,13 @@ function CorporateEventScreen() {
   const cakeParallax = useParallax(0.2, 40);
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-full overflow-x-hidden">
       <Header />
-      <main className="flex flex-col items-center">
-        <h1 className="font-semibold text-[64px] text-[var(--color-dark-blue)] pt-[64px]">
+      <main className="flex flex-col items-center w-full overflow-x-hidden">
+        <h1 className="font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[64px] text-[var(--color-dark-blue)] pt-8 sm:pt-12 md:pt-16 lg:pt-[64px] px-4 text-center break-words">
           Корпоративные мероприятия
         </h1>
-        <section className="flex flex-row flex-wrap justify-center gap-[32px] py-[64px] max-w-[1280px]">
+        <section className="flex flex-row flex-wrap justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-[32px] py-8 sm:py-12 md:py-16 lg:py-[64px] max-w-[1280px] px-4 sm:px-6 md:px-8 lg:px-8 xl:px-0 w-full">
           <EventCard
             urlImg={'bg-[url(./src/assets/event-card/event-card-1.png)]'}
             imgPosition="bg-position-[center_45%]"
@@ -36,12 +36,12 @@ function CorporateEventScreen() {
           />
           <div
             ref={cakeParallax.ref}
-            className="relative w-full pointer-events-none"
+            className="relative w-full pointer-events-none hidden lg:block"
             style={{ height: 0 }}
           >
             <img
               src={cake}
-              className="absolute left-1/2 -translate-x-1/2"
+              className="absolute left-1/2 -translate-x-1/2 w-auto"
               style={{
                 top: '-140px',
                 transform: `translateY(${cakeParallax.offset}px)`,
