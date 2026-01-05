@@ -17,7 +17,7 @@ function AboutMomentLab() {
     <div className="flex flex-col items-center w-full overflow-x-hidden">
       <Header />
       <main className="flex flex-col items-center w-full overflow-x-hidden">
-        <section className="relative pt-0 lg:pt-[64px] pb-8 sm:pb-12 md:pb-[32px] min-h-[60vh] sm:min-h-[70vh] md:min-h-[80vh] lg:h-[calc(100vh-180px)] w-full">
+        <section className="relative pt-0 lg:pt-[64px] lg:h-[calc(100vh-180px)] w-full">
           <div className="absolute right-0 top-8 sm:top-12 md:top-16 lg:top-[64px] bottom-8 sm:bottom-12 md:bottom-[32px] w-full lg:w-[50vw] rounded-l-0 lg:rounded-l-[15px] bg-cover bg-no-repeat bg-[url(./src/assets/about-screen/team.png)] bg-[60%] opacity-20 lg:opacity-100 hidden lg:block" />
 
           <div className="relative w-full h-[240px] sm:h-[280px] md:h-[320px] overflow-hidden rounded-b-[16px] lg:hidden">

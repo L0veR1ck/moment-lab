@@ -28,8 +28,11 @@ function Form({ isModal, onClose }: FormProps) {
       {!isSuccess && (
         <form
           onSubmit={handleSubmit}
-          className="relative flex flex-col gap-3 sm:gap-4 md:gap-[16px] bg-[var(--color-beige)] rounded-xl px-4 sm:px-6 md:px-[42px] py-4 sm:py-6 md:py-[24px] w-full min-w-0"
-          aria-labelledby="form-title"
+          className="relative flex flex-col gap-3 sm:gap-4
+             bg-[var(--color-beige)] rounded-xl
+             px-4 sm:px-6 md:px-[42px]
+             py-4 sm:py-6 md:py-[24px]
+             w-full"
         >
           {isModal && (
             <>
@@ -54,7 +57,7 @@ function Form({ isModal, onClose }: FormProps) {
 
           <div className="flex flex-col">
             <label
-              className="font-semibold text-[var(--color-dark-blue)] text-sm sm:text-base md:text-lg"
+              className="text-left font-semibold text-[var(--color-dark-blue)] text-sm sm:text-base md:text-lg"
               htmlFor="name"
             >
               Имя <span className="text-[var(--color-red)]">*</span>
@@ -70,7 +73,7 @@ function Form({ isModal, onClose }: FormProps) {
 
           <div className="flex flex-col">
             <label
-              className="font-semibold text-[var(--color-dark-blue)] text-sm sm:text-base md:text-lg"
+              className="text-left font-semibold text-[var(--color-dark-blue)] text-sm sm:text-base md:text-lg"
               htmlFor="mail"
             >
               Электронная почта
@@ -85,7 +88,7 @@ function Form({ isModal, onClose }: FormProps) {
 
           <div className="flex flex-col">
             <label
-              className="font-semibold text-[var(--color-dark-blue)] text-sm sm:text-base md:text-lg"
+              className="text-left text-left font-semibold text-[var(--color-dark-blue)] text-sm sm:text-base md:text-lg"
               htmlFor="phone"
             >
               Номер телефона <span className="text-[var(--color-red)]">*</span>
@@ -101,7 +104,7 @@ function Form({ isModal, onClose }: FormProps) {
 
           <div className="flex flex-col">
             <label
-              className="font-semibold text-[var(--color-dark-blue)] text-sm sm:text-base md:text-lg"
+              className="text-left font-semibold text-[var(--color-dark-blue)] text-sm sm:text-base md:text-lg"
               htmlFor="wishes"
             >
               Ваши пожелания
