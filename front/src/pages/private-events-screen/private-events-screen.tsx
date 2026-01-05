@@ -23,21 +23,21 @@ function PrivateEventsScreen() {
   ];
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-full overflow-x-hidden">
       <Header />
-      <main className="flex flex-col items-center">
-        <section className="flex flex-wrap justify-center gap-[32px] pt-[120px] pb-[32px] h-[calc(50vh-47px)] max-w-[1280px]">
-          <div className="relative">
+      <main className="flex flex-col items-center w-full overflow-x-hidden">
+        <section className="flex flex-col items-center justify-center gap-4 sm:gap-6 md:gap-8 lg:gap-[32px] pt-8 sm:pt-12 md:pt-16 lg:pt-16 xl:pt-[120px] pb-8 sm:pb-12 md:pb-[32px] max-w-[1280px] px-4 sm:px-6 md:px-8 lg:px-8 xl:px-0 w-full">
+          <div className="relative w-full">
             <div
               ref={diamondParallax.ref}
-              className="relative w-full pointer-events-none"
-              style={{ height: '1px', marginTop: '-70px' }}
+              className="pointer-events-none hidden xl:block absolute inset-x-0"
+              style={{ top: '-70px', height: '1px' }}
             >
               <img
                 src={littleDiamond}
-                className="absolute left-[-230px] -translate-y-1/2"
+                className="absolute left-[-0px] top-[40%]
+                 -translate-y-1/2 w-auto"
                 style={{
-                  top: '40%',
                   transform: `translateY(${diamondParallax.offset}px)`,
                   transition: 'transform 0.2s ease-out',
                   willChange: 'transform',
@@ -45,11 +45,13 @@ function PrivateEventsScreen() {
                 alt=""
               />
             </div>
-            <h1 className="font-semibold text-[64px] text-[var(--color-dark-blue)]">
-              Частные мероприятия
+            <h1 className="text-center font-semibold
+                 text-3xl sm:text-4xl md:text-5xl lg:text-[64px]
+                 text-[var(--color-dark-blue)] break-words">
+            Частные мероприятия
             </h1>
           </div>
-          <p className="text-2xl text-[var(--color-blue)]/55 text-center mb-[32px]">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-[var(--color-blue)]/55 text-center mb-4 sm:mb-6 md:mb-8 lg:mb-[32px] break-words max-w-4xl">
             Создаем события по вашему запросу, начиная от Дня Рождения,
             заканчивая свадьбой и корпоративом. Разработка и реализация любой
             концепции
@@ -61,16 +63,16 @@ function PrivateEventsScreen() {
           ></Button>
           {modal.isOpen && <ModalForm onClose={modal.close} />}
         </section>
-        <section className="flex flex-col flex-wrap gap-[32px] py-[64px] h-[calc(50vh-47px)] max-w-[1280px] w-full">
+        <section className="flex flex-col gap-6 sm:gap-8 md:gap-[32px] py-8 sm:py-12 md:py-16 lg:py-[64px] max-w-[1280px] w-full px-4 sm:px-6 md:px-8 lg:px-8 xl:px-0">
           <div className="relative">
             <div
               ref={pomponParallax.ref}
-              className="relative w-full pointer-events-none"
+              className="relative w-full pointer-events-none hidden xl:block"
               style={{ height: '1px', marginTop: '-40px' }}
             >
               <img
                 src={pompon}
-                className="absolute right-[10px] -translate-y-1/2"
+                className="absolute right-[10px] -translate-y-1/2 w-auto"
                 style={{
                   top: '40%',
                   transform: `translateY(${pomponParallax.offset}px)`,
@@ -80,21 +82,21 @@ function PrivateEventsScreen() {
                 alt="Помпон"
               />
             </div>
-            <h2 className="text-5xl font-semibold text-[var(--color-dark-blue)] text-left pr-10">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--color-dark-blue)] text-left pr-0 lg:pr-10 break-words">
               Преимущества
             </h2>
           </div>
-          <div className="flex gap-[16px] flex-wrap">
+          <div className="flex gap-3 sm:gap-4 md:gap-[16px] flex-wrap">
             {infoDataPresent.map((info, index) => (
               <InfoItem key={index} text={info.text} />
             ))}
           </div>
-          <p className="text-2xl text-[var(--color-blue)]/55">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-[var(--color-blue)]/55 break-words">
             У вас есть идея? У нас уже есть реализация! Создаем мероприятия для
             вас и про вас!
           </p>
         </section>
-        <section className="flex flex-col w-screen py-[32px] gap-[32px] overflow-hidden">
+        <section className="flex flex-col w-screen py-4 sm:py-6 md:py-8 lg:py-[32px] gap-4 sm:gap-6 md:gap-8 lg:gap-[32px] overflow-hidden">
           <Marquee
             speed={60}
             direction="right"
@@ -102,11 +104,11 @@ function PrivateEventsScreen() {
             pauseOnHover={true}
           >
             {photos.map((photoNumber) => (
-              <div key={photoNumber} className="h-[410px] w-[304px] px-[8px]">
+              <div key={photoNumber} className="h-[250px] sm:h-[300px] md:h-[350px] lg:h-[410px] w-[200px] sm:w-[240px] md:w-[280px] lg:w-[304px] px-2 sm:px-4 md:px-[8px]">
                 <img
-                  className="h-full w-full object-cover rounded-2xl"
+                  className="h-full w-full object-cover rounded-xl sm:rounded-2xl"
                   src={`./src/assets/private/private-${photoNumber}.webp`}
-                  alt={''}
+                  alt={`Частное мероприятие ${photoNumber}`}
                 />
               </div>
             ))}

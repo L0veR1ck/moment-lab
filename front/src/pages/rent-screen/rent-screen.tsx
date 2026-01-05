@@ -51,14 +51,14 @@ function RentScreen() {
   ];
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="flex flex-col items-center w-full overflow-x-hidden">
       <Header />
-      <main className="flex flex-col items-center">
-        <section className="flex flex-wrap justify-center gap-[32px] pt-[64px] pb-[32px] max-w-[1280px]">
-          <h1 className="font-semibold text-[64px] text-[var(--color-dark-blue)]">
+      <main className="flex flex-col items-center w-full overflow-x-hidden">
+        <section className="flex flex-col items-center justify-center gap-6 sm:gap-8 md:gap-[32px] pt-8 sm:pt-12 md:pt-16 lg:pt-[64px] pb-8 sm:pb-12 md:pb-[32px] max-w-[1280px] px-4 sm:px-6 md:px-8 lg:px-8 xl:px-0 w-full">
+          <h1 className="font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[64px] text-[var(--color-dark-blue)] text-center break-words">
             Пространство для событий
           </h1>
-          <p className="text-2xl text-[var(--color-blue)]/55 text-center mb-[32px]">
+          <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-[var(--color-blue)]/55 text-center mb-4 sm:mb-6 md:mb-8 lg:mb-[32px] break-words max-w-4xl">
             Стильное и уютное место для ваших праздников, корпоративов,
             тренингов, фотосессий, мастер-классов и много другого!
           </p>
@@ -69,19 +69,19 @@ function RentScreen() {
           ></Button>
           {modal.isOpen && <ModalForm onClose={modal.close} />}
         </section>
-        <section className="flex flex-col flex-wrap gap-[32px] py-[64px] max-w-[1280px] w-full">
+        <section className="flex flex-col gap-6 sm:gap-8 md:gap-[32px] py-8 sm:py-12 md:py-16 lg:py-[64px] max-w-[1280px] w-full px-4 sm:px-6 md:px-8 lg:px-8 xl:px-0">
           <div className="relative">
-            <h2 className="text-5xl font-semibold text-[var(--color-dark-blue)] text-left pr-10">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--color-dark-blue)] text-left pr-0 lg:pr-10 break-words">
               У нас есть
             </h2>
             <div
               ref={checkOffset.ref}
-              className="relative w-full pointer-events-none"
+              className="relative w-full pointer-events-none hidden xl:block"
               style={{ height: '1px' }}
             >
               <img
                 src={check}
-                className="absolute left-[200px] -translate-y-[320px]"
+                className="absolute left-[200px] -translate-y-[320px] w-auto"
                 style={{
                   top: '50%',
                   transform: `translateY(${checkOffset.offset}px)`,
@@ -92,7 +92,7 @@ function RentScreen() {
               />
             </div>
           </div>
-          <div className="flex gap-x-[64px]">
+          <div className="flex flex-wrap gap-x-4 sm:gap-x-8 md:gap-x-12 lg:gap-x-[64px] gap-y-4 sm:gap-y-6 md:gap-y-8">
             {conditionData.map((condition, index) => (
               <ConditionItem
                 key={index}
@@ -101,32 +101,22 @@ function RentScreen() {
               />
             ))}
           </div>
-          <div className="flex gap-[16px] py-[32px] flex-wrap">
+          <div className="flex gap-3 sm:gap-4 md:gap-[16px] py-4 sm:py-6 md:py-8 lg:py-[32px] flex-wrap">
             {infoDataPresent.map((info, index) => (
               <InfoItem key={index} icon={info.icon} text={info.text} />
             ))}
           </div>
         </section>
-        <section className="flex flex-col flex-wrap gap-[32px] py-[32px] max-w-[1280px] w-full">
+        <section className="flex flex-col gap-6 sm:gap-8 md:gap-[32px] py-4 sm:py-6 md:py-8 lg:py-[32px] max-w-[1280px] w-full px-4 sm:px-6 md:px-8 lg:px-8 xl:px-0">
           <div className="relative">
-            {/* <img
-                            src={cross}
-                            className="absolute top-2/5 right-[10px] -mt-12"
-                            style={{
-                                transform: `translateY(calc(-50% + ${crossOffset}px))`,
-                                transition: 'transform 0.2s ease-out',
-                                willChange: 'transform'
-                            }}
-                            alt=""
-                        /> */}
             <div
               ref={crossOffset.ref}
-              className="relative w-full pointer-events-none"
+              className="relative w-full pointer-events-none hidden lg:block"
               style={{ height: '1px', marginTop: '-40px' }}
             >
               <img
                 src={cross}
-                className="absolute right-[10px] -translate-y-1/2"
+                className="absolute right-[10px] -translate-y-1/2 w-auto"
                 style={{
                   top: '50%',
                   transform: `translateY(${crossOffset.offset}px)`,
@@ -136,24 +126,24 @@ function RentScreen() {
                 alt=""
               />
             </div>
-            <h2 className="text-5xl font-semibold text-[var(--color-dark-blue)] text-left">
+            <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-[var(--color-dark-blue)] text-left break-words">
               У нас нет
             </h2>
           </div>
-          <div className="flex flex-wrap gap-x-[16px]">
+          <div className="flex flex-wrap gap-3 sm:gap-4 md:gap-[16px]">
             {infoDataAbsent.map((info, index) => (
               <InfoItem key={index} icon={info.icon} text={info.text} />
             ))}
           </div>
         </section>
-        <section className="flex flex-col w-screen py-[64px] gap-[32px] overflow-hidden">
+        <section className="flex flex-col w-screen py-4 sm:py-6 md:py-8 lg:py-[64px] gap-4 sm:gap-6 md:gap-8 lg:gap-[32px] overflow-hidden">
           <Marquee speed={60} autoFill={true} pauseOnHover={true}>
             {photos.slice(0, 6).map((roomNumber) => (
-              <div key={roomNumber} className="h-[225px] w-[340px] px-[8px]">
+              <div key={roomNumber} className="h-[180px] sm:h-[200px] md:h-[210px] lg:h-[225px] w-[270px] sm:w-[300px] md:w-[320px] lg:w-[340px] px-2 sm:px-4 md:px-[8px]">
                 <img
-                  className="h-full w-full object-cover rounded-2xl"
+                  className="h-full w-full object-cover rounded-xl sm:rounded-2xl"
                   src={`./src/assets/room/room-${roomNumber}.JPEG`}
-                  alt={`Room ${roomNumber}`}
+                  alt={`Комната ${roomNumber}`}
                 />
               </div>
             ))}
@@ -166,11 +156,11 @@ function RentScreen() {
             pauseOnHover={true}
           >
             {photos.slice(6, 12).map((roomNumber) => (
-              <div key={roomNumber} className="h-[225px] w-[340px] px-[8px]">
+              <div key={roomNumber} className="h-[180px] sm:h-[200px] md:h-[210px] lg:h-[225px] w-[270px] sm:w-[300px] md:w-[320px] lg:w-[340px] px-2 sm:px-4 md:px-[8px]">
                 <img
-                  className="h-full w-full object-cover rounded-2xl"
+                  className="h-full w-full object-cover rounded-xl sm:rounded-2xl"
                   src={`./src/assets/room/room-${roomNumber}.JPEG`}
-                  alt={''}
+                  alt={`Комната ${roomNumber}`}
                 />
               </div>
             ))}
