@@ -2,9 +2,8 @@ import { useState } from 'react';
 import Footer from '../../components/layout/footer/footer';
 import Header from '../../components/layout/header/header';
 import Button from '../../components/ui/button/button';
-import PersonCard from '../../components/ui/person-card/person-card';
+import PersonCard from './components/person-card/person-card';
 import ModalForm from '../../components/ui/modal-form/modal-form';
-import MyMap from '../../components/ui/my-map/my-map';
 import { useParallax } from '../../shared/hooks/use-parallax';
 import { gift } from '../../assets/3d-objects';
 
@@ -23,7 +22,7 @@ function AboutMomentLab() {
           <div className="relative w-full h-[240px] sm:h-[280px] md:h-[320px] overflow-hidden rounded-b-[16px] lg:hidden">
             <img
               src="/src/assets/about-screen/team.png"
-              alt="Команда Moment.lab"
+              alt="Команда Момент лаб"
               className="
       w-full h-full object-cover
       object-[50%_10%]
@@ -109,23 +108,11 @@ w-full max-w-full"
             />
           </div>
         </section>
-        <section className="flex flex-col items-center gap-4 sm:gap-6 md:gap-8 lg:gap-[32px] pt-8 sm:pt-12 md:pt-16 lg:pt-[64px] pb-8 sm:pb-12 md:pb-[32px] w-full max-w-[1280px] px-4 sm:px-6 md:px-8 lg:px-8 xl:px-0">
+        <section className="flex flex-col items-center gap-4 sm:gap-6 md:gap-8 lg:gap-[32px] pt-8 sm:pt-12 md:pt-16 lg:pt-[64px] pb-8 sm:pb-12 md:pb-[120px] w-full max-w-[1280px] px-4 sm:px-6 md:px-8 lg:px-8 xl:px-0">
           <h2 className="font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[64px] text-[var(--color-dark-blue)] text-center break-words">
             Контакты
           </h2>
           <ul className="flex flex-col sm:flex-row gap-6 sm:gap-8 md:gap-12 lg:gap-[100px] w-full sm:w-auto">
-            <li className="flex flex-col items-center gap-2 sm:gap-3 md:gap-[12px]">
-              <p className="font-semibold text-lg sm:text-xl md:text-2xl lg:text-[24px] text-[var(--color-blue)]">
-                Адрес
-              </p>
-              <a
-                className="text-sm sm:text-base md:text-lg text-[var(--color-blue)]/80 text-center hover:text-[var(--color-blue)] transition break-words"
-                target="_blank"
-                href="https://yandex.ru/maps/29397/berezovskyi/house/koltsevaya_ulitsa_2v_6/YkkYcQJoTEcDQFtsfXR4d39gYw==/?ll=60.758524%2C56.896337&z=16"
-              >
-                г. Березовский, ул. Кольцевая, 2В/6
-              </a>
-            </li>
             <li className="flex flex-col items-center gap-2 sm:gap-3 md:gap-[12px]">
               <p className="font-semibold text-lg sm:text-xl md:text-2xl lg:text-[24px] text-[var(--color-blue)]">
                 Телефон
@@ -149,7 +136,6 @@ w-full max-w-full"
               </a>
             </li>
           </ul>
-          <MyMap />
         </section>
       </main>
       <Footer />

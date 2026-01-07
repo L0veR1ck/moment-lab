@@ -51,10 +51,6 @@ function Header() {
                   }}
                   items={[
                     {
-                      name: 'Корпоративные мероприятия',
-                      path: ROUTES.CORPORATE_EVENTS,
-                    },
-                    {
                       name: 'Частные мероприятия',
                       path: ROUTES.PRIVATE_EVENTS,
                     },
@@ -63,8 +59,8 @@ function Header() {
                       path: ROUTES.SCHOOL_EVENTS,
                     },
                     {
-                      name: 'Пространство для событий',
-                      path: ROUTES.RENT,
+                      name: 'Иммерсивные квесты',
+                      path: ROUTES.IMMERSIVE_QUESTS,
                     },
                   ]}
                 />

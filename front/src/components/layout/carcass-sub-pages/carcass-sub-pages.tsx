@@ -21,7 +21,7 @@ type CarcassSubPagesProps = {
       heading: string;
       checklist: string[];
     };
-    secondProgramList: {
+    secondProgramList?: {
       heading: string;
       checklist: string[];
     };
@@ -105,8 +105,8 @@ function CarcassSubPages(pageData: CarcassSubPagesProps) {
               checklist={pageData.section_2.firstProgramList.checklist}
             />
             <ProgramList
-              heading={pageData.section_2.secondProgramList.heading}
-              checklist={pageData.section_2.secondProgramList.checklist}
+              heading={pageData.section_2.secondProgramList?.heading}
+              checklist={pageData.section_2.secondProgramList?.checklist}
             />
           </div>
           <div className="flex flex-wrap justify-center sm:justify-evenly gap-x-4 sm:gap-x-8 md:gap-x-12 lg:gap-x-16 gap-y-4 sm:gap-y-6 w-full">

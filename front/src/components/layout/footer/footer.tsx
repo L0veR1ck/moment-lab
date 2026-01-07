@@ -38,13 +38,6 @@ function Footer() {
           >
             moment.lab@gmail.com
           </a>
-          <a
-            className="text-sm sm:text-base md:text-lg font-semibold pt-2 sm:pt-[10px] text-[var(--color-blue)]/80 hover:text-[var(--color-blue)] transition"
-            target="_blank"
-            href="https://yandex.ru/maps/29397/berezovskyi/house/koltsevaya_ulitsa_2v_6/YkkYcQJoTEcDQFtsfXR4d39gYw==/?ll=60.758524%2C56.896337&z=16"
-          >
-            г. Березовский, ул. Кольцевая, 2В/6
-          </a>
         </div>
 
         <div className="flex flex-row gap-3 sm:gap-[12px]">
@@ -84,14 +77,7 @@ function Footer() {
           Наши продукты
         </p>
         <ul className="flex flex-col gap-2 sm:gap-[8px] text-sm sm:text-base md:text-lg text-[var(--color-blue)]">
-          <li>
-            <Link
-              to={ROUTES.CORPORATE_EVENTS}
-              className="cursor-pointer hover:text-[var(--color-dark-blue)] block transition"
-            >
-              Корпоративные мероприятия
-            </Link>
-          </li>
+          <li></li>
           <li>
             <Link
               to={ROUTES.PRIVATE_EVENTS}
@@ -110,10 +96,10 @@ function Footer() {
           </li>
           <li>
             <Link
-              to={ROUTES.RENT}
+              to={ROUTES.IMMERSIVE_QUESTS}
               className="cursor-pointer hover:text-[var(--color-dark-blue)] block transition"
             >
-              Пространство для событий
+              Иммерсивные квесты
             </Link>
           </li>
         </ul>

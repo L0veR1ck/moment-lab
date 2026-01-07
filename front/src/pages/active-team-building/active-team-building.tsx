@@ -1,15 +1,15 @@
 import CarcassSubPages from '../../components/layout/carcass-sub-pages/carcass-sub-pages';
 import { useToggle } from '../../shared/hooks/useToggle';
 
-function TrainingsScreen() {
+function ActiveTeamBuilding() {
   const modal = useToggle();
   const photos = Array.from({ length: 8 }, (_, i) => i + 1);
 
-  const trainingsData = {
+  const activeTeamBuildingData = {
     section_1: {
-      mainHeading: 'Тренинги',
+      mainHeading: 'Активное командообразование',
       mainAnnotation:
-        'Специальный тренинг для вашего класса, лидерство, командообразование, профориентация, опишите ваш запрос, а мы составим программу, специально для вас.',
+        'Динамичный тренинг по активному командообразованию для одного или нескольких классов. Цель — сплотить коллектив через энергичные игры и совместные задачи. Программа адаптируется под ваши цели, с возможностью участия родителей.Тренинг проходит в игровой форме.',
       handleModalOpen: modal.open,
       handleModalClose: modal.close,
       isModalOpen: modal.isOpen,
@@ -20,6 +20,7 @@ function TrainingsScreen() {
         checklist: [
           'Профессиональная команда: ведущий и хелперы.',
           'Масштабируемый формат для разного числа участников.',
+          'Интерактивные задания на взаимодействие и лидерство.',
           'Индивидуальный сценарий под ваш запрос.',
         ],
       },
@@ -35,7 +36,7 @@ function TrainingsScreen() {
     },
   };
 
-  return <CarcassSubPages {...trainingsData} />;
+  return <CarcassSubPages {...activeTeamBuildingData} />;
 }
 
-export default TrainingsScreen;
+export default ActiveTeamBuilding;

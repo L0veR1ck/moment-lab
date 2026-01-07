@@ -1,6 +1,6 @@
 type ProgramListProps = {
-  heading: string;
-  checklist: string[];
+  heading?: string;
+  checklist?: string[];
 };
 
 function ProgramList({ heading, checklist }: ProgramListProps) {
@@ -10,7 +10,7 @@ function ProgramList({ heading, checklist }: ProgramListProps) {
         {heading}
       </p>
       <ul className="list-disc list-inside">
-        {checklist.map((listItem, itemIndex) => (
+        {checklist?.map((listItem, itemIndex) => (
           <li
             key={itemIndex}
             className="font-bold text-sm sm:text-base text-[var(--color-blue)]/55 break-words"

@@ -10,18 +10,9 @@ function ProgramSection() {
       <div className="flex flex-col py-4 sm:py-6 md:py-[32px] gap-4 sm:gap-6 md:gap-[32px] w-full">
         <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 md:gap-[32px] w-full">
           <ProgramCard
-            link={ROUTES.CORPORATE_EVENTS}
-            title={'Корпоративные мероприятия'}
-            description={
-              'События, от которых бегут мурашки, ощущаются моменты радости и вдохновения'
-            }
-            imageUrl={'bg-[url(./src/assets/program-cards/card-1.jpg)]'}
-            imagePosition={'bg-position-[center_10%]'}
-          />
-          <ProgramCard
             link={ROUTES.PRIVATE_EVENTS}
             title={'Частные мероприятия'}
-            description={'Воплощаем ваши идеи'}
+            description={'Воплощаем идеи частных мероприятий'}
             imageUrl={'bg-[url(./src/assets/program-cards/card-2.jpg)]'}
             imagePosition={'bg-position-[center_20%]'}
           />
@@ -30,18 +21,14 @@ function ProgramSection() {
           <ProgramCard
             link={ROUTES.SCHOOL_EVENTS}
             title={'События для школ'}
-            description={
-              'Это не просто мероприятия, а инвестиции в будущее вашего класса'
-            }
+            description={'Разрабатываем осмысленные события в школе'}
             imageUrl={'bg-[url(./src/assets/program-cards/card-3.png)]'}
             imagePosition={'bg-position-[center_52%]'}
           />
           <ProgramCard
-            link={ROUTES.RENT}
-            title={'Пространство для событий'}
-            description={
-              'Многофункциональный лофт, подходящий для организации вашего мероприятия'
-            }
+            link={ROUTES.IMMERSIVE_QUESTS}
+            title={'Иммерсивные квесты'}
+            description={'Полное погружение в детективную историю'}
             imageUrl={'bg-[url(./src/assets/program-cards/card-4.JPEG)]'}
             imagePosition={'bg-position-[center_45%]'}
           />

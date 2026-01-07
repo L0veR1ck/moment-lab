@@ -23,17 +23,14 @@ function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
       <div>
         <p className="font-semibold mb-2">Программы и услуги</p>
         <ul className="flex flex-col gap-1 pl-2">
-          <Link to={ROUTES.CORPORATE_EVENTS} onClick={onClose}>
-            Корпоративные мероприятия
-          </Link>
           <Link to={ROUTES.PRIVATE_EVENTS} onClick={onClose}>
             Частные мероприятия
           </Link>
           <Link to={ROUTES.SCHOOL_EVENTS} onClick={onClose}>
             События для школ
           </Link>
-          <Link to={ROUTES.RENT} onClick={onClose}>
-            Пространство для событий
+          <Link to={ROUTES.IMMERSIVE_QUESTS} onClick={onClose}>
+            Иммерсивные квесты
           </Link>
         </ul>
       </div>
