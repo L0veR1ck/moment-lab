@@ -6,4 +6,5 @@ export const ROUTES = {
   ACTIVE_TEAM_BUILDING: '/active-team-building',
   TRAININGS: '/trainings',
   ABOUT_MOMENT_LAB: '/about-moment-lab',
+  PORTFOLIO: '/portfolio',
 } as const;

@@ -8,6 +8,7 @@ import { ROUTES } from '../consts/routes';
 import AboutMomentLab from '../pages/about-moment-lab-screen/about-moment-lab-screen';
 import ScrollToTop from '../shared/scroll-to-top/scroll-to-top';
 import ImmersiveQuestsScreen from '../pages/immersive-quests-screen/immersive-quests';
+import PortfolioScreen from '../pages/portfolio-screen/portfolio-screen';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         />
         <Route path={ROUTES.TRAININGS} element={<TrainingsScreen />} />
         <Route path={ROUTES.ABOUT_MOMENT_LAB} element={<AboutMomentLab />} />
+        <Route path={ROUTES.PORTFOLIO} element={<PortfolioScreen />} />
       </Routes>
     </BrowserRouter>
   );
