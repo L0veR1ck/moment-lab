@@ -1,14 +1,23 @@
 import Button from '../button/button';
 import { success } from '../../../assets/icons';
+import clsx from 'clsx';
 
 type Props = {
   onClose: () => void;
+  isModal: boolean;
 };
 
-function SuccessSubmitModal({ onClose }: Props) {
+function SuccessSubmitModal({ onClose, isModal }: Props) {
   return (
-    <div className="flex flex-col items-center justify-center bg-[var(--color-beige)] rounded-lg gap-[24px] p-[48px]">
-      <img src={success} alt="" className="w-16 h-16 mx-auto" />
+    <div
+      className={clsx(
+        'bg-[var(--color-beige)] rounded-lg flex flex-col items-center justify-center gap-[24px]',
+        isModal
+          ? 'p-[48px]'
+          : 'absolute inset-0 p-[24px]',
+      )}
+    >
+      <img src={success} alt="" className="w-16 h-16" />
       <p className="font-semibold text-center text-lg text-[var(--color-dark-blue)]">
         Заявка отправлена!
         <br />

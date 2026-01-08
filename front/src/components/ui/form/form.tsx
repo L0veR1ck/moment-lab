@@ -24,15 +24,19 @@ function Form({ isModal, onClose }: FormProps) {
   };
 
   return (
-    <>
-      {!isSuccess && (
+    <div className="relative w-full">
+      {isModal && isSuccess && (
+        <SuccessSubmitModal onClose={handleCloseSuccess} isModal />
+      )}
+      {(!isModal || !isSuccess) && (
         <form
           onSubmit={handleSubmit}
-          className="relative flex flex-col gap-3 sm:gap-4
+          className={`relative flex flex-col gap-3 sm:gap-4
              bg-[var(--color-beige)] rounded-xl
              px-4 sm:px-6 md:px-[42px]
              py-4 sm:py-6 md:py-[24px]
              w-full"
+             ${isSuccess && !isModal ? 'invisible' : ''}`}
         >
           {isModal && (
             <>
@@ -147,8 +151,11 @@ function Form({ isModal, onClose }: FormProps) {
         </form>
       )}
 
-      {isSuccess && <SuccessSubmitModal onClose={handleCloseSuccess} />}
-    </>
+      {!isModal && isSuccess && (
+        <SuccessSubmitModal onClose={handleCloseSuccess} isModal={false} />
+      )}
+
+    </div>
   );
 }
 
