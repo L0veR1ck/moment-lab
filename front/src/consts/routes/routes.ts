@@ -1,16 +1,10 @@
 export const ROUTES = {
-    MAIN: '/',
-    CORPORATE_EVENTS: '/corporate-events',
-    PERSONAL_IQ_GAME: '/personal-iq-game',
-    LIVE_ACTION_QUESTS: '/live-action-quests',
-    ART_TEAM_BUILDING: '/art-team-building',
-    FAMILY_EVENT: '/family-event',
-    SCHOOL_EVENTS: '/school-events',
-    RENT: '/rent',
-    PRIVATE_EVENTS: '/private',
-    INTELLECTUAL_GAMES: '/intellectual-games',
-    ENTERTAINMENT_GAMES: '/entertainment-games',
-    TRAININGS: '/trainings',
-    ABOUT_MOMENT_LAB: '/about-moment-lab',
-  } as const;
-  
+  MAIN: '/',
+  SCHOOL_EVENTS: '/school-events',
+  IMMERSIVE_QUESTS: '/immersive-quests',
+  PRIVATE_EVENTS: '/private',
+  ACTIVE_TEAM_BUILDING: '/active-team-building',
+  TRAININGS: '/trainings',
+  ABOUT_MOMENT_LAB: '/about-moment-lab',
+  PORTFOLIO: '/portfolio',
+} as const;

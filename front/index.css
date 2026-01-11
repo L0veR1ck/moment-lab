@@ -1,17 +1,18 @@
 @import "tailwindcss";
 
 :root {
-    --main-font-: 'Inter', sans-serif;
-    --color-dark-blue: #11224E;
-    --color-blue: #2E5283;
-    --color-beige: #FFFAF0;
+  --main-font-: "Inter", sans-serif;
+  --color-dark-blue: #11224e;
+  --color-blue: #2e5283;
+  --color-beige: #fffaf0;
+  --color-red: #ff6d6d;
 }
 
 body {
-    background-color: var(--color-beige);
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    max-width: 100%;
-    overflow-x: hidden;
+  background-color: var(--color-beige);
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow-x: hidden;
 }

@@ -6,6 +6,7 @@ import hangerIcon from './hanger.svg';
 import microphoneIcon from './microphone.svg';
 import parkingIcon from './parking.svg';
 import sofaIcon from './sofa.svg';
+import success from './success.svg';
 
 export {
   bottleIcon,
@@ -16,4 +17,5 @@ export {
   microphoneIcon,
   parkingIcon,
   sofaIcon,
+  success,
 };

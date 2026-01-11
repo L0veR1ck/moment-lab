@@ -1,0 +1,29 @@
+type PersonCardProps = {
+  bgImage: string;
+  name: string;
+  job: string;
+};
+
+function PersonCard({ bgImage, name, job }: PersonCardProps) {
+  return (
+    <div className="flex flex-col gap-3 sm:gap-4 md:gap-[16px] items-center h-[280px] sm:h-[300px] md:h-[320px] w-full sm:w-[220px] md:w-[240px] lg:w-[264px] rounded-[8px] px-4 sm:px-6 md:px-[24px] py-3 sm:py-4 md:py-[16px] bg-[var(--color-blue)]/15">
+      <div
+        className={`h-full w-full bg-cover bg-no-repeat ${bgImage}
+  bg-[center_30%]
+  sm:bg-[center_35%]
+  md:bg-[center_40%]
+  lg:bg-[center_45%]`}
+      ></div>
+      <div className="flex flex-col items-center gap-2 sm:gap-[8px]">
+        <p className="font-semibold text-lg sm:text-xl md:text-2xl lg:text-[24px] text-[var(--color-dark-blue)] text-center break-words">
+          {name}
+        </p>
+        <p className="text-sm sm:text-base md:text-lg lg:text-[18px] text-[var(--color-dark-blue)] text-center break-words">
+          {job}
+        </p>
+      </div>
+    </div>
+  );
+}
+
+export default PersonCard;

@@ -1,22 +1,60 @@
-import Button from "../../../../components/ui/button/button";
-
+import Button from '../../../../components/ui/button/button';
 
 function StartSection() {
-    const scrollToForm = () => {
-        const formSection = document.getElementById('form-section');
-        if (formSection) {
-            formSection.scrollIntoView({behavior: 'smooth'});
-        }
-    };
+  const scrollToForm = () => {
+    const formSection = document.getElementById('form-section');
+    if (formSection) {
+      formSection.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
 
-    return (
-        <section className="flex justify-center items-end bg-cover bg-[url(./src/assets/content/start-photo.png)] bg-no-repeat h-[calc(100vh-95px)] w-screen ">
-            <div className="flex gap-[164px] pb-[64px] items-center justify-between w-full max-w-[1280px]">
-                <h1 className="text-3xl font-semibold text-[var(--color-beige)]">Наша суперсила — уникальные события, от которых бегут мурашки</h1>
-                <Button text="Хочу мероприятие 🎉" onClick={scrollToForm} theme={'light'}></Button>
-            </div>
-        </section>
-    )
+  return (
+    <section
+      className="
+        relative
+        flex justify-center items-end
+        bg-cover bg-top bg-no-repeat
+        w-screen
+
+        min-h-[35vh]        /* мобилка <640px */
+        sm:min-h-[50vh]     /* планшет 640-768px */
+        md:min-h-[90vh]    /* ПК >=768px */
+      "
+      style={{
+        backgroundImage: 'url(\'./src/assets/content/start-photo.png\')',
+      }}
+    >
+      <div
+        className="
+          flex flex-col md:flex-row
+          gap-8 md:gap-[164px]
+          pb-16 md:pb-[64px]
+          items-start md:items-end justify-start md:justify-between
+          w-full max-w-[1280px] px-4 mx-auto
+        "
+      >
+        <h1
+          className="
+            text-xl sm:text-2xl md:text-3xl lg:text-4xl
+            font-semibold
+            text-[var(--color-beige)]
+            text-left
+            max-w-full
+          "
+        >
+          Наша суперсила — уникальные события, от которых бегут мурашки
+        </h1>
+
+        <div className="hidden md:block">
+          <Button
+            text="Хочу мероприятие 🎉"
+            onClick={scrollToForm}
+            theme="light"
+          />
+        </div>
+      </div>
+    </section>
+  );
 }
 
 export default StartSection;
