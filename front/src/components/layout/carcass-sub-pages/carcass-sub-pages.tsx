@@ -7,6 +7,7 @@ import Header from '../header/header';
 import Footer from '../footer/footer';
 import { useParallax } from '../../../shared/hooks/use-parallax';
 import { littleDiamond } from '../../../assets/3d-objects';
+import type { GalleryImage } from '../../../shared/types/image';
 
 type CarcassSubPagesProps = {
   section_1: {
@@ -31,10 +32,8 @@ type CarcassSubPagesProps = {
     }[];
   };
   section_3: {
-    photos: number[];
-    pathImages: string;
-    formatImages: string;
-  };
+  images: GalleryImage[];
+};
 };
 
 function CarcassSubPages(pageData: CarcassSubPagesProps) {
@@ -127,18 +126,22 @@ function CarcassSubPages(pageData: CarcassSubPagesProps) {
             autoFill={true}
             pauseOnHover={true}
           >
-            {pageData.section_3.photos.map((photoNumber) => (
+            {pageData.section_3.images.map((img) => (
               <div
-                key={photoNumber}
-                className="h-[250px] sm:h-[300px] md:h-[350px] lg:h-[410px] w-[200px] sm:w-[240px] md:w-[280px] lg:w-[304px] px-2 sm:px-4 md:px-[8px]"
+                key={img.id}
+                className="h-[250px] sm:h-[300px] md:h-[350px] lg:h-[410px]
+               w-[200px] sm:w-[240px] md:w-[280px] lg:w-[304px]
+               px-2 sm:px-4 md:px-[8px]"
               >
                 <img
+                  src={img.url}
+                  alt=""
+                  loading="lazy"
                   className="h-full w-full object-cover rounded-xl sm:rounded-2xl"
-                  src={`${pageData.section_3.pathImages}-${photoNumber}.${pageData.section_3.formatImages}`}
-                  alt={`Фото ${photoNumber}`}
                 />
               </div>
             ))}
+
           </Marquee>
         </section>
       </main>

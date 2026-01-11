@@ -13,7 +13,7 @@ function ProgramSection() {
             link={ROUTES.PRIVATE_EVENTS}
             title={'Частные мероприятия'}
             description={'Воплощаем идеи частных мероприятий'}
-            imageUrl={'bg-[url(./src/assets/program-cards/card-2.jpg)]'}
+            imageUrl={'bg-[url(./src/assets/program-cards/card-1.jpg)]'}
             imagePosition={'bg-position-[center_20%]'}
           />
         </div>
@@ -22,14 +22,14 @@ function ProgramSection() {
             link={ROUTES.SCHOOL_EVENTS}
             title={'События для школ'}
             description={'Разрабатываем осмысленные события в школе'}
-            imageUrl={'bg-[url(./src/assets/program-cards/card-3.png)]'}
+            imageUrl={'bg-[url(./src/assets/program-cards/card-2.jpg)]'}
             imagePosition={'bg-position-[center_52%]'}
           />
           <ProgramCard
             link={ROUTES.IMMERSIVE_QUESTS}
             title={'Иммерсивные квесты'}
             description={'Полное погружение в детективную историю'}
-            imageUrl={'bg-[url(./src/assets/program-cards/card-4.JPEG)]'}
+            imageUrl={'bg-[url(./src/assets/program-cards/card-3.jpg)]'}
             imagePosition={'bg-position-[center_45%]'}
           />
         </div>

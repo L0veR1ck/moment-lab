@@ -32,7 +32,7 @@ function SchoolEventScreen() {
             />
           </div>
           <EventCard
-            urlImg={'bg-[url(./src/assets/event-card/school-event-card-1.png)]'}
+            urlImg={'bg-[url(./src/assets/active-team-building/active-team-building-1.jpg)]'}
             imgPosition="bg-position-[center_60%]"
             titleCard={'Активное командообразование'}
             description={
@@ -41,7 +41,7 @@ function SchoolEventScreen() {
             path={ROUTES.ACTIVE_TEAM_BUILDING}
           />
           <EventCard
-            urlImg={'bg-[url(./src/assets/event-card/school-event-card-4.png)]'}
+            urlImg={'bg-[url(./src/assets/training/training-4.jpg)]'}
             titleCard={'Тренинги'}
             description={
               'Специальный тренинг для вашего класса, лидерство, командообразование, профориентация, опишите ваш запрос, а мы составим программу, специально для вас.'

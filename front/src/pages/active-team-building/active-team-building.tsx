@@ -1,9 +1,16 @@
+import { useState, useEffect } from 'react';
 import CarcassSubPages from '../../components/layout/carcass-sub-pages/carcass-sub-pages';
+import { getActiveTeamBuildingImages } from '../../shared/data/galleries';
 import { useToggle } from '../../shared/hooks/useToggle';
+import type { GalleryImage } from '../../shared/types/image';
 
 function ActiveTeamBuilding() {
   const modal = useToggle();
-  const photos = Array.from({ length: 8 }, (_, i) => i + 1);
+  const [images, setImages] = useState<GalleryImage[]>([]);
+
+  useEffect(() => {
+    getActiveTeamBuildingImages().then(setImages);
+  }, []);
 
   const activeTeamBuildingData = {
     section_1: {
@@ -30,9 +37,7 @@ function ActiveTeamBuilding() {
       ],
     },
     section_3: {
-      photos: photos,
-      pathImages: './src/assets/private/private',
-      formatImages: 'webp',
+      images,
     },
   };
 

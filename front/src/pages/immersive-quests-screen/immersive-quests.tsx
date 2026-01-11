@@ -3,16 +3,23 @@ import Header from '../../components/layout/header/header.tsx';
 import Button from '../../components/ui/button/button.tsx';
 import ModalForm from '../../components/ui/modal-form/modal-form.tsx';
 import InfoItem from '../../components/ui/info-item/info-item.tsx';
-import Marquee from 'react-fast-marquee';
 import { littleDiamond, pompon } from '../../assets/3d-objects/index.ts';
 import { useParallax } from '../../shared/hooks/use-parallax.ts';
 import { useToggle } from '../../shared/hooks/useToggle.ts';
 import ConditionItem from '../../components/ui/condition-item/condition-item.tsx';
 import ProgramList from '../../components/ui/program-list/program-list.tsx';
+import { useState, useEffect } from 'react';
+import { getQuestsImages } from '../../shared/data/galleries.ts';
+import type { GalleryImage } from '../../shared/types/image.ts';
+import { ImageMarquee } from '../../components/ui/image-marquee/image-marquee.tsx';
 
 function ImmersiveQuestsScreen() {
   const modal = useToggle();
-  const photos = Array.from({ length: 8 }, (_, i) => i + 1);
+  const [images, setImages] = useState<GalleryImage[]>([]);
+
+  useEffect(() => {
+    getQuestsImages().then(setImages);
+  }, []);
 
   const diamondParallax = useParallax(0.55, 80);
   const pomponParallax = useParallax(0.35, 100);
@@ -128,25 +135,7 @@ function ImmersiveQuestsScreen() {
           </div>
         </section>
         <section className="flex flex-col w-screen py-4 sm:py-6 md:py-8 lg:py-[32px] gap-4 sm:gap-6 md:gap-8 lg:gap-[32px] overflow-hidden">
-          <Marquee
-            speed={60}
-            direction="right"
-            autoFill={true}
-            pauseOnHover={true}
-          >
-            {photos.map((photoNumber) => (
-              <div
-                key={photoNumber}
-                className="h-[250px] sm:h-[300px] md:h-[350px] lg:h-[410px] w-[200px] sm:w-[240px] md:w-[280px] lg:w-[304px] px-2 sm:px-4 md:px-[8px]"
-              >
-                <img
-                  className="h-full w-full object-cover rounded-xl sm:rounded-2xl"
-                  src={`./src/assets/private/private-${photoNumber}.webp`}
-                  alt={`Частное мероприятие ${photoNumber}`}
-                />
-              </div>
-            ))}
-          </Marquee>
+          <ImageMarquee images={images} />
         </section>
       </main>
       <Footer />
