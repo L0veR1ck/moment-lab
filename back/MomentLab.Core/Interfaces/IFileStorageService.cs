@@ -9,3 +9,5 @@ public interface IFileStorageService
     string GetFileUrl(string fileName, string folder = "uploads");
 }
 
+
+

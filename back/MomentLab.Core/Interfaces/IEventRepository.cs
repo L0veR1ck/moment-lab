@@ -13,3 +13,5 @@ public interface IEventRepository
     Task<bool> DeletePhotoAsync(Guid photoId);
 }
 
+
+
