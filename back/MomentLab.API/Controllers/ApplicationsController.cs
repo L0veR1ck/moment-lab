@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using MomentLab.API.Attributes;
 using MomentLab.Core.DTOs;
 using MomentLab.Core.Entities;
 using MomentLab.Core.Enums;
@@ -59,6 +60,7 @@ public class ApplicationsController(
     }
 
     [HttpGet]
+    [AdminAuthorize]
     public async Task<ActionResult<object>> GetAll([FromQuery] int page = 1, [FromQuery] int pageSize = 10)
     {
         try
@@ -106,6 +108,7 @@ public class ApplicationsController(
     }
 
     [HttpGet("{id:guid}")]
+    [AdminAuthorize]
     public async Task<ActionResult<ApplicationResponse>> GetById(Guid id)
     {
         try
@@ -139,6 +142,7 @@ public class ApplicationsController(
     }
 
     [HttpPut("{id:guid}")]
+    [AdminAuthorize]
     public async Task<ActionResult<ApplicationResponse>> Update(Guid id, [FromBody] UpdateApplicationRequest request)
     {
         try
@@ -183,6 +187,7 @@ public class ApplicationsController(
     }
 
     [HttpPatch("{id:guid}/status")]
+    [AdminAuthorize]
     public async Task<ActionResult<ApplicationResponse>> UpdateStatus(Guid id, [FromBody] UpdateStatusRequest request)
     {
         try

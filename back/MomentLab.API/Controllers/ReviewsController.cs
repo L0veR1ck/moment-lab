@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using MomentLab.API.Attributes;
 using MomentLab.Core.DTOs;
 using MomentLab.Core.Entities;
 using MomentLab.Core.Interfaces;
@@ -7,6 +8,7 @@ namespace MomentLab.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
+[AdminAuthorize]
 public class ReviewsController(
     IReviewRepository repository,
     ILogger<ReviewsController> logger
