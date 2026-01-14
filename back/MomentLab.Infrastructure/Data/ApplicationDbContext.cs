@@ -20,6 +20,7 @@ public class ApplicationDbContext(
 
         modelBuilder.Entity<ApplicationRequest>(entity =>
         {
+            entity.ToTable("application_requests");
             entity.HasKey(e => e.Id);
             entity.Property(e => e.ClientName).IsRequired().HasMaxLength(200);
             entity.Property(e => e.ClientPhone).IsRequired().HasMaxLength(50);
@@ -35,6 +36,7 @@ public class ApplicationDbContext(
 
         modelBuilder.Entity<Event>(entity =>
         {
+            entity.ToTable("events");
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Title).IsRequired().HasMaxLength(200);
             entity.Property(e => e.Description).IsRequired().HasMaxLength(2000);
@@ -60,6 +62,7 @@ public class ApplicationDbContext(
 
         modelBuilder.Entity<EventCharacteristic>(entity =>
         {
+            entity.ToTable("event_characteristics");
             entity.HasKey(e => e.Id);
             entity.Property(e => e.Name).IsRequired().HasMaxLength(100);
             entity.Property(e => e.Value).IsRequired().HasMaxLength(500);
@@ -69,6 +72,7 @@ public class ApplicationDbContext(
 
         modelBuilder.Entity<EventPhoto>(entity =>
         {
+            entity.ToTable("event_photos");
             entity.HasKey(e => e.Id);
             entity.Property(e => e.PhotoUrl).IsRequired().HasMaxLength(500);
             entity.Property(e => e.UploadedAt).IsRequired();
@@ -78,6 +82,7 @@ public class ApplicationDbContext(
 
         modelBuilder.Entity<Review>(entity =>
         {
+            entity.ToTable("reviews");
             entity.HasKey(e => e.Id);
             entity.Property(e => e.ClientName).IsRequired().HasMaxLength(200);
             entity.Property(e => e.ReviewText).IsRequired().HasMaxLength(2000);
@@ -90,6 +95,7 @@ public class ApplicationDbContext(
 
         modelBuilder.Entity<TeamMember>(entity =>
         {
+            entity.ToTable("team_members");
             entity.HasKey(e => e.Id);
             entity.Property(e => e.FirstName).IsRequired().HasMaxLength(100);
             entity.Property(e => e.LastName).IsRequired().HasMaxLength(100);
