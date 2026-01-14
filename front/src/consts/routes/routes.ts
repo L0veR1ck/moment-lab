@@ -7,4 +7,5 @@ export const ROUTES = {
   TRAININGS: '/trainings',
   ABOUT_MOMENT_LAB: '/about-moment-lab',
   PORTFOLIO: '/portfolio',
+  ADMIN: '/admin/*',
 } as const;

@@ -11,7 +11,7 @@ namespace MomentLab.Infrastructure.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "ApplicationRequests",
+                name: "application_requests",
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -28,17 +28,17 @@ namespace MomentLab.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ApplicationRequests", x => x.Id);
+                    table.PrimaryKey("PK_application_requests", x => x.Id);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApplicationRequests_CreatedAt",
-                table: "ApplicationRequests",
+                name: "IX_application_requests_CreatedAt",
+                table: "application_requests",
                 column: "CreatedAt");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ApplicationRequests_Status",
-                table: "ApplicationRequests",
+                name: "IX_application_requests_Status",
+                table: "application_requests",
                 column: "Status");
         }
 
@@ -46,7 +46,7 @@ namespace MomentLab.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "ApplicationRequests");
+                name: "application_requests");
         }
     }
 }
