@@ -80,31 +80,28 @@ items-center text-center lg:items-start lg:text-left"
           <h2 className="font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[64px] text-[var(--color-dark-blue)] text-center break-words">
             Наша команда
           </h2>
+          <p className="text-base sm:text-l md:text-m lg:text-xl text-[var(--color-blue)]/55 text-center mb-4 sm:mb-6 md:mb-8 lg:mb-[32px] break-words max-w-4xl">15 лет создаем уникальные события.Без повторов. С полной отдачей. И с пользой.
+Наша команда — наш главный ресурс.</p>
           <div
             className="flex flex-col sm:flex-row flex-wrap
 justify-center
-gap-4 sm:gap-6 md:gap-8 lg:gap-[32px]
+gap-4 sm:gap-6 md:gap-8 lg:gap-[48px]
 w-full max-w-full"
           >
             <PersonCard
-              bgImage={'bg-[url(./src/assets/about-screen/person.png)]'}
-              name={'Иван Иванов'}
-              job={'Котенок момент.лаб'}
+              bgImage={'bg-[url(./src/assets/about-screen/team-1.jpg)]'}
+              name={'Анастасия Сеченова'}
+              job={'Стратег и вдохновитель'}
             />
             <PersonCard
-              bgImage={'bg-[url(./src/assets/about-screen/person.png)]'}
-              name={'Иван Иванов'}
-              job={'Котенок момент.лаб'}
+              bgImage={'bg-[url(./src/assets/about-screen/team-2.jpg)]'}
+              name={'Андрей Рябинин'}
+              job={'Архитектор атмосферы'}
             />
             <PersonCard
-              bgImage={'bg-[url(./src/assets/about-screen/person.png)]'}
-              name={'Иван Иванов'}
-              job={'Котенок момент.лаб'}
-            />
-            <PersonCard
-              bgImage={'bg-[url(./src/assets/about-screen/person.png)]'}
-              name={'Иван Иванов'}
-              job={'Котенок момент.лаб'}
+              bgImage={'bg-[url(./src/assets/about-screen/team-3.jpg)]'}
+              name={'Катя Кудашова'}
+              job={'Мастер вовлечения'}
             />
           </div>
         </section>

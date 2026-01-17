@@ -6,7 +6,7 @@ type PersonCardProps = {
 
 function PersonCard({ bgImage, name, job }: PersonCardProps) {
   return (
-    <div className="flex flex-col gap-3 sm:gap-4 md:gap-[16px] items-center h-[280px] sm:h-[300px] md:h-[320px] w-full sm:w-[220px] md:w-[240px] lg:w-[264px] rounded-[8px] px-4 sm:px-6 md:px-[24px] py-3 sm:py-4 md:py-[16px] bg-[var(--color-blue)]/15">
+    <div className="flex flex-col gap-3 sm:gap-4 md:gap-[16px] items-center h-[320px] sm:h-[340px] md:h-[360px] w-full sm:w-[260px] md:w-[280px] lg:w-[300px] rounded-[8px] px-4 sm:px-6 md:px-[24px] py-3 sm:py-4 md:py-[16px] bg-[var(--color-blue)]/15">
       <div
         className={`h-full w-full bg-cover bg-no-repeat ${bgImage}
   bg-[center_30%]
