@@ -1,12 +1,18 @@
+import { useQuery } from '@tanstack/react-query';
 import { ball } from '../../assets/3d-objects';
 import Footer from '../../components/layout/footer/footer';
 import Header from '../../components/layout/header/header';
 import EventCard from '../../components/ui/event-card/event-card';
-import { ROUTES } from '../../consts/routes';
 import { useParallax } from '../../shared/hooks/use-parallax';
+import { api } from '../../api/client';
 
 function SchoolEventScreen() {
   const ballParallax = useParallax(0.4, 100);
+
+  const { data: eventsData, isLoading } = useQuery({
+    queryKey: ['events', 'active'],
+    queryFn: () => api.events.getAll(1, 100, true),
+  });
 
   return (
     <div className="flex flex-col items-center w-full overflow-x-hidden">
@@ -31,23 +37,19 @@ function SchoolEventScreen() {
               }}
             />
           </div>
-          <EventCard
-            urlImg={'bg-[url(./src/assets/active-team-building/active-team-building-1.jpg)]'}
-            imgPosition="bg-position-[center_60%]"
-            titleCard={'Активное командообразование'}
-            description={
-              'Динамичный тренинг по активному командообразованию для одного или нескольких классов.'
-            }
-            path={ROUTES.ACTIVE_TEAM_BUILDING}
-          />
-          <EventCard
-            urlImg={'bg-[url(./src/assets/training/training-4.jpg)]'}
-            titleCard={'Тренинги'}
-            description={
-              'Специальный тренинг для вашего класса, лидерство, командообразование, профориентация, опишите ваш запрос, а мы составим программу, специально для вас.'
-            }
-            path={ROUTES.TRAININGS}
-          />
+          {isLoading ? (
+            <div className="text-[var(--color-blue)] text-lg">Загрузка...</div>
+          ) : (
+            eventsData?.items.map((event: any) => (
+              <EventCard
+                key={event.id}
+                urlImg={event.mainPhotoUrl ? `http://localhost:5009${event.mainPhotoUrl}` : 'bg-gray-300'}
+                titleCard={event.title}
+                description={event.description}
+                path={`/school-events/${event.urlSlug}`}
+              />
+            ))
+          )}
         </section>
       </main>
       <Footer />

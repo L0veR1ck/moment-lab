@@ -24,17 +24,42 @@ public class BitrixService(
     {
         try
         {
-            var dealData = new
+            var commentsBuilder = new StringBuilder();
+            
+            if ((application.RequestDate - application.CreatedAt).TotalDays > 1)
             {
-                fields = new
-                {
-                    TITLE = $"Заявка от {application.ClientName}",
-                    NAME = application.ClientName,
-                    PHONE = new[] { new { VALUE = application.ClientPhone, VALUE_TYPE = "WORK" } },
-                    ASSIGNED_BY_ID = userId,
-                    COMMENTS = $"Дата события: {application.RequestDate:dd.MM.yyyy}"
-                }
+                commentsBuilder.AppendLine($"Дата события: {application.RequestDate:dd.MM.yyyy}");
+            }
+            
+            if (!string.IsNullOrWhiteSpace(application.ClientWishes))
+            {
+                commentsBuilder.AppendLine($"Пожелания: {application.ClientWishes}");
+            }
+            
+            if (!string.IsNullOrWhiteSpace(application.AttachedFileName))
+            {
+                commentsBuilder.AppendLine($"Прикрепленный файл: {application.AttachedFileName}");
+            }
+
+            var fields = new Dictionary<string, object>
+            {
+                { "TITLE", $"Заявка от {application.ClientName}" },
+                { "NAME", application.ClientName },
+                { "PHONE", new[] { new { VALUE = application.ClientPhone, VALUE_TYPE = "WORK" } } },
+                { "ASSIGNED_BY_ID", userId }
             };
+
+            if (!string.IsNullOrWhiteSpace(application.ClientEmail))
+            {
+                fields["EMAIL"] = new[] { new { VALUE = application.ClientEmail, VALUE_TYPE = "WORK" } };
+            }
+
+            if (commentsBuilder.Length > 0)
+            {
+                fields["COMMENTS"] = commentsBuilder.ToString().Trim();
+            }
+
+            var dealData = new { fields };
 
             var content = new StringContent(
                 JsonSerializer.Serialize(dealData),

@@ -60,3 +60,13 @@ Thumbs.db
 *.tmp
 *.temp
 *~
+
+# Frontend / Node.js
+node_modules/
+.next/
+.turbo/
+dist/
+build/
+*.tsbuildinfo
+.npm
+.eslintcache

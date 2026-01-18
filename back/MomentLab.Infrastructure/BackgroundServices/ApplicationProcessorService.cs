@@ -24,12 +24,13 @@ public class ApplicationProcessorService(
                 var telegramService = scope.ServiceProvider.GetRequiredService<ITelegramService>();
                 var bitrixService = scope.ServiceProvider.GetRequiredService<IBitrixService>();
                 var emailService = scope.ServiceProvider.GetRequiredService<IEmailService>();
-                var configuration = scope.ServiceProvider.GetRequiredService<IConfiguration>();
+                var notificationSettingsRepository = scope.ServiceProvider.GetRequiredService<INotificationSettingsRepository>();
 
-                // Получаем настройки интеграций
-                var enableTelegram = configuration.GetValue("IntegrationSettings:EnableTelegram", true);
-                var enableEmail = configuration.GetValue("IntegrationSettings:EnableEmail", true);
-                var enableBitrix = configuration.GetValue("IntegrationSettings:EnableBitrix", true);
+                // Получаем настройки уведомлений из базы данных
+                var notificationSettings = await notificationSettingsRepository.GetSettingsAsync();
+                var enableTelegram = notificationSettings.IsTelegramEnabled;
+                var enableEmail = notificationSettings.IsEmailEnabled;
+                var enableBitrix = notificationSettings.IsBitrixEnabled;
 
                 var unprocessedApplications = await repository.GetUnprocessedApplicationsAsync();
 

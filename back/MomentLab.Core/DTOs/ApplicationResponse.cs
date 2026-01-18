@@ -5,7 +5,11 @@ namespace MomentLab.Core.DTOs;
 public record ApplicationResponse(
     Guid Id,
     string ClientName,
+    string? ClientEmail,
     string ClientPhone,
+    string? ClientWishes,
+    string? AttachedFileName,
+    string? AttachedFileUrl,
     DateTime RequestDate,
     ApplicationStatus Status,
     bool IsTelegramNotificationSent,

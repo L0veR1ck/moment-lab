@@ -26,6 +26,7 @@ type CarcassSubPagesProps = {
       heading: string;
       checklist: string[];
     };
+    keyValues?: string;
     conditionData: {
       value: string;
       description: string;
@@ -98,16 +99,31 @@ function CarcassSubPages(pageData: CarcassSubPagesProps) {
         </section>
 
         <section className="flex flex-col items-center gap-6 sm:gap-8 md:gap-[32px] py-8 sm:py-12 md:py-16 lg:py-[64px] max-w-[1280px] w-full px-4 sm:px-6 md:px-8 lg:px-8 xl:px-0">
-          <div className="flex flex-col lg:flex-row gap-8 sm:gap-12 md:gap-16 lg:gap-x-[256px] lg:justify-between w-full">
-            <ProgramList
-              heading={pageData.section_2.firstProgramList.heading}
-              checklist={pageData.section_2.firstProgramList.checklist}
-            />
-            <ProgramList
-              heading={pageData.section_2.secondProgramList?.heading}
-              checklist={pageData.section_2.secondProgramList?.checklist}
-            />
+          <div className="flex flex-col lg:flex-row gap-8 sm:gap-12 md:gap-16 lg:gap-x-[64px] w-full">
+            <div className="flex-1">
+              <ProgramList
+                heading={pageData.section_2.firstProgramList.heading}
+                checklist={pageData.section_2.firstProgramList.checklist}
+              />
+            </div>
+            <div className="flex-1">
+              {pageData.section_2.keyValues ? (
+                <ProgramList
+                  heading="Ключевые ценности"
+                  checklist={pageData.section_2.keyValues
+                    .split('\n')
+                    .filter((line: string) => line.trim())
+                    .map((line: string) => line.replace(/^[•\-\*]\s*/, ''))}
+                />
+              ) : (
+                <ProgramList
+                  heading={pageData.section_2.secondProgramList?.heading}
+                  checklist={pageData.section_2.secondProgramList?.checklist}
+                />
+              )}
+            </div>
           </div>
+
           <div className="flex flex-wrap justify-center sm:justify-evenly gap-x-4 sm:gap-x-8 md:gap-x-12 lg:gap-x-16 gap-y-4 sm:gap-y-6 w-full">
             {pageData.section_2.conditionData.map((condition, index) => (
               <ConditionItem
