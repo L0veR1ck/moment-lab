@@ -8,7 +8,6 @@ namespace MomentLab.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[AdminAuthorize]
 public class TeamMembersController(
     ITeamMemberRepository repository,
     ILogger<TeamMembersController> logger
@@ -46,6 +45,7 @@ public class TeamMembersController(
     }
 
     [HttpGet("{id:guid}")]
+    [AdminAuthorize]
     public async Task<ActionResult<TeamMemberResponse>> GetById(Guid id)
     {
         try
@@ -65,6 +65,7 @@ public class TeamMembersController(
     }
 
     [HttpPost]
+    [AdminAuthorize]
     public async Task<ActionResult<TeamMemberResponse>> Create([FromBody] TeamMemberRequest request)
     {
         try
@@ -75,9 +76,6 @@ public class TeamMembersController(
                 LastName = request.LastName,
                 Position = request.Position,
                 PhotoUrl = request.PhotoUrl,
-                PhoneNumber = request.PhoneNumber,
-                Wishes = request.Wishes,
-                AttachmentUrl = request.AttachmentUrl,
                 IsActive = request.IsActive,
                 DisplayOrder = request.DisplayOrder
             };
@@ -96,6 +94,7 @@ public class TeamMembersController(
     }
 
     [HttpPut("{id:guid}")]
+    [AdminAuthorize]
     public async Task<ActionResult<TeamMemberResponse>> Update(Guid id, [FromBody] TeamMemberRequest request)
     {
         try
@@ -109,9 +108,6 @@ public class TeamMembersController(
             existing.LastName = request.LastName;
             existing.Position = request.Position;
             existing.PhotoUrl = request.PhotoUrl;
-            existing.PhoneNumber = request.PhoneNumber;
-            existing.Wishes = request.Wishes;
-            existing.AttachmentUrl = request.AttachmentUrl;
             existing.IsActive = request.IsActive;
             existing.DisplayOrder = request.DisplayOrder;
 
@@ -129,6 +125,7 @@ public class TeamMembersController(
     }
 
     [HttpDelete("{id:guid}")]
+    [AdminAuthorize]
     public async Task<ActionResult> Delete(Guid id)
     {
         try
@@ -157,9 +154,6 @@ public class TeamMembersController(
             teamMember.LastName,
             teamMember.Position,
             teamMember.PhotoUrl,
-            teamMember.PhoneNumber,
-            teamMember.Wishes,
-            teamMember.AttachmentUrl,
             teamMember.IsActive,
             teamMember.DisplayOrder,
             teamMember.CreatedAt,

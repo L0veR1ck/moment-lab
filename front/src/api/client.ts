@@ -82,4 +82,25 @@ export const api = {
     get: () => request<any>('/NotificationSettings'),
     update: (data: any) => request<any>('/NotificationSettings', { method: 'PUT', body: JSON.stringify(data) }),
   },
+  files: {
+    upload: async (file: File, folder?: string) => {
+      const formData = new FormData();
+      formData.append('file', file);
+      if (folder) formData.append('folder', folder);
+
+      const response = await fetch(`${API_BASE_URL}/Files/upload`, {
+        method: 'POST',
+        credentials: 'include',
+        body: formData,
+      });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      return response.json();
+    },
+    delete: (fileUrl: string) =>
+      request<void>(`/Files?fileUrl=${encodeURIComponent(fileUrl)}`, { method: 'DELETE' }),
+  },
 };

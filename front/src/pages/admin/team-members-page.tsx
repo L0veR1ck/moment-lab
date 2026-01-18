@@ -5,7 +5,9 @@ import { api } from '../../api/client';
 export default function TeamMembersPage() {
   const [page, setPage] = useState(1);
   const [showCreateModal, setShowCreateModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [selectedMember, setSelectedMember] = useState<any>(null);
+  const [editingMember, setEditingMember] = useState<any>(null);
   const queryClient = useQueryClient();
 
   const { data, isLoading, error } = useQuery({
@@ -43,7 +45,6 @@ export default function TeamMembersPage() {
               <th>Имя</th>
               <th>Фамилия</th>
               <th>Должность</th>
-              <th>Телефон</th>
               <th>Статус</th>
               <th>Действия</th>
             </tr>
@@ -51,7 +52,7 @@ export default function TeamMembersPage() {
           <tbody>
             {data?.items.length === 0 ? (
               <tr>
-                <td colSpan={6} style={{ textAlign: 'center', padding: '3rem', color: '#7f8c8d' }}>
+                <td colSpan={5} style={{ textAlign: 'center', padding: '3rem', color: '#7f8c8d' }}>
                   Членов команды пока нет. Добавьте первого!
                 </td>
               </tr>
@@ -66,24 +67,34 @@ export default function TeamMembersPage() {
                   <td><strong>{member.firstName}</strong></td>
                   <td><strong>{member.lastName}</strong></td>
                   <td>{member.position || '-'}</td>
-                  <td>{member.phoneNumber || '-'}</td>
                   <td>
                     <span className={member.isActive ? 'admin-badge admin-badge-success' : 'admin-badge admin-badge-warning'}>
                       {member.isActive ? 'Активен' : 'Неактивен'}
                     </span>
                   </td>
                   <td className="admin-actions" onClick={(e) => e.stopPropagation()}>
-                    <button
-                      className="admin-btn admin-btn-danger"
-                      onClick={() => {
-                        if (confirm('Удалить члена команды?')) {
-                          deleteMutation.mutate(member.id);
-                        }
-                      }}
-                      disabled={deleteMutation.isPending}
-                    >
-                      {deleteMutation.isPending ? 'Удаление...' : 'Удалить'}
-                    </button>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
+                      <button
+                        className="admin-btn admin-btn-secondary"
+                        onClick={() => {
+                          setEditingMember(member);
+                          setShowEditModal(true);
+                        }}
+                      >
+                        Редактировать
+                      </button>
+                      <button
+                        className="admin-btn admin-btn-danger"
+                        onClick={() => {
+                          if (confirm('Удалить члена команды?')) {
+                            deleteMutation.mutate(member.id);
+                          }
+                        }}
+                        disabled={deleteMutation.isPending}
+                      >
+                        {deleteMutation.isPending ? 'Удаление...' : 'Удалить'}
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))
@@ -102,20 +113,6 @@ export default function TeamMembersPage() {
               <p style={{ color: '#2c3e50' }}>{selectedMember.position || '-'}</p>
             </div>
 
-            <div className="admin-form-group">
-              <label>Телефон:</label>
-              <p style={{ color: '#2c3e50' }}>{selectedMember.phoneNumber || '-'}</p>
-            </div>
-
-            {selectedMember.wishes && (
-              <div className="admin-form-group">
-                <label>Пожелания:</label>
-                <p style={{ whiteSpace: 'pre-wrap', color: '#2c3e50', lineHeight: '1.6' }}>
-                  {selectedMember.wishes}
-                </p>
-              </div>
-            )}
-
             {selectedMember.photoUrl && (
               <div className="admin-form-group">
                 <label>Фото:</label>
@@ -124,20 +121,6 @@ export default function TeamMembersPage() {
                   alt={`${selectedMember.firstName} ${selectedMember.lastName}`}
                   style={{ maxWidth: '200px', borderRadius: '8px' }}
                 />
-              </div>
-            )}
-
-            {selectedMember.attachmentUrl && (
-              <div className="admin-form-group">
-                <label>Вложение:</label>
-                <a 
-                  href={selectedMember.attachmentUrl} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                  style={{ color: '#3498db' }}
-                >
-                  Открыть файл
-                </a>
               </div>
             )}
 
@@ -182,6 +165,16 @@ export default function TeamMembersPage() {
       {showCreateModal && (
         <CreateTeamMemberModal onClose={() => setShowCreateModal(false)} />
       )}
+
+      {showEditModal && editingMember && (
+        <EditTeamMemberModal 
+          member={editingMember} 
+          onClose={() => {
+            setShowEditModal(false);
+            setEditingMember(null);
+          }} 
+        />
+      )}
     </div>
   );
 }
@@ -192,12 +185,12 @@ function CreateTeamMemberModal({ onClose }: { onClose: () => void }) {
     firstName: '',
     lastName: '',
     position: '',
-    phoneNumber: '',
     photoUrl: null,
-    wishes: null,
-    attachmentUrl: null,
     isActive: true,
+    displayOrder: 0,
   });
+  const [uploading, setUploading] = useState(false);
+  const [photoPreview, setPhotoPreview] = useState<string | null>(null);
 
   const createMutation = useMutation({
     mutationFn: api.teamMembers.create,
@@ -206,6 +199,34 @@ function CreateTeamMemberModal({ onClose }: { onClose: () => void }) {
       onClose();
     },
   });
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('folder', 'team');
+
+      const response = await fetch('http://localhost:5009/api/files/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) throw new Error('Upload failed');
+
+      const data = await response.json();
+      setFormData(prev => ({ ...prev, photoUrl: data.fileUrl }));
+      setPhotoPreview(`http://localhost:5009${data.fileUrl}`);
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      alert('Ошибка загрузки файла');
+    } finally {
+      setUploading(false);
+    }
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -246,19 +267,188 @@ function CreateTeamMemberModal({ onClose }: { onClose: () => void }) {
             />
           </div>
           <div className="admin-form-group">
-            <label>Телефон</label>
+            <label>Фотография</label>
             <input
-              type="tel"
-              value={formData.phoneNumber}
-              onChange={(e) => setFormData({ ...formData, phoneNumber: e.target.value })}
+              type="file"
+              accept="image/*"
+              onChange={handleFileUpload}
+              disabled={uploading}
             />
+            {uploading && <p style={{ color: '#3498db', marginTop: '8px' }}>Загрузка...</p>}
+            {photoPreview && (
+              <img 
+                src={photoPreview} 
+                alt="Предварительный просмотр" 
+                style={{ maxWidth: '200px', marginTop: '12px', borderRadius: '8px' }}
+              />
+            )}
+          </div>
+          <div className="admin-form-group">
+            <label>Порядок отображения</label>
+            <input
+              type="number"
+              min="0"
+              value={formData.displayOrder}
+              onChange={(e) => setFormData({ ...formData, displayOrder: parseInt(e.target.value) || 0 })}
+            />
+          </div>
+          <div className="admin-form-group">
+            <label>
+              <input
+                type="checkbox"
+                checked={formData.isActive}
+                onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
+                style={{ marginRight: '8px' }}
+              />
+              Активен
+            </label>
           </div>
           <div className="admin-form-actions">
             <button type="button" className="admin-btn admin-btn-secondary" onClick={onClose}>
               Отмена
             </button>
-            <button type="submit" className="admin-btn admin-btn-primary">
-              Добавить
+            <button type="submit" className="admin-btn admin-btn-primary" disabled={createMutation.isPending}>
+              {createMutation.isPending ? 'Добавление...' : 'Добавить'}
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  );
+}
+
+function EditTeamMemberModal({ member, onClose }: { member: any; onClose: () => void }) {
+  const queryClient = useQueryClient();
+  const [formData, setFormData] = useState({
+    firstName: member.firstName,
+    lastName: member.lastName,
+    position: member.position || '',
+    photoUrl: member.photoUrl,
+    isActive: member.isActive,
+    displayOrder: member.displayOrder,
+  });
+  const [uploading, setUploading] = useState(false);
+  const [photoPreview, setPhotoPreview] = useState<string | null>(
+    member.photoUrl ? `http://localhost:5009${member.photoUrl}` : null
+  );
+
+  const updateMutation = useMutation({
+    mutationFn: (data: any) => api.teamMembers.update(member.id, data),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['teamMembers'] });
+      onClose();
+    },
+  });
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      const formData = new FormData();
+      formData.append('file', file);
+      formData.append('folder', 'team');
+
+      const response = await fetch('http://localhost:5009/api/files/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      if (!response.ok) throw new Error('Upload failed');
+
+      const data = await response.json();
+      setFormData(prev => ({ ...prev, photoUrl: data.fileUrl }));
+      setPhotoPreview(`http://localhost:5009${data.fileUrl}`);
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      alert('Ошибка загрузки файла');
+    } finally {
+      setUploading(false);
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    updateMutation.mutate(formData);
+  };
+
+  return (
+    <div className="admin-modal" onClick={onClose}>
+      <div className="admin-modal-content" onClick={(e) => e.stopPropagation()}>
+        <div className="admin-modal-header">
+          <h2 className="admin-modal-title">Редактировать члена команды</h2>
+        </div>
+        <form onSubmit={handleSubmit}>
+          <div className="admin-form-group">
+            <label>Имя *</label>
+            <input
+              type="text"
+              required
+              value={formData.firstName}
+              onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+            />
+          </div>
+          <div className="admin-form-group">
+            <label>Фамилия *</label>
+            <input
+              type="text"
+              required
+              value={formData.lastName}
+              onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+            />
+          </div>
+          <div className="admin-form-group">
+            <label>Должность</label>
+            <input
+              type="text"
+              value={formData.position}
+              onChange={(e) => setFormData({ ...formData, position: e.target.value })}
+            />
+          </div>
+          <div className="admin-form-group">
+            <label>Фотография</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileUpload}
+              disabled={uploading}
+            />
+            {uploading && <p style={{ color: '#3498db', marginTop: '8px' }}>Загрузка...</p>}
+            {photoPreview && (
+              <img 
+                src={photoPreview} 
+                alt="Предварительный просмотр" 
+                style={{ maxWidth: '200px', marginTop: '12px', borderRadius: '8px' }}
+              />
+            )}
+          </div>
+          <div className="admin-form-group">
+            <label>Порядок отображения</label>
+            <input
+              type="number"
+              min="0"
+              value={formData.displayOrder}
+              onChange={(e) => setFormData({ ...formData, displayOrder: parseInt(e.target.value) || 0 })}
+            />
+          </div>
+          <div className="admin-form-group">
+            <label>
+              <input
+                type="checkbox"
+                checked={formData.isActive}
+                onChange={(e) => setFormData({ ...formData, isActive: e.target.checked })}
+                style={{ marginRight: '8px' }}
+              />
+              Активен
+            </label>
+          </div>
+          <div className="admin-form-actions">
+            <button type="button" className="admin-btn admin-btn-secondary" onClick={onClose}>
+              Отмена
+            </button>
+            <button type="submit" className="admin-btn admin-btn-primary" disabled={updateMutation.isPending}>
+              {updateMutation.isPending ? 'Сохранение...' : 'Сохранить'}
             </button>
           </div>
         </form>

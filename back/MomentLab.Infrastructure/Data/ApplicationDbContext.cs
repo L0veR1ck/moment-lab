@@ -106,9 +106,6 @@ public class ApplicationDbContext(
             entity.Property(e => e.LastName).IsRequired().HasMaxLength(100);
             entity.Property(e => e.Position).HasMaxLength(200);
             entity.Property(e => e.PhotoUrl).HasMaxLength(500);
-            entity.Property(e => e.PhoneNumber).HasMaxLength(50);
-            entity.Property(e => e.Wishes).HasMaxLength(1000);
-            entity.Property(e => e.AttachmentUrl).HasMaxLength(500);
             entity.Property(e => e.CreatedAt).IsRequired();
             entity.Property(e => e.UpdatedAt).IsRequired();
             

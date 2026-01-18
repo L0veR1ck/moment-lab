@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import Footer from '../../components/layout/footer/footer';
 import Header from '../../components/layout/header/header';
 import Button from '../../components/ui/button/button';
@@ -6,11 +7,21 @@ import PersonCard from './components/person-card/person-card';
 import ModalForm from '../../components/ui/modal-form/modal-form';
 import { useParallax } from '../../shared/hooks/use-parallax';
 import { gift } from '../../assets/3d-objects';
+import { api } from '../../api/client';
 
 function AboutMomentLab() {
   const [isModalOpen, setModalOpen] = useState(false);
   const handleModalClick = () => setModalOpen((prev) => !prev);
   const giftParallax = useParallax(0.4, 40);
+
+  const { data: teamData } = useQuery({
+    queryKey: ['teamMembers', 'active'],
+    queryFn: () => api.teamMembers.getAll(1, 100),
+  });
+
+  const activeTeamMembers = teamData?.items
+    .filter((member: any) => member.isActive)
+    .sort((a: any, b: any) => a.displayOrder - b.displayOrder) || [];
 
   return (
     <div className="flex flex-col items-center w-full overflow-x-hidden">
@@ -88,21 +99,34 @@ justify-center
 gap-4 sm:gap-6 md:gap-8 lg:gap-[48px]
 w-full max-w-full"
           >
-            <PersonCard
-              bgImage={'bg-[url(./src/assets/about-screen/team-1.jpg)]'}
-              name={'Анастасия Сеченова'}
-              job={'Стратег и вдохновитель'}
-            />
-            <PersonCard
-              bgImage={'bg-[url(./src/assets/about-screen/team-2.jpg)]'}
-              name={'Андрей Рябинин'}
-              job={'Архитектор атмосферы'}
-            />
-            <PersonCard
-              bgImage={'bg-[url(./src/assets/about-screen/team-3.jpg)]'}
-              name={'Катя Кудашова'}
-              job={'Мастер вовлечения'}
-            />
+            {activeTeamMembers.length > 0 ? (
+              activeTeamMembers.map((member: any) => (
+                <PersonCard
+                  key={member.id}
+                  photoUrl={member.photoUrl}
+                  name={`${member.firstName} ${member.lastName}`}
+                  job={member.position || ''}
+                />
+              ))
+            ) : (
+              <>
+                <PersonCard
+                  photoUrl="/uploads/team/team-1.jpg"
+                  name="Анастасия Сеченова"
+                  job="Стратег и вдохновитель"
+                />
+                <PersonCard
+                  photoUrl="/uploads/team/team-2.jpg"
+                  name="Андрей Рябинин"
+                  job="Архитектор атмосферы"
+                />
+                <PersonCard
+                  photoUrl="/uploads/team/team-3.jpg"
+                  name="Катя Кудашова"
+                  job="Мастер вовлечения"
+                />
+              </>
+            )}
           </div>
         </section>
         <section className="flex flex-col items-center gap-4 sm:gap-6 md:gap-8 lg:gap-[32px] pt-8 sm:pt-12 md:pt-16 lg:pt-[64px] pb-8 sm:pb-12 md:pb-[120px] w-full max-w-[1280px] px-4 sm:px-6 md:px-8 lg:px-8 xl:px-0">
