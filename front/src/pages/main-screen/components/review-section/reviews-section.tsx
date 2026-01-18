@@ -1,29 +1,36 @@
 import { useState, useEffect } from 'react';
 import { Carousel } from 'react-responsive-carousel';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
+import { api } from '../../../../api/client';
 
-const reviews = [
-  {
-    id: 1,
-    author: 'Ирина',
-    text: 'ОГРОМНОЕ спасибо вам за проделанный невероятный труд и очень классных спикеров! За нееееереально комфортную работу с вами, за абсолютный кредит доверия, за то что вы просто невероятны🥹🫶🏻',
-  },
-  {
-    id: 2,
-    author: 'Юлия',
-    text: 'Хочу сказать вам большое спасибо за организацию праздника! Нам очень понравилось и гости в восторге! Площадка очень хорошей площади, атмосфера была праздничной',
-  },
-  { id: 3, author: 'Алексей', text: 'Хорошая поддержка и приятный интерфейс.' },
-  { id: 4, author: 'Ольга', text: 'Довольна на 100%! Обращусь снова.' },
-  {
-    id: 5,
-    author: 'Андрей',
-    text: 'Спасибо вам большое! Все гости в восторге. Спасибо за отзывчивость и ваш труд, за прекрасных людей. Нет слов, вы правда невероятная команда и потрясающе талантливые люди!!!',
-  },
-];
+interface Review {
+  id: string;
+  clientName: string;
+  reviewText: string;
+  rating: number;
+}
 
 function ReviewsSection() {
+  const [reviews, setReviews] = useState<Review[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
   const [centerSlidePercentage, setCenterSlidePercentage] = useState(100);
+
+  useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        setIsLoading(true);
+        const response = await api.reviews.getAll(1, 100);
+        setReviews(response.items);
+      } catch (error) {
+        console.error('Ошибка при загрузке отзывов:', error);
+        setReviews([]);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchReviews();
+  }, []);
 
   useEffect(() => {
     const updateSlidePercentage = () => {
@@ -41,6 +48,21 @@ function ReviewsSection() {
     window.addEventListener('resize', updateSlidePercentage);
     return () => window.removeEventListener('resize', updateSlidePercentage);
   }, []);
+
+  if (isLoading) {
+    return (
+      <section className="flex flex-col w-full py-8 sm:py-12 md:py-[64px] max-w-[1280px] px-4 sm:px-6 md:px-8 lg:px-8 xl:px-0">
+        <h2 className="text-center font-semibold text-3xl sm:text-4xl md:text-5xl lg:text-[64px] text-[var(--color-dark-blue)] pb-6 sm:pb-8 md:pb-[56px] break-words">
+          Отзывы
+        </h2>
+        <div className="text-center text-[var(--color-blue)] py-8">Загрузка отзывов...</div>
+      </section>
+    );
+  }
+
+  if (reviews.length === 0) {
+    return null; // Не показываем секцию, если нет отзывов
+  }
 
   return (
     <section className="flex flex-col w-full py-8 sm:py-12 md:py-[64px] max-w-[1280px] px-4 sm:px-6 md:px-8 lg:px-8 xl:px-0">
@@ -134,10 +156,10 @@ function ReviewsSection() {
             >
               <div className="min-h-[200px] sm:min-h-[230px] md:min-h-[250px] pt-4 sm:pt-6 md:pt-[24px] px-4 sm:px-6 md:px-[24px] bg-[var(--color-blue)]/15 rounded-lg shadow p-4 sm:p-6 h-full flex flex-col gap-4 sm:gap-6 md:gap-[24px] text-left">
                 <span className="font-semibold text-base sm:text-lg text-[var(--color-blue)] break-words">
-                  {item.author}
+                  {item.clientName}
                 </span>
                 <p className="text-sm sm:text-base md:text-lg text-[var(--color-blue)] break-words">
-                  {item.text}
+                  {item.reviewText}
                 </p>
               </div>
             </div>

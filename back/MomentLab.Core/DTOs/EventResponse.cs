@@ -3,6 +3,7 @@ namespace MomentLab.Core.DTOs;
 public record EventResponse(
     Guid Id,
     string Title,
+    string UrlSlug,
     string Description,
     string ProgramDescription,
     string KeyValues,

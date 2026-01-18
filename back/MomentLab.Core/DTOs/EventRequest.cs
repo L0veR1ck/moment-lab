@@ -2,6 +2,7 @@ namespace MomentLab.Core.DTOs;
 
 public record EventRequest(
     string Title,
+    string UrlSlug,
     string Description,
     string ProgramDescription,
     string KeyValues,

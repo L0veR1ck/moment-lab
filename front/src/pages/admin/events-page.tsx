@@ -201,6 +201,7 @@ function CreateEventModal({ onClose }: { onClose: () => void }) {
   const queryClient = useQueryClient();
   const [formData, setFormData] = useState({
     title: '',
+    urlSlug: '',
     description: '',
     programDescription: '',
     keyValues: '',
@@ -209,6 +210,7 @@ function CreateEventModal({ onClose }: { onClose: () => void }) {
     displayOrder: 0,
     characteristics: [],
   });
+  const [uploading, setUploading] = useState(false);
 
   const createMutation = useMutation({
     mutationFn: api.events.create,
@@ -221,6 +223,34 @@ function CreateEventModal({ onClose }: { onClose: () => void }) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     createMutation.mutate(formData);
+  };
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      const formDataUpload = new FormData();
+      formDataUpload.append('file', file);
+      formDataUpload.append('folder', 'events');
+
+      const response = await fetch('http://localhost:5009/api/Files/upload', {
+        method: 'POST',
+        body: formDataUpload,
+        credentials: 'include',
+      });
+
+      if (!response.ok) throw new Error('Upload failed');
+
+      const data = await response.json();
+      setFormData({ ...formData, mainPhotoUrl: data.fileUrl });
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      alert('Ошибка при загрузке файла');
+    } finally {
+      setUploading(false);
+    }
   };
 
   return (
@@ -240,9 +270,43 @@ function CreateEventModal({ onClose }: { onClose: () => void }) {
             />
           </div>
           <div className="admin-form-group">
+            <label>URL (slug) *</label>
+            <input
+              type="text"
+              required
+              pattern="^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              placeholder="active-team-building"
+              value={formData.urlSlug}
+              onChange={(e) => setFormData({ ...formData, urlSlug: e.target.value })}
+            />
+            <small style={{ color: '#7f8c8d', fontSize: '12px' }}>
+              Только строчные буквы, цифры и дефисы
+            </small>
+          </div>
+          <div className="admin-form-group">
+            <label>Изображение превью</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileUpload}
+              disabled={uploading}
+            />
+            {uploading && <span style={{ color: '#3498db', fontSize: '14px' }}>Загрузка...</span>}
+            {formData.mainPhotoUrl && (
+              <div style={{ marginTop: '8px' }}>
+                <img 
+                  src={`http://localhost:5009${formData.mainPhotoUrl}`} 
+                  alt="Preview" 
+                  style={{ maxWidth: '200px', maxHeight: '200px', objectFit: 'cover', borderRadius: '8px' }}
+                />
+              </div>
+            )}
+          </div>
+          <div className="admin-form-group">
             <label>Описание *</label>
             <textarea
               required
+              rows={3}
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             />
@@ -251,6 +315,7 @@ function CreateEventModal({ onClose }: { onClose: () => void }) {
             <label>Программа *</label>
             <textarea
               required
+              rows={5}
               value={formData.programDescription}
               onChange={(e) => setFormData({ ...formData, programDescription: e.target.value })}
             />
@@ -259,6 +324,7 @@ function CreateEventModal({ onClose }: { onClose: () => void }) {
             <label>Ключевые ценности *</label>
             <textarea
               required
+              rows={3}
               value={formData.keyValues}
               onChange={(e) => setFormData({ ...formData, keyValues: e.target.value })}
             />
@@ -280,6 +346,7 @@ function CreateEventModal({ onClose }: { onClose: () => void }) {
 function EditEventModal({ event, onClose, onSave }: { event: any; onClose: () => void; onSave: (data: any) => void }) {
   const [formData, setFormData] = useState({
     title: event.title,
+    urlSlug: event.urlSlug,
     description: event.description,
     programDescription: event.programDescription,
     keyValues: event.keyValues,
@@ -288,10 +355,39 @@ function EditEventModal({ event, onClose, onSave }: { event: any; onClose: () =>
     displayOrder: event.displayOrder || 0,
     characteristics: event.characteristics || [],
   });
+  const [uploading, setUploading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSave(formData);
+  };
+
+  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setUploading(true);
+    try {
+      const formDataUpload = new FormData();
+      formDataUpload.append('file', file);
+      formDataUpload.append('folder', 'events');
+
+      const response = await fetch('http://localhost:5009/api/Files/upload', {
+        method: 'POST',
+        body: formDataUpload,
+        credentials: 'include',
+      });
+
+      if (!response.ok) throw new Error('Upload failed');
+
+      const data = await response.json();
+      setFormData({ ...formData, mainPhotoUrl: data.fileUrl });
+    } catch (error) {
+      console.error('Error uploading file:', error);
+      alert('Ошибка при загрузке файла');
+    } finally {
+      setUploading(false);
+    }
   };
 
   return (
@@ -311,9 +407,43 @@ function EditEventModal({ event, onClose, onSave }: { event: any; onClose: () =>
             />
           </div>
           <div className="admin-form-group">
+            <label>URL (slug) *</label>
+            <input
+              type="text"
+              required
+              pattern="^[a-z0-9]+(?:-[a-z0-9]+)*$"
+              placeholder="active-team-building"
+              value={formData.urlSlug}
+              onChange={(e) => setFormData({ ...formData, urlSlug: e.target.value })}
+            />
+            <small style={{ color: '#7f8c8d', fontSize: '12px' }}>
+              Только строчные буквы, цифры и дефисы
+            </small>
+          </div>
+          <div className="admin-form-group">
+            <label>Изображение превью</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleFileUpload}
+              disabled={uploading}
+            />
+            {uploading && <span style={{ color: '#3498db', fontSize: '14px' }}>Загрузка...</span>}
+            {formData.mainPhotoUrl && (
+              <div style={{ marginTop: '8px' }}>
+                <img 
+                  src={`http://localhost:5009${formData.mainPhotoUrl}`} 
+                  alt="Preview" 
+                  style={{ maxWidth: '200px', maxHeight: '200px', objectFit: 'cover', borderRadius: '8px' }}
+                />
+              </div>
+            )}
+          </div>
+          <div className="admin-form-group">
             <label>Описание *</label>
             <textarea
               required
+              rows={3}
               value={formData.description}
               onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             />
@@ -322,6 +452,7 @@ function EditEventModal({ event, onClose, onSave }: { event: any; onClose: () =>
             <label>Программа *</label>
             <textarea
               required
+              rows={5}
               value={formData.programDescription}
               onChange={(e) => setFormData({ ...formData, programDescription: e.target.value })}
             />
@@ -330,6 +461,7 @@ function EditEventModal({ event, onClose, onSave }: { event: any; onClose: () =>
             <label>Ключевые ценности *</label>
             <textarea
               required
+              rows={3}
               value={formData.keyValues}
               onChange={(e) => setFormData({ ...formData, keyValues: e.target.value })}
             />

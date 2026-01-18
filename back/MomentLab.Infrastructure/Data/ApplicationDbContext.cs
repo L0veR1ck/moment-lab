@@ -13,6 +13,7 @@ public class ApplicationDbContext(
     public DbSet<EventPhoto> EventPhotos { get; set; }
     public DbSet<Review> Reviews { get; set; }
     public DbSet<TeamMember> TeamMembers { get; set; }
+    public DbSet<NotificationSettings> NotificationSettings { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -23,7 +24,11 @@ public class ApplicationDbContext(
             entity.ToTable("application_requests");
             entity.HasKey(e => e.Id);
             entity.Property(e => e.ClientName).IsRequired().HasMaxLength(200);
+            entity.Property(e => e.ClientEmail).HasMaxLength(200);
             entity.Property(e => e.ClientPhone).IsRequired().HasMaxLength(50);
+            entity.Property(e => e.ClientWishes).HasMaxLength(2000);
+            entity.Property(e => e.AttachedFileName).HasMaxLength(500);
+            entity.Property(e => e.AttachedFileUrl).HasMaxLength(1000);
             entity.Property(e => e.RequestDate).IsRequired();
             entity.Property(e => e.Status).IsRequired();
             entity.Property(e => e.BitrixDealId).HasMaxLength(100);
@@ -109,6 +114,16 @@ public class ApplicationDbContext(
             
             entity.HasIndex(e => e.IsActive);
             entity.HasIndex(e => e.DisplayOrder);
+        });
+
+        modelBuilder.Entity<NotificationSettings>(entity =>
+        {
+            entity.ToTable("notification_settings");
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.IsTelegramEnabled).IsRequired();
+            entity.Property(e => e.IsEmailEnabled).IsRequired();
+            entity.Property(e => e.IsBitrixEnabled).IsRequired();
+            entity.Property(e => e.UpdatedAt).IsRequired();
         });
     }
 }

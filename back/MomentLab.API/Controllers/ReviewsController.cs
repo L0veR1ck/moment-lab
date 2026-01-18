@@ -8,7 +8,6 @@ namespace MomentLab.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[AdminAuthorize]
 public class ReviewsController(
     IReviewRepository repository,
     ILogger<ReviewsController> logger
@@ -65,6 +64,7 @@ public class ReviewsController(
     }
 
     [HttpPost]
+    [AdminAuthorize]
     public async Task<ActionResult<ReviewResponse>> Create([FromBody] ReviewRequest request)
     {
         try
@@ -73,7 +73,8 @@ public class ReviewsController(
             {
                 ClientName = request.ClientName,
                 ReviewText = request.ReviewText,
-                Rating = request.Rating
+                Rating = request.Rating,
+                IsApproved = true
             };
 
             var created = await repository.CreateAsync(review);
@@ -90,6 +91,7 @@ public class ReviewsController(
     }
 
     [HttpPut("{id:guid}")]
+    [AdminAuthorize]
     public async Task<ActionResult<ReviewResponse>> Update(Guid id, [FromBody] ReviewRequest request)
     {
         try
@@ -117,6 +119,7 @@ public class ReviewsController(
     }
 
     [HttpPatch("{id:guid}/approve")]
+    [AdminAuthorize]
     public async Task<ActionResult<ReviewResponse>> Approve(Guid id)
     {
         try
@@ -138,6 +141,7 @@ public class ReviewsController(
     }
 
     [HttpDelete("{id:guid}")]
+    [AdminAuthorize]
     public async Task<ActionResult> Delete(Guid id)
     {
         try

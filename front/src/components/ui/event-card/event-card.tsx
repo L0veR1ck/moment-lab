@@ -15,6 +15,12 @@ function EventCard({
   description,
   path,
 }: EventCardProps) {
+  // Check if urlImg starts with 'bg-[url(' - if so it's a Tailwind class, otherwise it's a URL
+  const isBackgroundImage = urlImg.startsWith('bg-[url(');
+  const imageStyle = !isBackgroundImage ? {
+    backgroundImage: `url(${urlImg})`,
+  } : undefined;
+
   return (
     <div
       className="h-[500px] sm:h-[600px] md:h-[650px] lg:h-[700px]
@@ -28,9 +34,10 @@ function EventCard({
           flex-[2.2] min-h-0
           rounded-t-xl sm:rounded-t-2xl lg:rounded-t-[16px]
           bg-cover bg-no-repeat
-          ${urlImg}
+          ${isBackgroundImage ? urlImg : ''}
           ${imgPosition}
         `}
+        style={imageStyle}
       />
 
       <div

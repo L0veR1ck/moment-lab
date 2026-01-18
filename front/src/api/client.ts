@@ -40,9 +40,13 @@ export const api = {
       request<{ authenticated: boolean }>('/Auth/check'),
   },
   events: {
-    getAll: (page = 1, pageSize = 10) =>
-      request<PaginatedResponse<any>>(`/Events?page=${page}&pageSize=${pageSize}`),
+    getAll: (page = 1, pageSize = 10, isActive?: boolean) => {
+      const params = new URLSearchParams({ page: String(page), pageSize: String(pageSize) });
+      if (isActive !== undefined) params.append('isActive', String(isActive));
+      return request<PaginatedResponse<any>>(`/Events?${params}`);
+    },
     getById: (id: string) => request<any>(`/Events/${id}`),
+    getBySlug: (slug: string) => request<any>(`/Events/by-slug/${slug}`),
     create: (data: any) => request<any>('/Events', { method: 'POST', body: JSON.stringify(data) }),
     update: (id: string, data: any) =>
       request<any>(`/Events/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
@@ -73,5 +77,9 @@ export const api = {
     create: (data: any) => request<any>('/Applications', { method: 'POST', body: JSON.stringify(data) }),
     update: (id: string, data: any) =>
       request<any>(`/Applications/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
+  },
+  notificationSettings: {
+    get: () => request<any>('/NotificationSettings'),
+    update: (data: any) => request<any>('/NotificationSettings', { method: 'PUT', body: JSON.stringify(data) }),
   },
 };

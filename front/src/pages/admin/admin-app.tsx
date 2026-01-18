@@ -4,6 +4,7 @@ import EventsPage from './events-page';
 import ReviewsPage from './reviews-page';
 import TeamMembersPage from './team-members-page';
 import ApplicationsPage from './applications-page';
+import NotificationSettingsPage from './notification-settings-page';
 import AuthLogin from './auth-login';
 import ProtectedRoute from './protected-route';
 import { api } from '../../api/client';
@@ -33,6 +34,7 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
           <Link to="/admin/reviews">Отзывы</Link>
           <Link to="/admin/team">Команда</Link>
           <Link to="/admin/applications">Заявки</Link>
+          <Link to="/admin/notifications">Уведомления</Link>
           <button 
             onClick={handleLogout}
             style={{
@@ -109,6 +111,16 @@ function AdminApp() {
             <ProtectedRoute>
               <AdminLayout>
                 <ApplicationsPage />
+              </AdminLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/notifications"
+          element={
+            <ProtectedRoute>
+              <AdminLayout>
+                <NotificationSettingsPage />
               </AdminLayout>
             </ProtectedRoute>
           }

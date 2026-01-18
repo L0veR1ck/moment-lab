@@ -6,10 +6,16 @@ export default function ApplicationsPage() {
   const [page, setPage] = useState(1);
   const [showCreateModal, setShowCreateModal] = useState(false);
   const [showEditModal, setShowEditModal] = useState(false);
+  const [showDetailsModal, setShowDetailsModal] = useState(false);
   const [editingApp, setEditingApp] = useState<any>(null);
+  const [selectedApp, setSelectedApp] = useState<any>(null);
   const [formData, setFormData] = useState({
     clientName: '',
+    clientEmail: '',
     clientPhone: '',
+    clientWishes: '',
+    attachedFileName: '',
+    attachedFileUrl: '',
     requestDate: new Date().toISOString().split('T')[0],
     status: 0,
   });
@@ -28,7 +34,11 @@ export default function ApplicationsPage() {
       setShowCreateModal(false);
       setFormData({ 
         clientName: '', 
+        clientEmail: '',
         clientPhone: '', 
+        clientWishes: '',
+        attachedFileName: '',
+        attachedFileUrl: '',
         requestDate: new Date().toISOString().split('T')[0],
         status: 0 
       });
@@ -63,16 +73,16 @@ export default function ApplicationsPage() {
         </button>
       </div>
 
-      <div className="admin-table-container">
-        <table>
+      <div className="admin-table-container" style={{ width: '100%' }}>
+        <table style={{ width: '100%', tableLayout: 'fixed' }}>
           <thead>
             <tr>
-              <th>Имя клиента</th>
-              <th>Телефон</th>
-              <th>Дата мероприятия</th>
-              <th>Статус</th>
-              <th>Дата создания</th>
-              <th>Действия</th>
+              <th style={{ width: '20%' }}>Имя</th>
+              <th style={{ width: '15%' }}>Телефон</th>
+              <th style={{ width: '12%' }}>Дата</th>
+              <th style={{ width: '12%' }}>Статус</th>
+              <th style={{ width: '16%' }}>Уведомления</th>
+              <th style={{ width: '25%' }}>Действия</th>
             </tr>
           </thead>
           <tbody>
@@ -85,25 +95,58 @@ export default function ApplicationsPage() {
             ) : (
               data?.items.map((app: any) => (
                 <tr key={app.id}>
-                  <td><strong>{app.clientName}</strong></td>
-                  <td>{app.clientPhone}</td>
-                  <td>{new Date(app.requestDate).toLocaleDateString('ru-RU')}</td>
+                  <td style={{ overflow: 'hidden', textOverflow: 'ellipsis' }}>
+                    <strong>{app.clientName}</strong>
+                    {(app.clientWishes || app.attachedFileUrl) && (
+                      <div style={{ fontSize: '0.85rem', color: '#7f8c8d', marginTop: '0.25rem' }}>
+                        {app.clientWishes && '💬 '}
+                        {app.attachedFileUrl && '📎'}
+                      </div>
+                    )}
+                  </td>
+                  <td style={{ fontSize: '0.9rem' }}>{app.clientPhone}</td>
+                  <td style={{ fontSize: '0.9rem' }}>{new Date(app.requestDate).toLocaleDateString('ru-RU')}</td>
                   <td>
-                    <span className="admin-badge admin-badge-info">
-                      {app.status === 0 ? 'Новая' : app.status === 1 ? 'В работе' : 'Завершена'}
+                    <span className="admin-badge admin-badge-info" style={{ fontSize: '0.85rem', padding: '0.25rem 0.5rem' }}>
+                      {app.status === 0 ? 'Новая' : app.status === 1 ? 'В работе' : app.status === 2 ? 'Завершена' : 'Ошибка'}
                     </span>
                   </td>
-                  <td>{new Date(app.createdAt).toLocaleDateString('ru-RU')}</td>
+                  <td>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem', fontSize: '0.9rem' }}>
+                      <span title={app.isTelegramNotificationSent ? 'Telegram отправлен' : 'Telegram не отправлен'}>
+                        {app.isTelegramNotificationSent ? '✅' : '❌'} ✈️
+                      </span>
+                      <span title={app.isEmailSent ? 'Email отправлен' : 'Email не отправлен'}>
+                        {app.isEmailSent ? '✅' : '❌'} 📧
+                      </span>
+                      <span title={app.isBitrixSent ? 'Bitrix отправлен' : 'Bitrix не отправлен'}>
+                        {app.isBitrixSent ? '✅' : '❌'} 💼
+                      </span>
+                    </div>
+                  </td>
                   <td className="admin-actions">
-                    <button
-                      className="admin-btn admin-btn-primary"
-                      onClick={() => {
-                        setEditingApp(app);
-                        setShowEditModal(true);
-                      }}
-                    >
-                      Изменить
-                    </button>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.25rem' }}>
+                      <button
+                        className="admin-btn admin-btn-secondary"
+                        onClick={() => {
+                          setSelectedApp(app);
+                          setShowDetailsModal(true);
+                        }}
+                        style={{ padding: '0.4rem 0.6rem', fontSize: '0.85rem', width: '100%' }}
+                      >
+                        Подробнее
+                      </button>
+                      <button
+                        className="admin-btn admin-btn-primary"
+                        onClick={() => {
+                          setEditingApp(app);
+                          setShowEditModal(true);
+                        }}
+                        style={{ padding: '0.4rem 0.6rem', fontSize: '0.85rem', width: '100%' }}
+                      >
+                        Изменить
+                      </button>
+                    </div>
                   </td>
                 </tr>
               ))
@@ -161,6 +204,7 @@ export default function ApplicationsPage() {
                   <option value={0}>Новая</option>
                   <option value={1}>В работе</option>
                   <option value={2}>Завершена</option>
+                  <option value={3}>Ошибка</option>
                 </select>
               </div>
 
@@ -190,7 +234,11 @@ export default function ApplicationsPage() {
               e.preventDefault();
               const formData = {
                 clientName: editingApp.clientName,
+                clientEmail: editingApp.clientEmail,
                 clientPhone: editingApp.clientPhone,
+                clientWishes: editingApp.clientWishes,
+                attachedFileName: editingApp.attachedFileName,
+                attachedFileUrl: editingApp.attachedFileUrl,
                 requestDate: editingApp.requestDate,
                 status: editingApp.status,
               };
@@ -235,6 +283,7 @@ export default function ApplicationsPage() {
                   <option value={0}>Новая</option>
                   <option value={1}>В работе</option>
                   <option value={2}>Завершена</option>
+                  <option value={3}>Ошибка</option>
                 </select>
               </div>
 
@@ -251,6 +300,136 @@ export default function ApplicationsPage() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {showDetailsModal && selectedApp && (
+        <div className="admin-modal" onClick={() => setShowDetailsModal(false)}>
+          <div className="admin-modal-content" onClick={(e) => e.stopPropagation()}>
+            <h2>Детали заявки</h2>
+            
+            <div className="admin-form-group">
+              <label>Имя клиента:</label>
+              <p style={{ color: '#2c3e50', fontSize: '1.1rem', fontWeight: 'bold' }}>
+                {selectedApp.clientName}
+              </p>
+            </div>
+
+            {selectedApp.clientEmail && (
+              <div className="admin-form-group">
+                <label>Email:</label>
+                <p style={{ color: '#2c3e50' }}>
+                  <a href={`mailto:${selectedApp.clientEmail}`}>{selectedApp.clientEmail}</a>
+                </p>
+              </div>
+            )}
+
+            <div className="admin-form-group">
+              <label>Телефон:</label>
+              <p style={{ color: '#2c3e50' }}>
+                <a href={`tel:${selectedApp.clientPhone}`}>{selectedApp.clientPhone}</a>
+              </p>
+            </div>
+
+            {selectedApp.clientWishes && (
+              <div className="admin-form-group">
+                <label>Пожелания:</label>
+                <p style={{ 
+                  whiteSpace: 'pre-wrap', 
+                  color: '#2c3e50', 
+                  lineHeight: '1.6',
+                  background: '#f8f9fa',
+                  padding: '1rem',
+                  borderRadius: '4px'
+                }}>
+                  {selectedApp.clientWishes}
+                </p>
+              </div>
+            )}
+
+            {selectedApp.attachedFileUrl && (
+              <div className="admin-form-group">
+                <label>Прикрепленный файл:</label>
+                <p>
+                  <a 
+                    href={`http://localhost:5009${selectedApp.attachedFileUrl}`}
+                    download={selectedApp.attachedFileName}
+                    className="admin-btn admin-btn-secondary"
+                    style={{ display: 'inline-block' }}
+                  >
+                    📎 Скачать {selectedApp.attachedFileName}
+                  </a>
+                </p>
+              </div>
+            )}
+
+            <div className="admin-form-group">
+              <label>Дата мероприятия:</label>
+              <p style={{ color: '#2c3e50' }}>
+                {new Date(selectedApp.requestDate).toLocaleDateString('ru-RU')}
+              </p>
+            </div>
+
+            <div className="admin-form-group">
+              <label>Статус:</label>
+              <p>
+                <span className="admin-badge admin-badge-info">
+                  {selectedApp.status === 0 ? 'Новая' : selectedApp.status === 1 ? 'В работе' : selectedApp.status === 2 ? 'Завершена' : 'Ошибка'}
+                </span>
+              </p>
+            </div>
+
+            <div className="admin-form-group">
+              <label>Отправленные уведомления:</label>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.5rem' }}>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span style={{ fontSize: '1.2rem' }}>
+                    {selectedApp.isTelegramNotificationSent ? '✅' : '❌'} ✈️
+                  </span>
+                  <span style={{ color: selectedApp.isTelegramNotificationSent ? '#27ae60' : '#e74c3c', fontWeight: 500 }}>
+                    {selectedApp.isTelegramNotificationSent ? 'Telegram отправлен' : 'Telegram не отправлен'}
+                  </span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span style={{ fontSize: '1.2rem' }}>
+                    {selectedApp.isEmailSent ? '✅' : '❌'} 📧
+                  </span>
+                  <span style={{ color: selectedApp.isEmailSent ? '#27ae60' : '#e74c3c', fontWeight: 500 }}>
+                    {selectedApp.isEmailSent ? 'Email отправлен' : 'Email не отправлен'}
+                  </span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
+                  <span style={{ fontSize: '1.2rem' }}>
+                    {selectedApp.isBitrixSent ? '✅' : '❌'} 💼
+                  </span>
+                  <span style={{ color: selectedApp.isBitrixSent ? '#27ae60' : '#e74c3c', fontWeight: 500 }}>
+                    {selectedApp.isBitrixSent ? 'Bitrix отправлен' : 'Bitrix не отправлен'}
+                  </span>
+                </div>
+              </div>
+              {selectedApp.bitrixDealId && (
+                <p style={{ marginTop: '0.75rem', fontSize: '0.9rem', color: '#7f8c8d', background: '#f8f9fa', padding: '0.5rem', borderRadius: '4px' }}>
+                  💼 ID сделки в Bitrix: <strong>{selectedApp.bitrixDealId}</strong>
+                </p>
+              )}
+            </div>
+
+            <div className="admin-form-group">
+              <label>Дата создания:</label>
+              <p style={{ color: '#2c3e50' }}>
+                {new Date(selectedApp.createdAt).toLocaleString('ru-RU')}
+              </p>
+            </div>
+
+            <div className="admin-form-actions">
+              <button 
+                className="admin-btn admin-btn-secondary" 
+                onClick={() => setShowDetailsModal(false)}
+              >
+                Закрыть
+              </button>
+            </div>
           </div>
         </div>
       )}

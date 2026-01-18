@@ -22,10 +22,16 @@ public class ApplicationsController(
             var application = new ApplicationRequest
             {
                 ClientName = request.ClientName,
+                ClientEmail = request.ClientEmail,
                 ClientPhone = request.ClientPhone,
-                RequestDate = request.RequestDate.Kind == DateTimeKind.Utc 
-                    ? request.RequestDate 
-                    : DateTime.SpecifyKind(request.RequestDate, DateTimeKind.Utc),
+                ClientWishes = request.ClientWishes,
+                AttachedFileName = request.AttachedFileName,
+                AttachedFileUrl = request.AttachedFileUrl,
+                RequestDate = request.RequestDate.HasValue 
+                    ? (request.RequestDate.Value.Kind == DateTimeKind.Utc 
+                        ? request.RequestDate.Value 
+                        : DateTime.SpecifyKind(request.RequestDate.Value, DateTimeKind.Utc))
+                    : DateTime.UtcNow,
                 Status = (ApplicationStatus)request.Status,
                 IsTelegramNotificationSent = false,
                 IsBitrixSent = false,
@@ -39,7 +45,11 @@ public class ApplicationsController(
             var response = new ApplicationResponse(
                 created.Id,
                 created.ClientName,
+                created.ClientEmail,
                 created.ClientPhone,
+                created.ClientWishes,
+                created.AttachedFileName,
+                created.AttachedFileUrl,
                 created.RequestDate,
                 created.Status,
                 created.IsTelegramNotificationSent,
@@ -80,7 +90,11 @@ public class ApplicationsController(
             var responses = items.Select(app => new ApplicationResponse(
                 app.Id,
                 app.ClientName,
+                app.ClientEmail,
                 app.ClientPhone,
+                app.ClientWishes,
+                app.AttachedFileName,
+                app.AttachedFileUrl,
                 app.RequestDate,
                 app.Status,
                 app.IsTelegramNotificationSent,
@@ -121,7 +135,11 @@ public class ApplicationsController(
             var response = new ApplicationResponse(
                 application.Id,
                 application.ClientName,
+                application.ClientEmail,
                 application.ClientPhone,
+                application.ClientWishes,
+                application.AttachedFileName,
+                application.AttachedFileUrl,
                 application.RequestDate,
                 application.Status,
                 application.IsTelegramNotificationSent,
@@ -153,7 +171,11 @@ public class ApplicationsController(
                 return NotFound();
 
             application.ClientName = request.ClientName;
+            application.ClientEmail = request.ClientEmail;
             application.ClientPhone = request.ClientPhone;
+            application.ClientWishes = request.ClientWishes;
+            application.AttachedFileName = request.AttachedFileName;
+            application.AttachedFileUrl = request.AttachedFileUrl;
             application.RequestDate = request.RequestDate.Kind == DateTimeKind.Utc 
                 ? request.RequestDate 
                 : DateTime.SpecifyKind(request.RequestDate, DateTimeKind.Utc);
@@ -166,7 +188,11 @@ public class ApplicationsController(
             var response = new ApplicationResponse(
                 updated.Id,
                 updated.ClientName,
+                updated.ClientEmail,
                 updated.ClientPhone,
+                updated.ClientWishes,
+                updated.AttachedFileName,
+                updated.AttachedFileUrl,
                 updated.RequestDate,
                 updated.Status,
                 updated.IsTelegramNotificationSent,
@@ -205,7 +231,11 @@ public class ApplicationsController(
             var response = new ApplicationResponse(
                 updated.Id,
                 updated.ClientName,
+                updated.ClientEmail,
                 updated.ClientPhone,
+                updated.ClientWishes,
+                updated.AttachedFileName,
+                updated.AttachedFileUrl,
                 updated.RequestDate,
                 updated.Status,
                 updated.IsTelegramNotificationSent,

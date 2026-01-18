@@ -22,6 +22,14 @@ public class EventRepository : IEventRepository
             .FirstOrDefaultAsync(e => e.Id == id);
     }
 
+    public async Task<Event?> GetBySlugAsync(string slug)
+    {
+        return await _context.Events
+            .Include(e => e.Characteristics)
+            .Include(e => e.Photos.OrderBy(p => p.DisplayOrder))
+            .FirstOrDefaultAsync(e => e.UrlSlug == slug);
+    }
+
     public async Task<(IEnumerable<Event> items, int totalCount)> GetAllAsync(
         int page, 
         int pageSize, 

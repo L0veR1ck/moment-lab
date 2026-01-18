@@ -4,6 +4,7 @@ public class Event
 {
     public Guid Id { get; set; }
     public string Title { get; set; } = string.Empty;
+    public string UrlSlug { get; set; } = string.Empty;
     public string Description { get; set; } = string.Empty;
     public string ProgramDescription { get; set; } = string.Empty;
     public string KeyValues { get; set; } = string.Empty;

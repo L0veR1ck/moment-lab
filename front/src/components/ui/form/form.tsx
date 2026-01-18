@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import Button from '../button/button';
 import SuccessSubmitModal from './success-submit-modal';
+import { api } from '../../../api/client';
 
 type FormProps = {
   isModal: boolean;
@@ -10,12 +11,61 @@ type FormProps = {
 
 function Form({ isModal, onClose }: FormProps) {
   const [isSuccess, setIsSuccess] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log('Form submitted!');
+    setIsSubmitting(true);
+    setError(null);
 
-    setIsSuccess(true);
+    try {
+      const formData = new FormData(event.currentTarget);
+      const name = formData.get('name') as string;
+      const email = formData.get('email') as string;
+      const phone = formData.get('phone') as string;
+      const wishes = formData.get('wishes') as string;
+      const file = formData.get('file') as File;
+
+      let attachedFileName = null;
+      let attachedFileUrl = null;
+
+      // Загружаем файл, если он выбран
+      if (file && file.size > 0) {
+        const fileFormData = new FormData();
+        fileFormData.append('file', file);
+        fileFormData.append('folder', 'applications');
+
+        const fileResponse = await fetch('http://localhost:5009/api/Files/upload', {
+          method: 'POST',
+          body: fileFormData,
+        });
+
+        if (fileResponse.ok) {
+          const fileResult = await fileResponse.json();
+          attachedFileName = fileResult.fileName;
+          attachedFileUrl = fileResult.fileUrl;
+        }
+      }
+
+      await api.applications.create({
+        clientName: name,
+        clientEmail: email || null,
+        clientPhone: phone,
+        clientWishes: wishes || null,
+        attachedFileName,
+        attachedFileUrl,
+        requestDate: null,
+        status: 0,
+      });
+
+      setIsSuccess(true);
+    } catch (err) {
+      console.error('Ошибка при отправке формы:', err);
+      setError('Не удалось отправить форму. Попробуйте еще раз.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleCloseSuccess = () => {
@@ -69,6 +119,7 @@ function Form({ isModal, onClose }: FormProps) {
             <input
               className="border border-[var(--color-blue)]/25 rounded-sm px-3 sm:px-4 md:px-[16px] py-2 sm:py-[6px] md:py-[8px] placeholder:text-[var(--color-blue)] placeholder:opacity-55 text-sm sm:text-base"
               id="name"
+              name="name"
               type="text"
               placeholder="Введите имя"
               required
@@ -78,13 +129,14 @@ function Form({ isModal, onClose }: FormProps) {
           <div className="flex flex-col">
             <label
               className="text-left font-semibold text-[var(--color-dark-blue)] text-sm sm:text-base md:text-lg"
-              htmlFor="mail"
+              htmlFor="email"
             >
               Электронная почта
             </label>
             <input
               className="border border-[var(--color-blue)]/25 rounded-sm px-3 sm:px-4 md:px-[16px] py-2 sm:py-[6px] md:py-[8px] placeholder:text-[var(--color-blue)] placeholder:opacity-55 text-sm sm:text-base"
-              id="mail"
+              id="email"
+              name="email"
               type="email"
               placeholder="Введите электронную почту"
             />
@@ -100,6 +152,7 @@ function Form({ isModal, onClose }: FormProps) {
             <input
               className="border border-[var(--color-blue)]/25 rounded-sm px-3 sm:px-4 md:px-[16px] py-2 sm:py-[6px] md:py-[8px] placeholder:text-[var(--color-blue)] placeholder:opacity-55 text-sm sm:text-base"
               id="phone"
+              name="phone"
               type="tel"
               placeholder="Введите номер телефона"
               required
@@ -116,6 +169,7 @@ function Form({ isModal, onClose }: FormProps) {
             <textarea
               className="border border-[var(--color-blue)]/25 rounded-sm px-3 sm:px-4 md:px-[16px] py-2 sm:py-[6px] md:py-[8px] placeholder:text-[var(--color-blue)] placeholder:opacity-55 max-h-[200px] text-sm sm:text-base"
               id="wishes"
+              name="wishes"
               rows={3}
               placeholder="Введите ваши пожелания "
             />
@@ -125,6 +179,7 @@ function Form({ isModal, onClose }: FormProps) {
             <label className="sr-only">Выберите файл</label>
             <input
               type="file"
+              name="file"
               accept=".txt,.pdf,.doc,.docx"
               className="block w-full text-sm text-gray-500
                             file:py-2 file:px-4
@@ -134,6 +189,10 @@ function Form({ isModal, onClose }: FormProps) {
                             hover:file:bg-[#C7DFFF]"
             />
           </div>
+
+          {error && (
+            <div className="text-red-600 text-sm">{error}</div>
+          )}
 
           <div className="flex flex-col gap-[12px] mt-[16px]">
             <div className="flex justify-center gap-[16px]">
@@ -146,7 +205,7 @@ function Form({ isModal, onClose }: FormProps) {
                 из формы.
               </label>
             </div>
-            <Button text="Отправить форму" />
+            <Button text={isSubmitting ? "Отправка..." : "Отправить форму"} />
           </div>
         </form>
       )}

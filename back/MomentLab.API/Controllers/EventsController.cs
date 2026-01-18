@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using MomentLab.API.Attributes;
 using MomentLab.Core.DTOs;
@@ -8,13 +9,13 @@ namespace MomentLab.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-[AdminAuthorize]
 public class EventsController(
     IEventRepository repository,
     ILogger<EventsController> logger
 ) : ControllerBase
 {
     [HttpGet]
+    [AllowAnonymous]
     public async Task<ActionResult<object>> GetAll(
         [FromQuery] int page = 1, 
         [FromQuery] int pageSize = 10,
@@ -46,6 +47,7 @@ public class EventsController(
     }
 
     [HttpGet("{id:guid}")]
+    [AllowAnonymous]
     public async Task<ActionResult<EventResponse>> GetById(Guid id)
     {
         try
@@ -64,7 +66,28 @@ public class EventsController(
         }
     }
 
+    [HttpGet("by-slug/{slug}")]
+    [AllowAnonymous]
+    public async Task<ActionResult<EventResponse>> GetBySlug(string slug)
+    {
+        try
+        {
+            var @event = await repository.GetBySlugAsync(slug);
+
+            if (@event == null)
+                return NotFound();
+
+            return Ok(MapToResponse(@event));
+        }
+        catch (Exception ex)
+        {
+            logger.LogError(ex, "Error getting event by slug {Slug}", slug);
+            return StatusCode(500, "Internal server error");
+        }
+    }
+
     [HttpPost]
+    [AdminAuthorize]
     public async Task<ActionResult<EventResponse>> Create([FromBody] EventRequest request)
     {
         try
@@ -72,6 +95,7 @@ public class EventsController(
             var @event = new Event
             {
                 Title = request.Title,
+                UrlSlug = request.UrlSlug,
                 Description = request.Description,
                 ProgramDescription = request.ProgramDescription,
                 KeyValues = request.KeyValues,
@@ -100,6 +124,7 @@ public class EventsController(
     }
 
     [HttpPut("{id:guid}")]
+    [AdminAuthorize]
     public async Task<ActionResult<EventResponse>> Update(Guid id, [FromBody] EventRequest request)
     {
         try
@@ -110,6 +135,7 @@ public class EventsController(
                 return NotFound();
 
             existing.Title = request.Title;
+            existing.UrlSlug = request.UrlSlug;
             existing.Description = request.Description;
             existing.ProgramDescription = request.ProgramDescription;
             existing.KeyValues = request.KeyValues;
@@ -138,6 +164,7 @@ public class EventsController(
     }
 
     [HttpDelete("{id:guid}")]
+    [AdminAuthorize]
     public async Task<ActionResult> Delete(Guid id)
     {
         try
@@ -159,6 +186,7 @@ public class EventsController(
     }
 
     [HttpPost("{id:guid}/photos")]
+    [AdminAuthorize]
     public async Task<ActionResult<EventPhotoResponse>> AddPhoto(Guid id, [FromBody] AddEventPhotoRequest request)
     {
         try
@@ -200,6 +228,7 @@ public class EventsController(
     }
 
     [HttpDelete("{eventId:guid}/photos/{photoId:guid}")]
+    [AdminAuthorize]
     public async Task<ActionResult> DeletePhoto(Guid eventId, Guid photoId)
     {
         try
@@ -225,6 +254,7 @@ public class EventsController(
         return new EventResponse(
             @event.Id,
             @event.Title,
+            @event.UrlSlug,
             @event.Description,
             @event.ProgramDescription,
             @event.KeyValues,

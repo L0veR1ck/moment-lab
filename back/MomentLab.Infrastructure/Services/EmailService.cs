@@ -33,17 +33,39 @@ public class EmailService(IConfiguration configuration, ILogger<EmailService> lo
                 Credentials = new NetworkCredential(username, password)
             };
 
+            var bodyBuilder = new System.Text.StringBuilder();
+            bodyBuilder.AppendLine("<h2>Новая заявка</h2>");
+            bodyBuilder.AppendLine($"<p><strong>Имя клиента:</strong> {application.ClientName}</p>");
+            
+            if (!string.IsNullOrWhiteSpace(application.ClientEmail))
+            {
+                bodyBuilder.AppendLine($"<p><strong>Email:</strong> {application.ClientEmail}</p>");
+            }
+            
+            bodyBuilder.AppendLine($"<p><strong>Телефон:</strong> {application.ClientPhone}</p>");
+            
+            if (!string.IsNullOrWhiteSpace(application.ClientWishes))
+            {
+                bodyBuilder.AppendLine($"<p><strong>Пожелания:</strong><br/>{application.ClientWishes.Replace("\n", "<br/>")}</p>");
+            }
+            
+            if (!string.IsNullOrWhiteSpace(application.AttachedFileName))
+            {
+                bodyBuilder.AppendLine($"<p><strong>Прикрепленный файл:</strong> {application.AttachedFileName}</p>");
+            }
+            
+            if ((application.RequestDate - application.CreatedAt).TotalDays > 1)
+            {
+                bodyBuilder.AppendLine($"<p><strong>Дата события:</strong> {application.RequestDate:dd.MM.yyyy}</p>");
+            }
+            
+            bodyBuilder.AppendLine($"<p><strong>Дата создания заявки:</strong> {application.CreatedAt:dd.MM.yyyy HH:mm}</p>");
+
             var mailMessage = new MailMessage
             {
                 From = new MailAddress(fromEmail),
                 Subject = $"Новая заявка от {application.ClientName}",
-                Body = $@"
-                    <h2>Новая заявка</h2>
-                    <p><strong>Имя клиента:</strong> {application.ClientName}</p>
-                    <p><strong>Телефон:</strong> {application.ClientPhone}</p>
-                    <p><strong>Дата события:</strong> {application.RequestDate:dd.MM.yyyy}</p>
-                    <p><strong>Дата создания заявки:</strong> {application.CreatedAt:dd.MM.yyyy HH:mm}</p>
-                ",
+                Body = bodyBuilder.ToString(),
                 IsBodyHtml = true
             };
 
