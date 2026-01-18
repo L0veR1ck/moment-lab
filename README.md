@@ -2,23 +2,6 @@
 
 Веб-платформа для ивент-агентства с административной панелью и публичным сайтом
 
-## Стек технологий
-
-### Backend
-- ASP.NET Core 9.0
-- Entity Framework Core (PostgreSQL)
-- FluentValidation
-- Serilog
-- Swagger/OpenAPI
-
-### Frontend
-- React 18
-- TypeScript
-- Vite (Rolldown)
-- React Router 7
-- TanStack Query (React Query)
-- Tailwind CSS 4
-
 ## Структура проекта
 
 ```
