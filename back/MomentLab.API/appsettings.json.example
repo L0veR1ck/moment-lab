@@ -27,7 +27,8 @@
     "Port": "587",
     "Username": "your-email@gmail.com",
     "Password": "your-app-password",
-    "FromEmail": "your-email@gmail.com"
+    "FromEmail": "your-email@gmail.com",
+    "AdminEmails": "admin1@example.com,admin2@example.com"
   },
   "TelegramSettings": {
     "BotToken": "your-bot-token-here",
