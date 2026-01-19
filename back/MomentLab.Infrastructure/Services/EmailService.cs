@@ -31,7 +31,6 @@ public class EmailService(IConfiguration configuration, ILogger<EmailService> lo
     {
         var emailsString = configuration["EmailSettings:AdminEmails"];
         
-        // Если AdminEmails не настроен, используем FromEmail
         if (string.IsNullOrWhiteSpace(emailsString))
         {
             var fromEmail = configuration["EmailSettings:FromEmail"] 
@@ -114,7 +113,6 @@ public class EmailService(IConfiguration configuration, ILogger<EmailService> lo
 
                     mailMessage.To.Add(adminEmail);
 
-                    // Прикрепляем файл, если он есть
                     if (!string.IsNullOrWhiteSpace(application.AttachedFileUrl))
                     {
                         try
@@ -161,7 +159,6 @@ public class EmailService(IConfiguration configuration, ILogger<EmailService> lo
                 }
             }
             
-            // Считаем успехом если хотя бы один email был отправлен
             return sentCount > 0;
         }
         catch (Exception ex)
@@ -173,11 +170,8 @@ public class EmailService(IConfiguration configuration, ILogger<EmailService> lo
     
     private string GetLocalFilePath(string fileUrl)
     {
-        // Преобразуем URL вида "/uploads/applications/filename.pdf" в локальный путь
-        // Убираем начальный слэш и префикс "uploads/"
         var relativePath = fileUrl.TrimStart('/');
         
-        // Если путь начинается с "uploads/", убираем это, так как uploadsPath уже содержит "wwwroot/uploads"
         if (relativePath.StartsWith("uploads/", StringComparison.OrdinalIgnoreCase))
         {
             relativePath = relativePath.Substring("uploads/".Length);
