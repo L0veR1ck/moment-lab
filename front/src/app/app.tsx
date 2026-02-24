@@ -28,6 +28,7 @@ function App() {
             path={ROUTES.IMMERSIVE_QUESTS}
             element={<ImmersiveQuestsScreen />}
           />
+          <Route path="/immersive-quests/:slug" element={<EventDetailScreen />} />
           <Route path={ROUTES.PRIVATE_EVENTS} element={<PrivateEventsScreen />} />
           <Route
             path={ROUTES.ACTIVE_TEAM_BUILDING}

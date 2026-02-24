@@ -45,6 +45,9 @@ logs/
 # Application settings
 back/MomentLab.API/appsettings.json
 
+# Uploaded files (runtime data, not source code)
+back/MomentLab.API/wwwroot/uploads/
+
 # Docker
 docker-compose.override.yml
 

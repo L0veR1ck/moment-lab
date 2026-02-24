@@ -97,8 +97,8 @@ public class EventsController(
                 Title = request.Title,
                 UrlSlug = request.UrlSlug,
                 Description = request.Description,
-                ProgramDescription = request.ProgramDescription,
-                KeyValues = request.KeyValues,
+                ProgramDescription = request.ProgramDescription ?? string.Empty,
+                KeyValues = request.KeyValues ?? string.Empty,
                 MainPhotoUrl = request.MainPhotoUrl,
                 IsActive = request.IsActive,
                 DisplayOrder = request.DisplayOrder,
@@ -137,8 +137,8 @@ public class EventsController(
             existing.Title = request.Title;
             existing.UrlSlug = request.UrlSlug;
             existing.Description = request.Description;
-            existing.ProgramDescription = request.ProgramDescription;
-            existing.KeyValues = request.KeyValues;
+            existing.ProgramDescription = request.ProgramDescription ?? string.Empty;
+            existing.KeyValues = request.KeyValues ?? string.Empty;
             existing.MainPhotoUrl = request.MainPhotoUrl;
             existing.IsActive = request.IsActive;
             existing.DisplayOrder = request.DisplayOrder;

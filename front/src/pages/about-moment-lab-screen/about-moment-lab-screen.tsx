@@ -8,6 +8,9 @@ import ModalForm from '../../components/ui/modal-form/modal-form';
 import { useParallax } from '../../shared/hooks/use-parallax';
 import { gift } from '../../assets/3d-objects';
 import { api } from '../../api/client';
+import team1 from '../../assets/about-screen/team-1.jpg';
+import team2 from '../../assets/about-screen/team-2.jpg';
+import team3 from '../../assets/about-screen/team-3.jpg';
 
 function AboutMomentLab() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -28,11 +31,11 @@ function AboutMomentLab() {
       <Header />
       <main className="flex flex-col items-center w-full overflow-x-hidden">
         <section className="relative pt-0 lg:pt-[64px] lg:h-[calc(100vh-180px)] w-full">
-          <div className="absolute right-0 top-8 sm:top-12 md:top-16 lg:top-[64px] bottom-8 sm:bottom-12 md:bottom-[32px] w-full lg:w-[50vw] rounded-l-0 lg:rounded-l-[15px] bg-cover bg-no-repeat bg-[url(./src/assets/about-screen/team.png)] bg-[60%] opacity-20 lg:opacity-100 hidden lg:block" />
+          <div className="absolute right-0 top-8 sm:top-12 md:top-16 lg:top-[64px] bottom-8 sm:bottom-12 md:bottom-[32px] w-full lg:w-[50vw] rounded-l-0 lg:rounded-l-[15px] bg-cover bg-no-repeat bg-[url(./src/assets/about-screen/team.jpg)] bg-[60%] opacity-20 lg:opacity-100 hidden lg:block" />
 
           <div className="relative w-full h-[240px] sm:h-[280px] md:h-[320px] overflow-hidden rounded-b-[16px] lg:hidden">
             <img
-              src="/src/assets/about-screen/team.png"
+              src="/src/assets/about-screen/team.jpg"
               alt="Команда Момент лаб"
               className="
       w-full h-full object-cover
@@ -68,7 +71,7 @@ items-center text-center lg:items-start lg:text-left"
             {/* Пустой блок нужен для того, чтобы текст корренкто переносился */}
             <div className="hidden lg:block w-[45vw] flex-shrink-0"></div>
           </div>
-          <div className="absolute right-0 top-8 sm:top-12 md:top-16 lg:top-[64px] bottom-8 sm:bottom-12 md:bottom-[32px] w-full lg:w-[50vw] rounded-l-0 lg:rounded-l-[15px] bg-cover bg-no-repeat bg-[url(./src/assets/about-screen/team.png)] bg-[60%] opacity-20 lg:opacity-100 hidden lg:block" />
+          <div className="absolute right-0 top-8 sm:top-12 md:top-16 lg:top-[64px] bottom-8 sm:bottom-12 md:bottom-[32px] w-full lg:w-[50vw] rounded-l-0 lg:rounded-l-[15px] bg-cover bg-no-repeat bg-[url(./src/assets/about-screen/team.jpg)] bg-[60%] opacity-20 lg:opacity-100 hidden lg:block" />
         </section>
         <div
           ref={giftParallax.ref}
@@ -103,7 +106,11 @@ w-full max-w-full"
               activeTeamMembers.map((member: any) => (
                 <PersonCard
                   key={member.id}
-                  photoUrl={member.photoUrl}
+                  photoUrl={
+                    member.photoUrl
+                      ? `http://localhost:5009${member.photoUrl}`
+                      : undefined
+                  }
                   name={`${member.firstName} ${member.lastName}`}
                   job={member.position || ''}
                 />
@@ -111,17 +118,17 @@ w-full max-w-full"
             ) : (
               <>
                 <PersonCard
-                  photoUrl="/uploads/team/team-1.jpg"
+                  photoUrl={team1}
                   name="Анастасия Сеченова"
                   job="Стратег и вдохновитель"
                 />
                 <PersonCard
-                  photoUrl="/uploads/team/team-2.jpg"
+                  photoUrl={team2}
                   name="Андрей Рябинин"
                   job="Архитектор атмосферы"
                 />
                 <PersonCard
-                  photoUrl="/uploads/team/team-3.jpg"
+                  photoUrl={team3}
                   name="Катя Кудашова"
                   job="Мастер вовлечения"
                 />

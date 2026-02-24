@@ -1,10 +1,13 @@
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import EventsPage from './events-page';
+import SchoolsPage from './schools-page';
+import QuestsPage from './quests-page';
 import ReviewsPage from './reviews-page';
 import TeamMembersPage from './team-members-page';
 import ApplicationsPage from './applications-page';
 import NotificationSettingsPage from './notification-settings-page';
+import PortfolioPage from './portfolio-page';
 import AuthLogin from './auth-login';
 import ProtectedRoute from './protected-route';
 import { api } from '../../api/client';
@@ -30,7 +33,9 @@ function AdminLayout({ children }: { children: React.ReactNode }) {
       <nav className="admin-nav">
         <div className="admin-nav-brand">Moment Lab Admin</div>
         <div className="admin-nav-links">
-          <Link to="/admin/events">Мероприятия</Link>
+          <Link to="/admin/schools">Школы</Link>
+          <Link to="/admin/quests">Квесты</Link>
+          <Link to="/admin/portfolio">Портфолио</Link>
           <Link to="/admin/reviews">Отзывы</Link>
           <Link to="/admin/team">Команда</Link>
           <Link to="/admin/applications">Заявки</Link>
@@ -70,7 +75,7 @@ function AdminApp() {
           element={
             <ProtectedRoute>
               <AdminLayout>
-                <EventsPage />
+                <SchoolsPage />
               </AdminLayout>
             </ProtectedRoute>
           }
@@ -81,6 +86,26 @@ function AdminApp() {
             <ProtectedRoute>
               <AdminLayout>
                 <EventsPage />
+              </AdminLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/schools"
+          element={
+            <ProtectedRoute>
+              <AdminLayout>
+                <SchoolsPage />
+              </AdminLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/quests"
+          element={
+            <ProtectedRoute>
+              <AdminLayout>
+                <QuestsPage />
               </AdminLayout>
             </ProtectedRoute>
           }
@@ -121,6 +146,16 @@ function AdminApp() {
             <ProtectedRoute>
               <AdminLayout>
                 <NotificationSettingsPage />
+              </AdminLayout>
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/portfolio"
+          element={
+            <ProtectedRoute>
+              <AdminLayout>
+                <PortfolioPage />
               </AdminLayout>
             </ProtectedRoute>
           }

@@ -39,7 +39,7 @@ function MobileMenu({ isOpen, onClose }: MobileMenuProps) {
         О Момент.Лаб
       </Link>
 
-      <Link to="/events" onClick={onClose} className="font-semibold">
+      <Link to={ROUTES.PORTFOLIO} onClick={onClose} className="font-semibold">
         Портфолио
       </Link>
     </div>
