@@ -4,7 +4,7 @@ import Footer from '../../components/layout/footer/footer';
 import Header from '../../components/layout/header/header';
 import EventCard from '../../components/ui/event-card/event-card';
 import { useParallax } from '../../shared/hooks/use-parallax';
-import { api } from '../../api/client';
+import { api, getFileUrl } from '../../api/client';
 
 function ImmersiveQuestsScreen() {
   const diamondParallax = useParallax(0.4, 100);
@@ -49,7 +49,7 @@ function ImmersiveQuestsScreen() {
                 key={event.id}
                 urlImg={
                   event.mainPhotoUrl
-                    ? `http://localhost:5009${event.mainPhotoUrl}`
+                    ? getFileUrl(event.mainPhotoUrl)
                     : ''
                 }
                 titleCard={event.title}

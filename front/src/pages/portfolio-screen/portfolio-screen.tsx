@@ -3,7 +3,7 @@ import Header from '../../components/layout/header/header';
 import Footer from '../../components/layout/footer/footer';
 import { Carousel } from 'react-responsive-carousel';
 import { useQuery } from '@tanstack/react-query';
-import { api } from '../../api/client';
+import { api, getFileUrl } from '../../api/client';
 import { getPortfolioProjects } from '../../shared/data/portfolio';
 import type { PortfolioProject } from '../../shared/types/image';
 
@@ -27,7 +27,7 @@ function PortfolioScreen() {
         title: p.title,
         images: p.photos.map((ph: any) => ({
           id: ph.id,
-          url: `http://localhost:5009${ph.photoUrl}`,
+          url: getFileUrl(ph.photoUrl),
         })),
       }))
     : localProjects;

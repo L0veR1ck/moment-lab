@@ -9,11 +9,35 @@ export const BACKEND_URL = import.meta.env.DEV
   ? 'http://localhost:5009'
   : '';
 
+export const apiFetch = (endpoint: string, options: RequestInit = {}) => {
+  const isFormData = typeof FormData !== 'undefined' && options.body instanceof FormData;
+
+  return fetch(`${API_BASE_URL}${endpoint}`, {
+    ...options,
+    credentials: 'include',
+    headers: {
+      ...(isFormData ? {} : { 'Content-Type': 'application/json' }),
+      ...(options.headers ?? {}),
+    },
+  });
+};
+
 // Хелпер для получения полного URL файла
 export const getFileUrl = (path: string): string => {
   if (!path) return '';
-  // Если путь уже абсолютный URL, возвращаем как есть
-  if (path.startsWith('http://') || path.startsWith('https://')) return path;
+  // Если путь уже абсолютный URL
+  if (path.startsWith('http://') || path.startsWith('https://')) {
+    try {
+      const url = new URL(path);
+      // Если в данных сохранён localhost, нормализуем до текущего окружения
+      if (url.hostname === 'localhost' || url.hostname === '127.0.0.1') {
+        return `${BACKEND_URL}${url.pathname}${url.search}${url.hash}`;
+      }
+    } catch {
+      // ignore parsing errors and return as-is below
+    }
+    return path;
+  }
   // Иначе добавляем BACKEND_URL
   return `${BACKEND_URL}${path}`;
 };
@@ -24,9 +48,8 @@ export const uploadFile = async (file: File, folder?: string) => {
   formData.append('file', file);
   if (folder) formData.append('folder', folder);
 
-  const response = await fetch(`${API_BASE_URL}/Files/upload`, {
+  const response = await apiFetch('/Files/upload', {
     method: 'POST',
-    credentials: 'include',
     body: formData,
   });
 

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { api, ApiError } from '../../api/client';
+import { api, ApiError, apiFetch, getFileUrl, uploadFile } from '../../api/client';
 
 export default function SchoolsPage() {
   const [page, setPage] = useState(1);
@@ -247,19 +247,7 @@ function CreateEventModal({ onClose }: { onClose: () => void }) {
 
     setUploading(true);
     try {
-      const formDataUpload = new FormData();
-      formDataUpload.append('file', file);
-      formDataUpload.append('folder', 'events');
-
-      const response = await fetch('http://localhost:5009/api/Files/upload', {
-        method: 'POST',
-        body: formDataUpload,
-        credentials: 'include',
-      });
-
-      if (!response.ok) throw new Error('Upload failed');
-
-      const data = await response.json();
+      const data = await uploadFile(file, 'events');
       setFormData({ ...formData, mainPhotoUrl: data.fileUrl });
     } catch (error) {
       console.error('Error uploading file:', error);
@@ -311,7 +299,7 @@ function CreateEventModal({ onClose }: { onClose: () => void }) {
             {formData.mainPhotoUrl && (
               <div style={{ marginTop: '8px' }}>
                 <img 
-                  src={`http://localhost:5009${formData.mainPhotoUrl}`} 
+                  src={getFileUrl(formData.mainPhotoUrl)} 
                   alt="Preview" 
                   style={{ maxWidth: '200px', maxHeight: '200px', objectFit: 'cover', borderRadius: '8px' }}
                 />
@@ -399,12 +387,7 @@ function EditEventModal({ event, onClose, onSave, isSaving, saveError }: { event
     if (!file) return;
     setUploading(true);
     try {
-      const fd = new FormData();
-      fd.append('file', file);
-      fd.append('folder', 'events');
-      const response = await fetch('http://localhost:5009/api/Files/upload', { method: 'POST', body: fd, credentials: 'include' });
-      if (!response.ok) throw new Error('Upload failed');
-      const data = await response.json();
+      const data = await uploadFile(file, 'events');
       setFormData({ ...formData, mainPhotoUrl: data.fileUrl });
     } catch {
       alert('Ошибка при загрузке файла');
@@ -419,16 +402,9 @@ function EditEventModal({ event, onClose, onSave, isSaving, saveError }: { event
     setUploadingGallery(true);
     try {
       for (const file of files) {
-        const fd = new FormData();
-        fd.append('file', file);
-        fd.append('folder', 'events');
-        const uploadRes = await fetch('http://localhost:5009/api/Files/upload', { method: 'POST', body: fd, credentials: 'include' });
-        if (!uploadRes.ok) throw new Error('Upload failed');
-        const uploadData = await uploadRes.json();
-        const addRes = await fetch(`http://localhost:5009/api/Events/${event.id}/photos`, {
+        const uploadData = await uploadFile(file, 'events');
+        const addRes = await apiFetch(`/Events/${event.id}/photos`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
           body: JSON.stringify({ photoUrl: uploadData.fileUrl, displayOrder: photos.length }),
         });
         if (!addRes.ok) throw new Error('Add photo failed');
@@ -447,10 +423,7 @@ function EditEventModal({ event, onClose, onSave, isSaving, saveError }: { event
   const handleDeletePhoto = async (photoId: string) => {
     if (!confirm('Удалить фото из галереи?')) return;
     try {
-      const res = await fetch(`http://localhost:5009/api/Events/${event.id}/photos/${photoId}`, {
-        method: 'DELETE',
-        credentials: 'include',
-      });
+      const res = await apiFetch(`/Events/${event.id}/photos/${photoId}`, { method: 'DELETE' });
       if (!res.ok) throw new Error('Delete failed');
       setPhotos(prev => prev.filter(p => p.id !== photoId));
       queryClient.invalidateQueries({ queryKey: ['events'] });
@@ -495,7 +468,7 @@ function EditEventModal({ event, onClose, onSave, isSaving, saveError }: { event
             {uploading && <span style={{ color: '#3498db', fontSize: '14px' }}>Загрузка...</span>}
             {formData.mainPhotoUrl && (
               <div style={{ marginTop: '8px' }}>
-                <img src={`http://localhost:5009${formData.mainPhotoUrl}`} alt="Preview"
+                <img src={getFileUrl(formData.mainPhotoUrl)} alt="Preview"
                   style={{ maxWidth: '200px', maxHeight: '200px', objectFit: 'cover', borderRadius: '8px' }} />
               </div>
             )}
@@ -535,7 +508,7 @@ function EditEventModal({ event, onClose, onSave, isSaving, saveError }: { event
               <div style={{ display: 'flex', flexWrap: 'wrap', gap: '8px', marginTop: '10px' }}>
                 {photos.map((photo: any) => (
                   <div key={photo.id} style={{ position: 'relative' }}>
-                    <img src={`http://localhost:5009${photo.photoUrl}`} alt=""
+                    <img src={getFileUrl(photo.photoUrl)} alt=""
                       style={{ width: '80px', height: '80px', objectFit: 'cover', borderRadius: '6px', display: 'block' }} />
                     <button type="button" onClick={() => handleDeletePhoto(photo.id)}
                       style={{

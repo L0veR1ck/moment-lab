@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { api, ApiError } from '../../api/client';
+import { api, ApiError, apiFetch, getFileUrl, uploadFile } from '../../api/client';
 
 export default function PortfolioPage() {
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -55,7 +55,7 @@ export default function PortfolioPage() {
                       {project.photos.slice(0, 4).map((photo: any) => (
                         <img
                           key={photo.id}
-                          src={`http://localhost:5009${photo.photoUrl}`}
+                          src={getFileUrl(photo.photoUrl)}
                           alt=""
                           style={{ width: '48px', height: '48px', objectFit: 'cover', borderRadius: '4px' }}
                         />
@@ -168,19 +168,10 @@ function ProjectFormModal({ mode, project, onClose }: ProjectFormModalProps) {
     setUploadingGallery(true);
     try {
       for (const file of files) {
-        const fd = new FormData();
-        fd.append('file', file);
-        fd.append('folder', 'portfolio');
-        const uploadRes = await fetch('http://localhost:5009/api/Files/upload', {
-          method: 'POST', body: fd, credentials: 'include',
-        });
-        if (!uploadRes.ok) throw new Error('Upload failed');
-        const uploadData = await uploadRes.json();
+        const uploadData = await uploadFile(file, 'portfolio');
 
-        const addRes = await fetch(`http://localhost:5009/api/Portfolio/${editId}/photos`, {
+        const addRes = await apiFetch(`/Portfolio/${editId}/photos`, {
           method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
           body: JSON.stringify({ photoUrl: uploadData.fileUrl, displayOrder: photos.length }),
         });
         if (!addRes.ok) throw new Error('Add photo failed');
@@ -199,9 +190,7 @@ function ProjectFormModal({ mode, project, onClose }: ProjectFormModalProps) {
   const handleDeletePhoto = async (photoId: string) => {
     if (!editId || !confirm('Удалить фото?')) return;
     try {
-      await fetch(`http://localhost:5009/api/Portfolio/${editId}/photos/${photoId}`, {
-        method: 'DELETE', credentials: 'include',
-      });
+      await apiFetch(`/Portfolio/${editId}/photos/${photoId}`, { method: 'DELETE' });
       setPhotos(prev => prev.filter((p: any) => p.id !== photoId));
       queryClient.invalidateQueries({ queryKey: ['portfolio'] });
     } catch {
@@ -281,7 +270,7 @@ function ProjectFormModal({ mode, project, onClose }: ProjectFormModalProps) {
                 {photos.map((photo: any) => (
                   <div key={photo.id} style={{ position: 'relative' }}>
                     <img
-                      src={`http://localhost:5009${photo.photoUrl}`}
+                      src={getFileUrl(photo.photoUrl)}
                       alt=""
                       style={{ width: '90px', height: '90px', objectFit: 'cover', borderRadius: '8px', display: 'block' }}
                     />

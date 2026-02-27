@@ -113,11 +113,7 @@ w-full max-w-full"
               activeTeamMembers.map((member: any) => (
                 <PersonCard
                   key={member.id}
-                  photoUrl={
-                    member.photoUrl
-                      ? `http://localhost:5009${member.photoUrl}`
-                      : undefined
-                  }
+                  photoUrl={member.photoUrl || undefined}
                   name={`${member.firstName} ${member.lastName}`}
                   job={member.position || ''}
                 />
