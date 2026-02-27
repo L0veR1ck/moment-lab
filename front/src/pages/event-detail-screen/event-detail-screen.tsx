@@ -21,18 +21,15 @@ function EventDetailScreen() {
   useEffect(() => {
     async function loadImages() {
       if (event?.photos && event.photos.length > 0) {
-        // Use uploaded photos if available
         const galleryImages: GalleryImage[] = event.photos
           .sort((a: any, b: any) => a.displayOrder - b.displayOrder)
-          .map((photo: any) => ({
-            original: getFileUrl(photo.photoUrl),
-            thumbnail: getFileUrl(photo.photoUrl),
-            originalAlt: event.title,
-            thumbnailAlt: event.title,
+          .map((photo: any, index: number) => ({
+            id: String(photo.id ?? index),
+            url: getFileUrl(photo.photoUrl),
           }));
+
         setImages(galleryImages);
       } else {
-        // Use default images if no photos uploaded
         const defaultImages = await getActiveTeamBuildingImages();
         setImages(defaultImages);
       }
