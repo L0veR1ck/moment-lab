@@ -1,4 +1,41 @@
-const API_BASE_URL = 'http://localhost:5009/api';
+// В production используем относительный путь (проксируется через nginx)
+// В development - localhost:5009
+const API_BASE_URL = import.meta.env.DEV 
+  ? 'http://localhost:5009/api'
+  : '/api';
+
+// Базовый URL для backend (для файлов и других ресурсов)
+export const BACKEND_URL = import.meta.env.DEV 
+  ? 'http://localhost:5009'
+  : '';
+
+// Хелпер для получения полного URL файла
+export const getFileUrl = (path: string): string => {
+  if (!path) return '';
+  // Если путь уже абсолютный URL, возвращаем как есть
+  if (path.startsWith('http://') || path.startsWith('https://')) return path;
+  // Иначе добавляем BACKEND_URL
+  return `${BACKEND_URL}${path}`;
+};
+
+// Хелпер для загрузки файла
+export const uploadFile = async (file: File, folder?: string) => {
+  const formData = new FormData();
+  formData.append('file', file);
+  if (folder) formData.append('folder', folder);
+
+  const response = await fetch(`${API_BASE_URL}/Files/upload`, {
+    method: 'POST',
+    credentials: 'include',
+    body: formData,
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  return response.json();
+};
 
 export interface PaginatedResponse<T> {
   items: T[];
@@ -174,23 +211,7 @@ export const api = {
       request<void>(`/Portfolio/${projectId}/photos/${photoId}`, { method: 'DELETE' }),
   },
   files: {
-    upload: async (file: File, folder?: string) => {
-      const formData = new FormData();
-      formData.append('file', file);
-      if (folder) formData.append('folder', folder);
-
-      const response = await fetch(`${API_BASE_URL}/Files/upload`, {
-        method: 'POST',
-        credentials: 'include',
-        body: formData,
-      });
-
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      return response.json();
-    },
+    upload: uploadFile,
     delete: (fileUrl: string) =>
       request<void>(`/Files?fileUrl=${encodeURIComponent(fileUrl)}`, { method: 'DELETE' }),
   },

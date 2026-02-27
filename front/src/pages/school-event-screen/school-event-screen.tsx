@@ -4,7 +4,7 @@ import Footer from '../../components/layout/footer/footer';
 import Header from '../../components/layout/header/header';
 import EventCard from '../../components/ui/event-card/event-card';
 import { useParallax } from '../../shared/hooks/use-parallax';
-import { api } from '../../api/client';
+import { api, getFileUrl } from '../../api/client';
 
 function SchoolEventScreen() {
   const ballParallax = useParallax(0.4, 100);
@@ -47,11 +47,7 @@ function SchoolEventScreen() {
             schoolEvents.map((event: any) => (
               <EventCard
                 key={event.id}
-                urlImg={
-                  event.mainPhotoUrl
-                    ? `http://localhost:5009${event.mainPhotoUrl}`
-                    : 'bg-gray-300'
-                }
+                urlImg={event.mainPhotoUrl ? getFileUrl(event.mainPhotoUrl) : 'bg-gray-300'}
                 titleCard={event.title}
                 description={event.description}
                 path={`/school-events/${event.urlSlug}`}

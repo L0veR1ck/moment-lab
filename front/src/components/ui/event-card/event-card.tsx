@@ -1,4 +1,5 @@
 import { Link } from 'react-router-dom';
+import arrowIcon from '../../../assets/event-card/arrow.svg';
 
 type EventCardProps = {
   urlImg: string;
@@ -76,7 +77,7 @@ function EventCard({
         >
           Подробнее
           <img
-            src="/src/assets/event-card/arrow.svg"
+            src={arrowIcon}
             alt=""
             className="h-4 w-4 sm:h-5 sm:w-5 lg:h-auto lg:w-auto"
           />

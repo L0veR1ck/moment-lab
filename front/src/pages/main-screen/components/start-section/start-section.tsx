@@ -1,4 +1,5 @@
 import Button from '../../../../components/ui/button/button';
+import startPhoto from '../../../../assets/content/start-photo.png';
 
 function StartSection() {
   const scrollToForm = () => {
@@ -21,7 +22,7 @@ function StartSection() {
         md:min-h-[90vh]    /* ПК >=768px */
       "
       style={{
-        backgroundImage: 'url(\'./src/assets/content/start-photo.png\')',
+        backgroundImage: `url('${startPhoto}')`,
       }}
     >
       <div

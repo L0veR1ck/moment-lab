@@ -12,7 +12,7 @@ public class FilesController(
 {
     [HttpPost("upload")]
     [Consumes("multipart/form-data")]
-    public async Task<ActionResult<object>> UploadFile(IFormFile file, string? folder = "uploads")
+    public async Task<ActionResult<object>> UploadFile(IFormFile file, string? folder = "general")
     {
         try
         {
@@ -21,7 +21,7 @@ public class FilesController(
                 return BadRequest(new { error = "No file provided" });
             }
 
-            var fileUrl = await fileStorageService.UploadFileAsync(file, folder ?? "uploads");
+            var fileUrl = await fileStorageService.UploadFileAsync(file, folder ?? "general");
 
             return Ok(new
             {

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { api } from '../../api/client';
+import { api, getFileUrl } from '../../api/client';
 
 export default function ApplicationsPage() {
   const [page, setPage] = useState(1);
@@ -353,7 +353,7 @@ export default function ApplicationsPage() {
                 <label>Прикрепленный файл:</label>
                 <p>
                   <a 
-                    href={`http://localhost:5009${selectedApp.attachedFileUrl}`}
+                    href={getFileUrl(selectedApp.attachedFileUrl)}
                     download={selectedApp.attachedFileName}
                     className="admin-btn admin-btn-secondary"
                     style={{ display: 'inline-block' }}

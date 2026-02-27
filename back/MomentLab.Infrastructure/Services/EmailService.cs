@@ -27,6 +27,8 @@ public class EmailService(IConfiguration configuration, ILogger<EmailService> lo
     
     private readonly string uploadsPath = configuration["FileStorage:UploadPath"] ?? "wwwroot/uploads";
     
+    private readonly TimeZoneInfo yekaterinburgTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Yekaterinburg");
+    
     private static List<string> GetAdminEmails(IConfiguration configuration)
     {
         var emailsString = configuration["EmailSettings:AdminEmails"];
@@ -85,12 +87,16 @@ public class EmailService(IConfiguration configuration, ILogger<EmailService> lo
                 bodyBuilder.AppendLine($"<p><strong style='color: #2c3e50;'>Прикрепленный файл:</strong> {application.AttachedFileName} (см. вложение)</p>");
             }
             
+            // Конвертируем время в часовой пояс Екатеринбурга
+            var createdAtLocal = TimeZoneInfo.ConvertTimeFromUtc(application.CreatedAt, yekaterinburgTimeZone);
+            
             if ((application.RequestDate - application.CreatedAt).TotalDays > 1)
             {
-                bodyBuilder.AppendLine($"<p><strong style='color: #2c3e50;'>Дата события:</strong> {application.RequestDate:dd.MM.yyyy}</p>");
+                var requestDateLocal = TimeZoneInfo.ConvertTimeFromUtc(application.RequestDate, yekaterinburgTimeZone);
+                bodyBuilder.AppendLine($"<p><strong style='color: #2c3e50;'>Дата события:</strong> {requestDateLocal:dd.MM.yyyy}</p>");
             }
             
-            bodyBuilder.AppendLine($"<p><strong style='color: #2c3e50;'>Дата создания заявки:</strong> {application.CreatedAt:dd.MM.yyyy HH:mm}</p>");
+            bodyBuilder.AppendLine($"<p><strong style='color: #2c3e50;'>Дата создания заявки:</strong> {createdAtLocal:dd.MM.yyyy HH:mm} (Екб)</p>");
             
             bodyBuilder.AppendLine("</div>");
             bodyBuilder.AppendLine("</div>");

@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { api } from '../../api/client';
+import { api, uploadFile, getFileUrl } from '../../api/client';
 
 export default function TeamMembersPage() {
   const [page, setPage] = useState(1);
@@ -210,16 +210,9 @@ function CreateTeamMemberModal({ onClose }: { onClose: () => void }) {
       formData.append('file', file);
       formData.append('folder', 'team');
 
-      const response = await fetch('http://localhost:5009/api/files/upload', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!response.ok) throw new Error('Upload failed');
-
-      const data = await response.json();
+      const data = await uploadFile(file, 'team');
       setFormData(prev => ({ ...prev, photoUrl: data.fileUrl }));
-      setPhotoPreview(`http://localhost:5009${data.fileUrl}`);
+      setPhotoPreview(getFileUrl(data.fileUrl));
     } catch (error) {
       console.error('Error uploading file:', error);
       alert('Ошибка загрузки файла');
@@ -329,7 +322,7 @@ function EditTeamMemberModal({ member, onClose }: { member: any; onClose: () => 
   });
   const [uploading, setUploading] = useState(false);
   const [photoPreview, setPhotoPreview] = useState<string | null>(
-    member.photoUrl ? `http://localhost:5009${member.photoUrl}` : null
+    member.photoUrl ? getFileUrl(member.photoUrl) : null
   );
 
   const updateMutation = useMutation({
@@ -350,16 +343,9 @@ function EditTeamMemberModal({ member, onClose }: { member: any; onClose: () => 
       formData.append('file', file);
       formData.append('folder', 'team');
 
-      const response = await fetch('http://localhost:5009/api/files/upload', {
-        method: 'POST',
-        body: formData,
-      });
-
-      if (!response.ok) throw new Error('Upload failed');
-
-      const data = await response.json();
+      const data = await uploadFile(file, 'team');
       setFormData(prev => ({ ...prev, photoUrl: data.fileUrl }));
-      setPhotoPreview(`http://localhost:5009${data.fileUrl}`);
+      setPhotoPreview(getFileUrl(data.fileUrl));
     } catch (error) {
       console.error('Error uploading file:', error);
       alert('Ошибка загрузки файла');

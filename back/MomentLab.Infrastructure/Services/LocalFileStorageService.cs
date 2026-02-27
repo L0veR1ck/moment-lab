@@ -26,7 +26,7 @@ public class LocalFileStorageService : IFileStorageService
         }
     }
 
-    public async Task<string> UploadFileAsync(IFormFile file, string folder = "uploads")
+    public async Task<string> UploadFileAsync(IFormFile file, string folder = "general")
     {
         if (file == null || file.Length == 0)
         {
@@ -98,7 +98,7 @@ public class LocalFileStorageService : IFileStorageService
         }
     }
 
-    public string GetFileUrl(string fileName, string folder = "uploads")
+    public string GetFileUrl(string fileName, string folder = "general")
     {
         return $"{_baseUrl}/{folder}/{fileName}";
     }

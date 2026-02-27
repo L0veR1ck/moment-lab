@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import CarcassSubPages from '../../components/layout/carcass-sub-pages/carcass-sub-pages';
 import { useToggle } from '../../shared/hooks/useToggle';
 import type { GalleryImage } from '../../shared/types/image';
-import { api } from '../../api/client';
+import { api, getFileUrl } from '../../api/client';
 import { getActiveTeamBuildingImages } from '../../shared/data/galleries';
 
 function EventDetailScreen() {
@@ -25,8 +25,10 @@ function EventDetailScreen() {
         const galleryImages: GalleryImage[] = event.photos
           .sort((a: any, b: any) => a.displayOrder - b.displayOrder)
           .map((photo: any) => ({
-            id: photo.id,
-            url: `http://localhost:5009${photo.photoUrl}`,
+            original: getFileUrl(photo.photoUrl),
+            thumbnail: getFileUrl(photo.photoUrl),
+            originalAlt: event.title,
+            thumbnailAlt: event.title,
           }));
         setImages(galleryImages);
       } else {

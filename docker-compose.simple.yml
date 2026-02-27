@@ -1,3 +1,6 @@
+# Simplified Docker Compose without SSL (for testing or when you don't have a domain)
+# Usage: docker compose -f docker-compose.simple.yml up -d --build
+
 services:
   postgres:
     image: postgres:16-alpine
@@ -5,8 +8,7 @@ services:
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-momentlab}
       POSTGRES_USER: ${POSTGRES_USER:-postgres}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-      TZ: Asia/Yekaterinburg
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
     volumes:
       - postgres-data:/var/lib/postgresql/data
     networks:
@@ -26,8 +28,7 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:8080
-      - TZ=Asia/Yekaterinburg
-      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=${POSTGRES_DB:-momentlab};Username=${POSTGRES_USER:-postgres};Password=${POSTGRES_PASSWORD}
+      - ConnectionStrings__DefaultConnection=Host=postgres;Port=5432;Database=${POSTGRES_DB:-momentlab};Username=${POSTGRES_USER:-postgres};Password=${POSTGRES_PASSWORD:-postgres}
       - BitrixSettings__WebhookUrl=${BITRIX_WEBHOOK_URL}
       - BitrixSettings__UserId=${BITRIX_USER_ID}
       - EmailSettings__SmtpServer=${SMTP_SERVER}
@@ -57,15 +58,10 @@ services:
     container_name: momentlab-frontend
     depends_on:
       - api
+    ports:
+      - "80:80"
     networks:
       - momentlab-network
-    labels:
-      - "traefik.enable=true"
-      - "traefik.http.routers.momentlab-frontend.rule=Host(`${DOMAIN}`)"
-      - "traefik.http.routers.momentlab-frontend.entrypoints=websecure"
-      - "traefik.http.routers.momentlab-frontend.tls=true"
-      - "traefik.http.routers.momentlab-frontend.tls.certresolver=letsencrypt"
-      - "traefik.http.services.momentlab-frontend.loadbalancer.server.port=80"
     restart: unless-stopped
     healthcheck:
       test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost/"]
@@ -73,42 +69,11 @@ services:
       timeout: 10s
       retries: 3
       start_period: 10s
-    environment:
-      - TZ=Asia/Yekaterinburg
-
-  traefik:
-    image: traefik:v3.0
-    container_name: momentlab-traefik
-    command:
-      - "--api.dashboard=true"
-      - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
-      - "--certificatesresolvers.letsencrypt.acme.email=${ACME_EMAIL}"
-      - "--certificatesresolvers.letsencrypt.acme.storage=/letsencrypt/acme.json"
-      - "--certificatesresolvers.letsencrypt.acme.httpchallenge=true"
-      - "--certificatesresolvers.letsencrypt.acme.httpchallenge.entrypoint=web"
-      # Redirect HTTP to HTTPS
-      - "--entrypoints.web.http.redirections.entrypoint.to=websecure"
-      - "--entrypoints.web.http.redirections.entrypoint.scheme=https"
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - traefik-certificates:/letsencrypt
-    networks:
-      - momentlab-network
-    restart: unless-stopped
 
 volumes:
   postgres-data:
-    driver: local
-  traefik-certificates:
     driver: local
 
 networks:
   momentlab-network:
     driver: bridge
-

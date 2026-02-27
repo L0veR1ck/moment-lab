@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Button from '../button/button';
 import SuccessSubmitModal from './success-submit-modal';
-import { api } from '../../../api/client';
+import { api, uploadFile } from '../../../api/client';
 import consentPdf from '../../../assets/согласие.pdf';
 
 type FormProps = {
@@ -33,19 +33,12 @@ function Form({ isModal, onClose }: FormProps) {
 
       // Загружаем файл, если он выбран
       if (file && file.size > 0) {
-        const fileFormData = new FormData();
-        fileFormData.append('file', file);
-        fileFormData.append('folder', 'applications');
-
-        const fileResponse = await fetch('http://localhost:5009/api/Files/upload', {
-          method: 'POST',
-          body: fileFormData,
-        });
-
-        if (fileResponse.ok) {
-          const fileResult = await fileResponse.json();
+        try {
+          const fileResult = await uploadFile(file, 'applications');
           attachedFileName = fileResult.fileName;
           attachedFileUrl = fileResult.fileUrl;
+        } catch (error) {
+          console.error('Error uploading file:', error);
         }
       }
 

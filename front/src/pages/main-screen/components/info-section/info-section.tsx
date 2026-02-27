@@ -1,4 +1,5 @@
 import ConditionItem from '../../../../components/ui/condition-item/condition-item';
+import infoImage from '../../../../assets/content/info.webp';
 
 function InfoSection() {
   const statsData = [
@@ -22,7 +23,7 @@ function InfoSection() {
           </p>
           <img
             className="h-[200px] sm:h-[250px] md:h-[290px] rounded-2xl object-cover w-full"
-            src="./src/assets/content/info.webp"
+            src={infoImage}
             alt="О нас"
           />
         </div>

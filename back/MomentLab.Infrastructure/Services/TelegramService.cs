@@ -14,6 +14,7 @@ public class TelegramService : ITelegramService
     private readonly ILogger<TelegramService> logger;
     private readonly List<long> adminChatIds;
     private readonly string uploadsPath;
+    private readonly TimeZoneInfo yekaterinburgTimeZone;
 
     public TelegramService(
         IConfiguration configuration,
@@ -36,6 +37,9 @@ public class TelegramService : ITelegramService
             .ToList();
 
         uploadsPath = configuration["FileStorage:UploadPath"] ?? "wwwroot/uploads";
+        
+        // Инициализируем часовой пояс Екатеринбурга (GMT+5)
+        yekaterinburgTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Asia/Yekaterinburg");
     }
 
     public async Task<bool> SendApplicationNotificationAsync(ApplicationRequest application)
@@ -67,13 +71,17 @@ public class TelegramService : ITelegramService
                 messageBuilder.AppendLine($"<b>Прикрепленный файл:</b> {application.AttachedFileName}");
             }
             
+            // Конвертируем время создания в часовой пояс Екатеринбурга
+            var createdAtLocal = TimeZoneInfo.ConvertTimeFromUtc(application.CreatedAt, yekaterinburgTimeZone);
+            
             // Показываем дату события только если она отличается от даты создания (больше чем на 1 день)
             if ((application.RequestDate - application.CreatedAt).TotalDays > 1)
             {
-                messageBuilder.AppendLine($"<b>Дата события:</b> {application.RequestDate:dd.MM.yyyy}");
+                var requestDateLocal = TimeZoneInfo.ConvertTimeFromUtc(application.RequestDate, yekaterinburgTimeZone);
+                messageBuilder.AppendLine($"<b>Дата события:</b> {requestDateLocal:dd.MM.yyyy}");
             }
             
-            messageBuilder.AppendLine($"<b>Создано:</b> {application.CreatedAt:dd.MM.yyyy HH:mm}");
+            messageBuilder.AppendLine($"<b>Создано:</b> {createdAtLocal:dd.MM.yyyy HH:mm} (Екб)");
             
             var message = messageBuilder.ToString();
 

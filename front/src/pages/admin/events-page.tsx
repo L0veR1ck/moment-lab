@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { api } from '../../api/client';
+import { api, uploadFile, getFileUrl } from '../../api/client';
 
 export default function EventsPage() {
   const [page, setPage] = useState(1);
@@ -235,15 +235,7 @@ function CreateEventModal({ onClose }: { onClose: () => void }) {
       formDataUpload.append('file', file);
       formDataUpload.append('folder', 'events');
 
-      const response = await fetch('http://localhost:5009/api/Files/upload', {
-        method: 'POST',
-        body: formDataUpload,
-        credentials: 'include',
-      });
-
-      if (!response.ok) throw new Error('Upload failed');
-
-      const data = await response.json();
+      const data = await uploadFile(file, 'events');
       setFormData({ ...formData, mainPhotoUrl: data.fileUrl });
     } catch (error) {
       console.error('Error uploading file:', error);
@@ -295,7 +287,7 @@ function CreateEventModal({ onClose }: { onClose: () => void }) {
             {formData.mainPhotoUrl && (
               <div style={{ marginTop: '8px' }}>
                 <img 
-                  src={`http://localhost:5009${formData.mainPhotoUrl}`} 
+                  src={getFileUrl(formData.mainPhotoUrl)} 
                   alt="Preview" 
                   style={{ maxWidth: '200px', maxHeight: '200px', objectFit: 'cover', borderRadius: '8px' }}
                 />
@@ -372,15 +364,7 @@ function EditEventModal({ event, onClose, onSave }: { event: any; onClose: () =>
       formDataUpload.append('file', file);
       formDataUpload.append('folder', 'events');
 
-      const response = await fetch('http://localhost:5009/api/Files/upload', {
-        method: 'POST',
-        body: formDataUpload,
-        credentials: 'include',
-      });
-
-      if (!response.ok) throw new Error('Upload failed');
-
-      const data = await response.json();
+      const data = await uploadFile(file, 'events');
       setFormData({ ...formData, mainPhotoUrl: data.fileUrl });
     } catch (error) {
       console.error('Error uploading file:', error);
@@ -432,7 +416,7 @@ function EditEventModal({ event, onClose, onSave }: { event: any; onClose: () =>
             {formData.mainPhotoUrl && (
               <div style={{ marginTop: '8px' }}>
                 <img 
-                  src={`http://localhost:5009${formData.mainPhotoUrl}`} 
+                  src={getFileUrl(formData.mainPhotoUrl)} 
                   alt="Preview" 
                   style={{ maxWidth: '200px', maxHeight: '200px', objectFit: 'cover', borderRadius: '8px' }}
                 />

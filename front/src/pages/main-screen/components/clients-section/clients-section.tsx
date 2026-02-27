@@ -1,5 +1,6 @@
 import Marquee from 'react-fast-marquee';
 
+// Import all logos
 import logo1 from '../../../../assets/clients-logo/logo-1.svg';
 import logo2 from '../../../../assets/clients-logo/logo-2.svg';
 import logo3 from '../../../../assets/clients-logo/logo-3.svg';
