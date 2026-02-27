@@ -222,6 +222,60 @@ namespace MomentLab.Infrastructure.Migrations
                     b.ToTable("notification_settings", (string)null);
                 });
 
+            modelBuilder.Entity("MomentLab.Core.Entities.PortfolioPhoto", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("PhotoUrl")
+                        .IsRequired()
+                        .HasMaxLength(500)
+                        .HasColumnType("character varying(500)");
+
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("UploadedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ProjectId");
+
+                    b.ToTable("portfolio_photos", (string)null);
+                });
+
+            modelBuilder.Entity("MomentLab.Core.Entities.PortfolioProject", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<int>("DisplayOrder")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("character varying(200)");
+
+                    b.Property<DateTime>("UpdatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("DisplayOrder");
+
+                    b.ToTable("portfolio_projects", (string)null);
+                });
+
             modelBuilder.Entity("MomentLab.Core.Entities.Review", b =>
                 {
                     b.Property<Guid>("Id")
@@ -326,10 +380,26 @@ namespace MomentLab.Infrastructure.Migrations
                     b.Navigation("Event");
                 });
 
+            modelBuilder.Entity("MomentLab.Core.Entities.PortfolioPhoto", b =>
+                {
+                    b.HasOne("MomentLab.Core.Entities.PortfolioProject", "Project")
+                        .WithMany("Photos")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Project");
+                });
+
             modelBuilder.Entity("MomentLab.Core.Entities.Event", b =>
                 {
                     b.Navigation("Characteristics");
 
+                    b.Navigation("Photos");
+                });
+
+            modelBuilder.Entity("MomentLab.Core.Entities.PortfolioProject", b =>
+                {
                     b.Navigation("Photos");
                 });
 #pragma warning restore 612, 618

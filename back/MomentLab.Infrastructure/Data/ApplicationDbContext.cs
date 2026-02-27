@@ -14,6 +14,8 @@ public class ApplicationDbContext(
     public DbSet<Review> Reviews { get; set; }
     public DbSet<TeamMember> TeamMembers { get; set; }
     public DbSet<NotificationSettings> NotificationSettings { get; set; }
+    public DbSet<PortfolioProject> PortfolioProjects { get; set; }
+    public DbSet<PortfolioPhoto> PortfolioPhotos { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -121,6 +123,32 @@ public class ApplicationDbContext(
             entity.Property(e => e.IsEmailEnabled).IsRequired();
             entity.Property(e => e.IsBitrixEnabled).IsRequired();
             entity.Property(e => e.UpdatedAt).IsRequired();
+        });
+
+        modelBuilder.Entity<PortfolioProject>(entity =>
+        {
+            entity.ToTable("portfolio_projects");
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.Title).IsRequired().HasMaxLength(200);
+            entity.Property(e => e.CreatedAt).IsRequired();
+            entity.Property(e => e.UpdatedAt).IsRequired();
+
+            entity.HasIndex(e => e.DisplayOrder);
+
+            entity.HasMany(e => e.Photos)
+                .WithOne(p => p.Project)
+                .HasForeignKey(p => p.ProjectId)
+                .OnDelete(DeleteBehavior.Cascade);
+        });
+
+        modelBuilder.Entity<PortfolioPhoto>(entity =>
+        {
+            entity.ToTable("portfolio_photos");
+            entity.HasKey(e => e.Id);
+            entity.Property(e => e.PhotoUrl).IsRequired().HasMaxLength(500);
+            entity.Property(e => e.UploadedAt).IsRequired();
+
+            entity.HasIndex(e => e.ProjectId);
         });
     }
 }

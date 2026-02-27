@@ -21,12 +21,12 @@ public class EventRequestValidator : AbstractValidator<EventRequest>
             .MaximumLength(2000).WithMessage("Description must not exceed 2000 characters");
 
         RuleFor(x => x.ProgramDescription)
-            .NotEmpty().WithMessage("Program description is required")
-            .MaximumLength(2000).WithMessage("Program description must not exceed 2000 characters");
+            .MaximumLength(2000).WithMessage("Program description must not exceed 2000 characters")
+            .When(x => !string.IsNullOrEmpty(x.ProgramDescription));
 
         RuleFor(x => x.KeyValues)
-            .NotEmpty().WithMessage("Key values are required")
-            .MaximumLength(2000).WithMessage("Key values must not exceed 2000 characters");
+            .MaximumLength(2000).WithMessage("Key values must not exceed 2000 characters")
+            .When(x => !string.IsNullOrEmpty(x.KeyValues));
 
         RuleFor(x => x.MainPhotoUrl)
             .MaximumLength(500).WithMessage("Main photo URL must not exceed 500 characters")

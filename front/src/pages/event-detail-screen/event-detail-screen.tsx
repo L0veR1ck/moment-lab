@@ -25,10 +25,8 @@ function EventDetailScreen() {
         const galleryImages: GalleryImage[] = event.photos
           .sort((a: any, b: any) => a.displayOrder - b.displayOrder)
           .map((photo: any) => ({
-            original: `http://localhost:5009${photo.photoUrl}`,
-            thumbnail: `http://localhost:5009${photo.photoUrl}`,
-            originalAlt: event.title,
-            thumbnailAlt: event.title,
+            id: photo.id,
+            url: `http://localhost:5009${photo.photoUrl}`,
           }));
         setImages(galleryImages);
       } else {
@@ -59,7 +57,8 @@ function EventDetailScreen() {
   }
 
   if (error || !event) {
-    return <Navigate to="/school-events" replace />;
+    const backPath = slug?.startsWith('quest-') ? '/immersive-quests' : '/school-events';
+    return <Navigate to={backPath} replace />;
   }
 
   const eventData = {
@@ -73,12 +72,12 @@ function EventDetailScreen() {
     section_2: {
       firstProgramList: {
         heading: 'Что входит в программу?',
-        checklist: event.programDescription
+        checklist: (event.programDescription || '')
           .split('\n')
           .filter((line: string) => line.trim())
           .map((line: string) => line.replace(/^[•\-\*]\s*/, '')),
       },
-      keyValues: event.keyValues,
+      keyValues: event.keyValues || '',
       conditionData: event.characteristics
         .sort((a: any, b: any) => a.displayOrder - b.displayOrder)
         .map((char: any) => ({

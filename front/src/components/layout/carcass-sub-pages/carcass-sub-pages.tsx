@@ -98,42 +98,61 @@ function CarcassSubPages(pageData: CarcassSubPagesProps) {
           )}
         </section>
 
-        <section className="flex flex-col items-center gap-6 sm:gap-8 md:gap-[32px] py-8 sm:py-12 md:py-16 lg:py-[64px] max-w-[1280px] w-full px-4 sm:px-6 md:px-8 lg:px-8 xl:px-0">
-          <div className="flex flex-col lg:flex-row gap-8 sm:gap-12 md:gap-16 lg:gap-x-[64px] w-full">
-            <div className="flex-1">
-              <ProgramList
-                heading={pageData.section_2.firstProgramList.heading}
-                checklist={pageData.section_2.firstProgramList.checklist}
-              />
-            </div>
-            <div className="flex-1">
-              {pageData.section_2.keyValues ? (
-                <ProgramList
-                  heading="Ключевые ценности"
-                  checklist={pageData.section_2.keyValues
-                    .split('\n')
-                    .filter((line: string) => line.trim())
-                    .map((line: string) => line.replace(/^[•\-\*]\s*/, ''))}
-                />
-              ) : (
-                <ProgramList
-                  heading={pageData.section_2.secondProgramList?.heading}
-                  checklist={pageData.section_2.secondProgramList?.checklist}
-                />
-              )}
-            </div>
-          </div>
+        {(() => {
+          const checklist = pageData.section_2.firstProgramList.checklist;
+          const keyValuesLines = (pageData.section_2.keyValues || '')
+            .split('\n')
+            .filter((line: string) => line.trim())
+            .map((line: string) => line.replace(/^[•\-\*]\s*/, ''));
 
-          <div className="flex flex-wrap justify-center sm:justify-evenly gap-x-4 sm:gap-x-8 md:gap-x-12 lg:gap-x-16 gap-y-4 sm:gap-y-6 w-full">
-            {pageData.section_2.conditionData.map((condition, index) => (
-              <ConditionItem
-                key={index}
-                value={condition.value}
-                description={condition.description}
-              />
-            ))}
-          </div>
-        </section>
+          const hasProgram = checklist.length > 0;
+          const hasKeyValues = keyValuesLines.length > 0;
+          const hasBoth = hasProgram && hasKeyValues;
+          const hasAny = hasProgram || hasKeyValues;
+          const hasConditions = pageData.section_2.conditionData.length > 0;
+
+          // Ничего нет — не рендерим секцию вообще
+          if (!hasAny && !hasConditions) return null;
+
+          return (
+            <section className="flex flex-col items-center gap-6 sm:gap-8 md:gap-[32px] py-8 sm:py-12 md:py-16 lg:py-[64px] max-w-[1280px] w-full px-4 sm:px-6 md:px-8 lg:px-8 xl:px-0">
+              {hasAny && (
+                <div className={`flex w-full ${hasBoth ? 'flex-col lg:flex-row gap-8 sm:gap-12 md:gap-16 lg:gap-x-[64px]' : 'flex-col items-center'}`}>
+                  {hasProgram && (
+                    <div className={hasBoth ? 'flex-1' : 'w-full max-w-[640px]'}>
+                      <ProgramList
+                        heading={pageData.section_2.firstProgramList.heading}
+                        checklist={checklist}
+                        large={!hasBoth}
+                      />
+                    </div>
+                  )}
+                  {hasKeyValues && (
+                    <div className={hasBoth ? 'flex-1' : 'w-full max-w-[640px]'}>
+                      <ProgramList
+                        heading="Ключевые ценности"
+                        checklist={keyValuesLines}
+                        large={!hasBoth}
+                      />
+                    </div>
+                  )}
+                </div>
+              )}
+
+              {hasConditions && (
+                <div className="flex flex-wrap justify-center sm:justify-evenly gap-x-4 sm:gap-x-8 md:gap-x-12 lg:gap-x-16 gap-y-4 sm:gap-y-6 w-full">
+                  {pageData.section_2.conditionData.map((condition, index) => (
+                    <ConditionItem
+                      key={index}
+                      value={condition.value}
+                      description={condition.description}
+                    />
+                  ))}
+                </div>
+              )}
+            </section>
+          );
+        })()}
 
         <section className="flex flex-col w-screen py-4 sm:py-6 md:py-8 lg:py-[64px] gap-4 sm:gap-6 md:gap-8 lg:gap-[32px] overflow-hidden">
           <Marquee

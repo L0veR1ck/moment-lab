@@ -14,6 +14,10 @@ function SchoolEventScreen() {
     queryFn: () => api.events.getAll(1, 100, true),
   });
 
+  const schoolEvents = eventsData?.items.filter(
+    (event: any) => !event.urlSlug.startsWith('quest-'),
+  );
+
   return (
     <div className="flex flex-col items-center w-full overflow-x-hidden">
       <Header />
@@ -39,16 +43,24 @@ function SchoolEventScreen() {
           </div>
           {isLoading ? (
             <div className="text-[var(--color-blue)] text-lg">Загрузка...</div>
-          ) : (
-            eventsData?.items.map((event: any) => (
+          ) : schoolEvents && schoolEvents.length > 0 ? (
+            schoolEvents.map((event: any) => (
               <EventCard
                 key={event.id}
-                urlImg={event.mainPhotoUrl ? `http://localhost:5009${event.mainPhotoUrl}` : 'bg-gray-300'}
+                urlImg={
+                  event.mainPhotoUrl
+                    ? `http://localhost:5009${event.mainPhotoUrl}`
+                    : 'bg-gray-300'
+                }
                 titleCard={event.title}
                 description={event.description}
                 path={`/school-events/${event.urlSlug}`}
               />
             ))
+          ) : (
+            <div className="text-[var(--color-blue)] text-lg">
+              Пока нет активных мероприятий для школ.
+            </div>
           )}
         </section>
       </main>

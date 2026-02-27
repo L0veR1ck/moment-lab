@@ -2,6 +2,7 @@ import { useState } from 'react';
 import Button from '../button/button';
 import SuccessSubmitModal from './success-submit-modal';
 import { api } from '../../../api/client';
+import consentPdf from '../../../assets/согласие.pdf';
 
 type FormProps = {
   isModal: boolean;
@@ -199,7 +200,12 @@ function Form({ isModal, onClose }: FormProps) {
               <input type="checkbox" required />
               <label className="text-xs text-[var(--color-dark-blue)]/55 leading-none">
                 Соглашаюсь на{' '}
-                <a href="/" className="underline underline-offset-[.2rem]">
+                <a
+                  href={consentPdf}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="underline underline-offset-[.2rem]"
+                >
                   обработку персональных данных
                 </a>{' '}
                 из формы.
