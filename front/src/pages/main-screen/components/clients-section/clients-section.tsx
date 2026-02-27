@@ -14,7 +14,7 @@ import png1 from '../../../../assets/clients-logo/8ff1863551e5ffaf01b853d339cbac
 import png2 from '../../../../assets/clients-logo/c4aa2a2c2519f20b4908ec4b69792f0 (1) 1.png';
 import png3 from '../../../../assets/clients-logo/images (1) (1) 1.png';
 import png4 from '../../../../assets/clients-logo/sign-single-basic 1.png';
-import png5 from '../../../../assets/clients-logo/STIMEK ВЕРНЫЙ logo_v2_pantone-01 (2) 1.png';
+import png5 from '../../../../assets/clients-logo/stimek-logo.png';
 import png6 from '../../../../assets/clients-logo/image 1.png';
 import png7 from '../../../../assets/clients-logo/image 2.png';
 import png8 from '../../../../assets/clients-logo/image 3.png';
