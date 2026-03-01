@@ -3,7 +3,7 @@ import Header from '../../components/layout/header/header.tsx';
 import Button from '../../components/ui/button/button.tsx';
 import ModalForm from '../../components/ui/modal-form/modal-form.tsx';
 import InfoItem from '../../components/ui/info-item/info-item.tsx';
-import { littleDiamond, pompon } from '../../assets/3d-objects/index.ts';
+import { pompon, star } from '../../assets/3d-objects/index.ts';
 import { useParallax } from '../../shared/hooks/use-parallax.ts';
 import { useToggle } from '../../shared/hooks/useToggle.ts';
 import { useState, useEffect } from 'react';
@@ -41,11 +41,11 @@ function PrivateEventsScreen() {
               style={{ top: '-70px', height: '1px' }}
             >
               <img
-                src={littleDiamond}
+                src={star}
                 className="absolute left-[-0px] top-[40%]
                  -translate-y-1/2 w-auto"
                 style={{
-                  transform: `translateY(${diamondParallax.offset}px)`,
+                  transform: `translateY(${diamondParallax.offset + 20}px)`,
                   transition: 'transform 0.2s ease-out',
                   willChange: 'transform',
                 }}

@@ -6,7 +6,7 @@ import ProgramList from '../../ui/program-list/program-list';
 import Header from '../header/header';
 import Footer from '../footer/footer';
 import { useParallax } from '../../../shared/hooks/use-parallax';
-import { littleDiamond } from '../../../assets/3d-objects';
+import { star } from '../../../assets/3d-objects';
 import type { GalleryImage } from '../../../shared/types/image';
 
 type CarcassSubPagesProps = {
@@ -57,7 +57,7 @@ function CarcassSubPages(pageData: CarcassSubPagesProps) {
               }}
             >
               <img
-                src={littleDiamond}
+                src={star}
                 alt=""
                 className="-translate-y-1/2 w-auto"
               />
@@ -86,7 +86,7 @@ function CarcassSubPages(pageData: CarcassSubPagesProps) {
               }}
             >
               <img
-                src={littleDiamond}
+                src={star}
                 alt=""
                 className="-translate-y-1/2 scale-x-[-1] w-auto"
               />

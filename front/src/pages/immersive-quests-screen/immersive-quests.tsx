@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { littleDiamond } from '../../assets/3d-objects';
+import { star } from '../../assets/3d-objects';
 import Footer from '../../components/layout/footer/footer';
 import Header from '../../components/layout/header/header';
 import EventCard from '../../components/ui/event-card/event-card';
@@ -32,7 +32,7 @@ function ImmersiveQuestsScreen() {
             style={{ height: 0 }}
           >
             <img
-              src={littleDiamond}
+              src={star}
               className="absolute w-auto"
               style={{
                 top: '-180px',
